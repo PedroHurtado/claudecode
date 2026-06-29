@@ -1,0 +1,24 @@
+/* ─────────────────────────────────────────
+   Fudie Design System · styles.css
+   Punto de entrada global. Solo @imports.
+   Los consumidores enlazan SOLO este archivo.
+───────────────────────────────────────── */
+
+/* Tokens */
+@import './tokens/colors.css';
+@import './tokens/typography.css';
+@import './tokens/spaces.css';
+@import './tokens/borders.css';
+@import './tokens/shadows.css';
+@import './tokens/elevations.css';
+@import './tokens/transitions.css';
+@import './tokens/controls.css';
+@import './tokens/breakpoints.css';
+
+/* Base */
+@import './base/reset.css';
+@import './base/base.css';
+@import './base/link.css';
+
+/* Utilities */
+@import './utilities/util.css';

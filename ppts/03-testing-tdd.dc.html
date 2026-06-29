@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/styles.css">
+  <script src="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/_ds_bundle.js"></script>
+  <style>
+    :root {
+      --type-display: 90px;
+      --type-title: 60px;
+      --type-subtitle: 40px;
+      --type-lead: 36px;
+      --type-body: 30px;
+      --type-small: 24px;
+      --type-mono: 24px;
+      --type-over: 24px;
+      --pad-x: 120px;
+      --pad-y: 92px;
+      --ink: #111827;
+      --muted: #656C79;
+      --red: #DF2F3A;
+      --red-subtle: #FFF0F1;
+      --line: #E5E7EB;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+  </style>
+</helmet>
+<x-import component-from-global-scope="deck-stage" from="./deck-stage.js" width="1920" height="1080" hint-size="100%,100%">
+
+  <section data-label="Portada" data-screen-label="Portada" data-speaker-notes="Sesión 4, tercera lección. Ya sabes dar contexto, paralelizar y versionar. Pero todo eso produce código, y código sin verificar es una promesa, no un hecho. Esta lección trata cómo usar Claude Code para que el testing no sea un añadido al final, sino el motor que guía la implementación y verifica que lo que produce de verdad funciona." style="background:var(--red);display:flex;flex-direction:column;justify-content:space-between;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="display:flex;align-items:center;gap:16px;">
+      <span style="width:14px;height:14px;border-radius:999px;background:#fff;display:block;"></span>
+      <span style="text-transform:uppercase;letter-spacing:0.16em;font-size:var(--type-over);font-weight:700;opacity:.9;">Curso Claude Code · Sesión 4</span>
+    </div>
+    <div>
+      <div style="font-size:var(--type-subtitle);font-weight:600;opacity:.85;margin-bottom:18px;">Lección 3</div>
+      <h1 style="font-size:var(--type-display);font-weight:800;letter-spacing:-0.03em;line-height:1.0;margin:0;max-width:1400px;text-wrap:balance;">Testing y TDD asistido</h1>
+      <p style="font-size:var(--type-lead);font-weight:500;line-height:1.4;margin:32px 0 0;max-width:1200px;opacity:.92;">El testing no como un añadido al final, sino como el motor que guía la implementación y verifica que de verdad funciona.</p>
+    </div>
+    <div style="font-size:var(--type-small);font-weight:600;opacity:.8;">Sesión 4 · Sesiones largas, flujo y seguridad</div>
+  </section>
+
+  <section data-label="Dónde estamos" data-screen-label="01" data-speaker-notes="El puente. Ya sabes dar contexto, paralelizar y versionar. Pero todo eso produce código, y código sin verificar es una promesa, no un hecho. El testing es lo que convierte la promesa en hecho." style="background:#fff;display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Dónde estamos</div>
+    <h2 style="font-size:64px;font-weight:800;letter-spacing:-0.03em;line-height:1.06;margin:0;max-width:1480px;text-wrap:balance;">Código sin verificar es una promesa, no un hecho</h2>
+    <p style="font-size:var(--type-lead);font-weight:500;line-height:1.45;margin:40px 0 0;max-width:1380px;color:var(--muted);">Dar contexto, paralelizar y versionar produce código. El <strong style="color:var(--ink);">testing</strong> es lo que convierte la promesa en hecho.</p>
+  </section>
+
+  <section data-label="Por qué importa con IA" data-screen-label="02" data-speaker-notes="Con un asistente que genera código rápido, el riesgo no es escribir poco código: es escribir código que parece correcto. Claude produce implementaciones plausibles, bien estructuradas, que compilan, y que a veces hacen lo que el modelo creyó que querías, no lo que querías. El test cierra esa brecha entre parece que va y va. Enlaza con la Sesión 1: el problema de verificación. Cuanto más autónomo es el agente, más importa tener una forma objetiva de comprobar su trabajo. Un test que pasa es esa forma objetiva." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Por qué importa especialmente con IA</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">El riesgo no es poco código: es código que <em>parece</em> correcto</h2>
+    <div style="display:flex;gap:48px;align-items:center;">
+      <p style="flex:1;font-size:var(--type-body);line-height:1.5;margin:0;">Claude produce implementaciones plausibles, que compilan, y que a veces hacen lo que el modelo <strong>creyó</strong> que querías, no lo que querías.</p>
+      <div style="flex:none;width:640px;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:20px;padding:44px;">
+        <p style="font-size:30px;line-height:1.35;margin:0;color:var(--ink);">Cuanto más autónomo es el agente, más importa una forma <strong>objetiva</strong> de comprobar su trabajo.</p>
+        <p style="font-size:24px;color:var(--color-error-text);line-height:1.4;margin:20px 0 0;font-weight:600;">Un test que pasa es esa forma objetiva.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="El ciclo" data-screen-label="03" data-speaker-notes="El patrón clásico de TDD se adapta especialmente bien al trabajo con Claude Code. El ciclo. Uno, test, rojo: primero escribes —o le pides a Claude— los tests que definen el comportamiento deseado, antes de la implementación; fallan porque aún no hay código. Defines el qué debe hacer de forma ejecutable y sin ambigüedad. Dos, implementación, verde: le pides que implemente hasta que los tests pasen; aquí está la ganancia con IA, Claude tiene un objetivo verificable, no implementa lo que cree. Tres, refactor: con los tests en verde como red, mejoras sin miedo." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">El patrón clásico, adaptado</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 48px;">El ciclo test · implementación · refactor</h2>
+    <div style="display:flex;gap:24px;align-items:stretch;">
+      <div style="flex:1;background:var(--color-error-subtle);border:1px solid #F6C9C9;border-radius:18px;padding:34px 34px;"><div style="font-size:24px;font-weight:800;color:var(--color-error-text);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:14px;">1 · Rojo</div><div style="font-size:28px;font-weight:800;margin-bottom:10px;">Test</div><p style="font-size:24px;color:var(--ink);line-height:1.4;margin:0;">Escribes los tests <strong>antes</strong> de implementar. Fallan. Defines el «qué» de forma ejecutable y sin ambigüedad.</p></div>
+      <div style="flex:none;width:50px;display:flex;align-items:center;justify-content:center;font-size:34px;color:var(--gray-300);">→</div>
+      <div style="flex:1;background:var(--color-success-subtle);border:1px solid #BBE9D6;border-radius:18px;padding:34px 34px;"><div style="font-size:24px;font-weight:800;color:var(--color-success-text);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:14px;">2 · Verde</div><div style="font-size:28px;font-weight:800;margin-bottom:10px;">Implementación</div><p style="font-size:24px;color:var(--ink);line-height:1.4;margin:0;">Claude implementa <strong>hasta que pasan</strong>. Tiene un objetivo verificable, no implementa «lo que cree».</p></div>
+      <div style="flex:none;width:50px;display:flex;align-items:center;justify-content:center;font-size:34px;color:var(--gray-300);">→</div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:34px 34px;"><div style="font-size:24px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:14px;">3</div><div style="font-size:28px;font-weight:800;margin-bottom:10px;">Refactor</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">Con los tests en verde como red, mejoras <strong style="color:var(--ink);">sin miedo</strong>: si rompes algo, te avisan al instante.</p></div>
+    </div>
+  </section>
+
+  <section data-label="El orden importa" data-screen-label="04" data-speaker-notes="Por qué este orden importa con un agente. Si dejas que Claude implemente y luego escriba los tests, hay un riesgo sutil: tiende a escribir tests que pasan con la implementación que ya hizo, en vez de tests que comprueban el comportamiento correcto. El test se amolda al código en vez de juzgarlo. Escribir el test primero —o al menos revisarlo con ojo crítico antes de implementar— evita que el examen lo escriba el propio examinado." style="background:var(--red);display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="text-transform:uppercase;letter-spacing:0.14em;font-size:var(--type-over);font-weight:700;opacity:.85;margin-bottom:36px;">Por qué el orden importa con un agente</div>
+    <h2 style="font-size:64px;font-weight:800;letter-spacing:-0.03em;line-height:1.06;margin:0;max-width:1480px;text-wrap:balance;">No dejes que el examen lo escriba el propio examinado</h2>
+    <p style="font-size:var(--type-lead);font-weight:500;line-height:1.45;margin:44px 0 0;max-width:1440px;opacity:.92;">Si implementa <em>y luego</em> testea, tiende a escribir tests que pasan con lo que ya hizo, en vez de tests que juzgan el comportamiento. Escribe el test <strong>primero</strong> —o al menos revísalo con ojo crítico antes de implementar—.</p>
+  </section>
+
+  <section data-label="Un guardarraíl práctico" data-screen-label="05" data-speaker-notes="Recuerda el comando /test de la Sesión 2 y la skill en que lo convertiste en la Sesión 3. Su instrucción incluía: detectar el framework que ya usa el proyecto, cubrir camino feliz, casos límite y errores, usar las factorías de datos, y ejecutar la suite y verificar que los nuevos tests pasan. Ese último paso convierte la generación de tests en algo fiable: Claude no solo escribe el test, lo corre y confirma. Un patrón potente: deja que un hook PostToolUse ejecute la suite tras cada edición, para feedback inmediato sin esperar a CI." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Un guardarraíl práctico</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">No solo escribir el test: <em>correrlo</em></h2>
+    <div style="display:flex;gap:40px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:34px 38px;">
+        <div style="font-family:var(--font-mono);font-size:27px;font-weight:800;color:var(--red);margin-bottom:14px;">/test <span style="font-family:var(--font-sans);font-size:0.8em;color:var(--muted);">(S2 → skill S3)</span></div>
+        <p style="font-size:25px;line-height:1.45;margin:0;color:var(--ink);">Detecta el framework existente, cubre camino feliz/límites/errores, usa las factorías, y <strong>ejecuta la suite y verifica que pasan</strong>. Ese último paso lo hace fiable.</p>
+      </div>
+      <div style="flex:1;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:18px;padding:34px 38px;">
+        <div style="font-family:var(--font-mono);font-size:27px;font-weight:800;color:var(--red);margin-bottom:14px;">PostToolUse <span style="font-family:var(--font-sans);font-size:0.8em;color:var(--muted);">(S3)</span></div>
+        <p style="font-size:25px;line-height:1.45;margin:0;color:var(--ink);">Un hook que ejecuta la suite <strong>tras cada edición</strong>: feedback inmediato de si el cambio rompió algo, sin esperar a CI.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Cobertura" data-screen-label="06" data-speaker-notes="Generar tests no basta; hay que saber si cubren lo que importa. Dos cautelas. La cobertura es una métrica necesaria pero engañosa: un 90% te dice que el 90% de las líneas se ejecutan, no que el comportamiento sea correcto. Es fácil tener mucha cobertura con tests que no comprueban nada útil. Le puedes pedir a Claude que señale zonas sin cubrir, pero el juicio de qué merece un test es tuyo: los caminos de error, los casos límite, la lógica crítica." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Cobertura y verificación</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 40px;">La cobertura es necesaria pero engañosa</h2>
+    <div style="display:flex;gap:48px;align-items:center;">
+      <div style="flex:none;width:620px;background:#111827;border-radius:20px;padding:44px;box-shadow:0 14px 36px rgba(17,24,39,.22);text-align:center;">
+        <div style="font-size:80px;font-weight:800;color:#fff;line-height:1;">90%</div>
+        <p style="font-size:25px;color:#9CA3AF;line-height:1.45;margin:18px 0 0;">de las líneas se <strong style="color:#E5E7EB;">ejecutan</strong> en algún test… no que el comportamiento sea correcto.</p>
+      </div>
+      <div style="flex:1;">
+        <p style="font-size:var(--type-body);line-height:1.5;margin:0;">Es fácil tener mucha cobertura con tests que no comprueban nada útil. Claude puede señalar zonas sin cubrir, pero el <strong>juicio de qué merece un test es tuyo</strong>: caminos de error, casos límite, lógica de negocio crítica.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Verifica, no el verde" data-screen-label="07" data-speaker-notes="Verifica los resultados, no te fíes del verde. Un subagente es ideal aquí: lanza la suite y devuélveme solo los que fallan con su mensaje de error. El subagente absorbe el ruido de la salida completa en su contexto y te trae lo accionable. Pero leer por qué falla algo y decidir si el test o la implementación es lo incorrecto sigue siendo criterio humano." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">No te fíes del «verde»</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Un subagente trae solo lo accionable</h2>
+    <div style="display:flex;gap:44px;align-items:center;">
+      <div style="flex:none;width:680px;background:#111827;border-radius:20px;padding:36px 40px;box-shadow:0 14px 36px rgba(17,24,39,.22);">
+        <p style="font-size:26px;font-family:var(--font-mono);color:#E5E7EB;line-height:1.5;margin:0;">«Lanza la suite y devuélveme <span style="color:#FF9AA0;">solo los que fallan</span> con su mensaje de error.»</p>
+      </div>
+      <p style="flex:1;font-size:var(--type-body);line-height:1.5;margin:0;">El subagente <strong>absorbe el ruido</strong> de la salida completa en su contexto. Pero leer <em>por qué</em> falla y decidir si el test o la implementación es lo incorrecto sigue siendo criterio humano.</p>
+    </div>
+  </section>
+
+  <section data-label="El antipatrón" data-screen-label="08" data-speaker-notes="El antipatrón a evitar: pedirle a Claude haz que los tests pasen sin mirar cómo. Un modelo presionado por ese objetivo puede arreglar un test cambiándolo para que deje de comprobar lo que fallaba, en vez de arreglar el código. Si delegas el ciclo, revisa qué se modificó: ¿arregló la implementación, o ablandó el test? Esto es exactamente por qué el comando /fix de la Sesión 2 llevaba el guardarraíl: localiza la causa raíz LEYENDO el código antes de proponer nada." style="background:var(--red);display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="text-transform:uppercase;letter-spacing:0.14em;font-size:var(--type-over);font-weight:700;opacity:.85;margin-bottom:36px;">El antipatrón a evitar</div>
+    <h2 style="font-size:62px;font-weight:800;letter-spacing:-0.03em;line-height:1.06;margin:0;max-width:1500px;text-wrap:balance;">«Haz que los tests pasen» — sin mirar cómo</h2>
+    <p style="font-size:var(--type-lead);font-weight:500;line-height:1.45;margin:44px 0 0;max-width:1440px;opacity:.92;">Presionado por ese objetivo, el modelo puede <strong>ablandar el test</strong> en vez de arreglar el código. Si delegas el ciclo, revisa qué se modificó: ¿arregló la implementación o ablandó el test? Por eso <code style="font-family:var(--font-mono);font-size:0.9em;">/fix</code> llevaba «localiza la causa raíz <strong>leyendo</strong> el código antes de proponer nada».</p>
+  </section>
+
+  <section data-label="Ejercicio" data-screen-label="09" data-speaker-notes="El ejercicio. Elige una función pequeña sin implementar; pídele a Claude que escriba primero los tests (camino feliz, casos límite, errores), revísalos con ojo crítico, y solo entonces pídele la implementación hasta que pasen; observa cómo el test acota lo que hace. Añade un hook PostToolUse que ejecute la suite tras cada edición; rompe algo y comprueba que el feedback es inmediato. Y pide la cobertura, pero en vez de perseguir el número, identifica un camino de error sin cubrir y escribe el test que falta." style="background:#fff;display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Para practicar</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 40px;">Tres tareas</h2>
+    <div style="display:flex;flex-direction:column;gap:18px;max-width:1580px;">
+      <div style="display:flex;gap:24px;align-items:center;font-size:27px;"><span style="flex:none;width:46px;height:46px;border-radius:12px;background:var(--gray-100);color:var(--muted);font-weight:800;display:flex;align-items:center;justify-content:center;">1</span>Tests <strong>primero</strong> para una función pequeña; revísalos, e implementa hasta que pasen.</div>
+      <div style="display:flex;gap:24px;align-items:center;font-size:27px;"><span style="flex:none;width:46px;height:46px;border-radius:12px;background:var(--gray-100);color:var(--muted);font-weight:800;display:flex;align-items:center;justify-content:center;">2</span>Un hook <code style="font-family:var(--font-mono);font-size:0.9em;">PostToolUse</code> que corra la suite tras cada edición; rompe algo y mira el feedback.</div>
+      <div style="display:flex;gap:24px;align-items:center;font-size:27px;font-weight:700;color:var(--red);"><span style="flex:none;width:46px;height:46px;border-radius:12px;background:var(--red);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;">3</span>Pide la cobertura; en vez del número, cubre un camino de error que falte.</div>
+    </div>
+  </section>
+
+  <section data-label="Resumen" data-screen-label="10" data-speaker-notes="Las ideas para llevarse a casa. Con IA el riesgo es código que parece correcto; un test que pasa es la forma objetiva de comprobarlo. El ciclo rojo-verde-refactor acota la libertad del modelo: tiene un objetivo verificable. Escribe el test primero, o el examen lo escribe el examinado. /test y un hook PostToolUse cierran el bucle. La cobertura es engañosa: verifica resultados, no el verde, y nunca dejes que ablande el test." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Para llevarse a casa</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Resumen de la lección</h2>
+    <div style="display:flex;flex-direction:column;gap:20px;max-width:1560px;">
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">Con IA el riesgo es código que <strong>parece correcto</strong>. Un test que pasa es la forma objetiva de comprobarlo.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">El ciclo <strong>rojo · verde · refactor</strong> da a Claude un objetivo verificable y acota su libertad.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">Escribe el test <strong>primero</strong>, o el examen lo escribe el examinado. <code style="font-family:var(--font-mono);font-size:0.9em;">/test</code> + <code style="font-family:var(--font-mono);font-size:0.9em;">PostToolUse</code> cierran el bucle.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">La cobertura es <strong>engañosa</strong>: verifica resultados, no el «verde».</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">Nunca dejes que «haga que pasen» <strong>ablandando el test</strong> en vez de arreglar el código.</p></div>
+    </div>
+  </section>
+
+  <section data-label="Cierre" data-screen-label="11" data-speaker-notes="Cierre y puente. El ciclo de testing que acabamos de ver, ejecutado por una máquina sin nadie delante, es justo lo que habilita la automatización: el modo headless y la integración en pipelines de CI. Es la última pieza técnica antes del bloque de seguridad y el criterio final." style="background:var(--red);display:flex;flex-direction:column;justify-content:space-between;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="display:flex;align-items:center;gap:16px;"><span style="width:14px;height:14px;border-radius:999px;background:#fff;display:block;"></span><span style="text-transform:uppercase;letter-spacing:0.16em;font-size:var(--type-over);font-weight:700;opacity:.9;">Siguiente lección</span></div>
+    <div>
+      <h2 style="font-size:64px;font-weight:800;letter-spacing:-0.03em;line-height:1.06;margin:0;max-width:1480px;text-wrap:balance;">El mismo ciclo, ejecutado por una máquina sin nadie delante</h2>
+      <p style="font-size:var(--type-lead);font-weight:500;line-height:1.4;margin:36px 0 0;max-width:1360px;opacity:.92;">El <strong>modo headless</strong> y la integración en pipelines de CI: la última pieza técnica antes del bloque de seguridad y el criterio final.</p>
+    </div>
+    <div style="font-size:var(--type-small);font-weight:600;opacity:.8;">Sesión 4 · Lección 4 — Automatización y modo headless</div>
+  </section>
+
+</x-import>
+</x-dc>
+</body>
+</html>

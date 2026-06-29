@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/styles.css">
+  <script src="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/_ds_bundle.js"></script>
+  <style>
+    :root {
+      --type-display: 90px;
+      --type-title: 60px;
+      --type-subtitle: 40px;
+      --type-lead: 36px;
+      --type-body: 30px;
+      --type-small: 24px;
+      --type-mono: 24px;
+      --type-over: 24px;
+      --pad-x: 120px;
+      --pad-y: 92px;
+      --ink: #111827;
+      --muted: #656C79;
+      --red: #DF2F3A;
+      --red-subtle: #FFF0F1;
+      --line: #E5E7EB;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+  </style>
+</helmet>
+<x-import component-from-global-scope="deck-stage" from="./deck-stage.js" width="1920" height="1080" hint-size="100%,100%">
+
+  <section data-label="Portada" data-screen-label="Portada" data-speaker-notes="Sesión 3, segunda lección. Una skill aplica tu procedimiento dentro de la conversación principal, donde lo ves y lo guías. Pero hay tareas que no quieres ver paso a paso: rastrear dónde se llama una función, analizar un log de 5.000 líneas, auditar dependencias. Ese trabajo te llena la ventana de ruido. Los subagentes son la herramienta para sacarlo." style="background:var(--red);display:flex;flex-direction:column;justify-content:space-between;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="display:flex;align-items:center;gap:16px;">
+      <span style="width:14px;height:14px;border-radius:999px;background:#fff;display:block;"></span>
+      <span style="text-transform:uppercase;letter-spacing:0.16em;font-size:var(--type-over);font-weight:700;opacity:.9;">Curso Claude Code · Sesión 3</span>
+    </div>
+    <div>
+      <div style="font-size:var(--type-subtitle);font-weight:600;opacity:.85;margin-bottom:18px;">Lección 2</div>
+      <h1 style="font-size:var(--type-display);font-weight:800;letter-spacing:-0.03em;line-height:1.0;margin:0;max-width:1420px;text-wrap:balance;">Agentes y subagentes</h1>
+      <p style="font-size:var(--type-lead);font-weight:500;line-height:1.4;margin:32px 0 0;max-width:1200px;opacity:.92;">Saca el trabajo ruidoso de tu conversación: instancias aisladas que exploran en su propia ventana y devuelven solo el resultado.</p>
+    </div>
+    <div style="font-size:var(--type-small);font-weight:600;opacity:.8;">Sesión 3 · Skills, agentes, MCPs y hooks</div>
+  </section>
+
+  <section data-label="Dónde estamos" data-screen-label="01" data-speaker-notes="El puente con la lección anterior. Una skill hace que Claude aplique tu procedimiento dentro de la conversación principal, donde lo ves y lo guías paso a paso. Pero hay tareas que no quieres ver paso a paso, y que generan mucho ruido. Los subagentes sacan ese ruido de tu conversación." style="background:#fff;display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Dónde estamos</div>
+    <h2 style="font-size:62px;font-weight:800;letter-spacing:-0.03em;line-height:1.06;margin:0;max-width:1500px;text-wrap:balance;">Hay trabajo que no quieres ver paso a paso</h2>
+    <p style="font-size:var(--type-lead);font-weight:500;line-height:1.45;margin:40px 0 0;max-width:1400px;color:var(--muted);">Rastrear dónde se llama una función, analizar un log de 5.000 líneas, auditar dependencias. Genera <strong style="color:var(--ink);">mucho ruido</strong> que te llena la ventana de contexto. Los subagentes lo sacan de tu conversación.</p>
+  </section>
+
+  <section data-label="El problema del contexto" data-screen-label="02" data-speaker-notes="La ventana de contexto es EL recurso crítico de una sesión de desarrollo. Una sesión normal es un único hilo: una ventana, una conversación, una línea de decisiones. El problema aparece cuando el contexto se llena de detalle no relacionado: resultados de búsqueda, 30 ficheros leídos, razonamiento intermedio. Entonces la atención del modelo se degrada y la calidad baja. No es que se olvide: es que lo importante compite con el ruido." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">El problema del contexto</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 40px;">Un único hilo que se llena de ruido</h2>
+    <div style="display:flex;gap:48px;align-items:center;">
+      <p style="flex:1;font-size:var(--type-body);line-height:1.5;margin:0;">Cuando el contexto se llena de detalle no relacionado —resultados de búsqueda, <strong>30 ficheros</strong> leídos para entender algo, razonamiento intermedio— la atención del modelo se degrada.</p>
+      <div style="flex:none;width:640px;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:20px;padding:44px;">
+        <p style="font-size:32px;font-weight:800;line-height:1.25;margin:0;color:var(--ink);">No es que se «olvide»: es que lo importante <span style="color:var(--red);">compite con el ruido</span>, y el modelo rinde peor.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Qué es un subagente" data-screen-label="03" data-speaker-notes="Un subagente es una instancia aislada de Claude con su propia ventana de contexto. Recibe una tarea, la hace, y te devuelve solo el resultado. La analogía que mejor lo captura: los subagentes son como las pestañas del navegador de una sesión de Claude Code: un sitio donde perseguir una tangente sin perder el hilo principal." style="background:var(--red);display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="text-transform:uppercase;letter-spacing:0.14em;font-size:var(--type-over);font-weight:700;opacity:.85;margin-bottom:36px;">El concepto</div>
+    <h2 style="font-size:64px;font-weight:800;letter-spacing:-0.03em;line-height:1.06;margin:0;max-width:1500px;text-wrap:balance;">Una instancia aislada de Claude con su propia ventana de contexto</h2>
+    <p style="font-size:var(--type-lead);font-weight:500;line-height:1.45;margin:44px 0 0;max-width:1420px;opacity:.92;">Recibe una tarea, la hace, y te devuelve <strong>solo el resultado</strong>. Son como las <strong>pestañas del navegador</strong> de una sesión: un sitio donde perseguir una tangente sin perder el hilo principal.</p>
+  </section>
+
+  <section data-label="El aislamiento en acción" data-screen-label="04" data-speaker-notes="El aislamiento, en concreto. Cuando Claude lanza un subagente para encuentra todos los sitios donde se llama a loadUser y resúmelos, el subagente lee los 30 ficheros en su propio contexto, y a tu conversación principal vuelve solo el resumen. Los ficheros, los resultados de búsqueda, el ruido: todo se queda en la ventana del subagente y nunca toca la tuya." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">El aislamiento, en acción</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 52px;">El ruido se queda en su ventana, no en la tuya</h2>
+    <div style="display:flex;gap:30px;align-items:center;">
+      <div style="flex:none;width:520px;background:#111827;border-radius:20px;padding:38px 40px;box-shadow:0 14px 36px rgba(17,24,39,.22);">
+        <div style="font-size:23px;color:#9CA3AF;font-family:var(--font-mono);margin-bottom:14px;">subagente · su contexto</div>
+        <div style="font-family:var(--font-mono);font-size:24px;color:#E5E7EB;line-height:1.7;">«¿Dónde se llama <span style="color:#FF9AA0;">loadUser</span>?»<br>→ lee <span style="color:#fff;">30 ficheros</span><br>→ búsquedas, intermedios…</div>
+      </div>
+      <div style="flex:none;display:flex;flex-direction:column;align-items:center;color:var(--muted);"><div style="font-size:40px;">→</div><div style="font-size:22px;font-weight:700;color:var(--red);">solo el resumen</div></div>
+      <div style="flex:1;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:20px;padding:40px 44px;">
+        <div style="font-size:23px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:14px;">Tu conversación</div>
+        <p style="font-size:30px;line-height:1.4;margin:0;color:var(--ink);">Recibe <strong>solo el resumen</strong>. Los 30 ficheros y el ruido nunca tocan tu ventana.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Para qué sirven" data-screen-label="05" data-speaker-notes="Para qué sirven, en concreto. Preservar contexto: mantienen la exploración y el trabajo pesado fuera de tu conversación. Imponer límites: puedes restringir qué tools usa cada uno (investigación solo lectura; implementación con edición). Especializar comportamiento: cada uno con su propio system prompt. Controlar costes: enrutar a modelos más rápidos y baratos, como Haiku, cuando no hace falta el grande." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Cuatro usos</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 48px;">Para qué sirven</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:26px;">
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:32px 36px;"><div style="font-size:28px;font-weight:800;margin-bottom:10px;">Preservar contexto</div><p style="font-size:25px;color:var(--muted);line-height:1.4;margin:0;">Mantienen la exploración y el trabajo pesado fuera de tu conversación principal.</p></div>
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:32px 36px;"><div style="font-size:28px;font-weight:800;margin-bottom:10px;">Imponer límites</div><p style="font-size:25px;color:var(--muted);line-height:1.4;margin:0;">Restringes sus tools: uno de investigación, solo lectura; uno de implementación, con edición.</p></div>
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:32px 36px;"><div style="font-size:28px;font-weight:800;margin-bottom:10px;">Especializar comportamiento</div><p style="font-size:25px;color:var(--muted);line-height:1.4;margin:0;">Cada uno con su propio system prompt enfocado a un dominio.</p></div>
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:32px 36px;"><div style="font-size:28px;font-weight:800;margin-bottom:10px;">Controlar costes</div><p style="font-size:25px;color:var(--muted);line-height:1.4;margin:0;">Enruta tareas a modelos más rápidos y baratos (Haiku) cuando no hace falta el grande.</p></div>
+    </div>
+  </section>
+
+  <section data-label="Los de serie" data-screen-label="06" data-speaker-notes="Claude Code trae tres subagentes integrados; conviene conocerlos porque cubren la mayoría de casos. Explore: solo lectura, optimizado para velocidad y coste, corre en Haiku por defecto; es el que más notarás, lo usas constantemente sin darte cuenta. Plan: reúne contexto antes de presentarte una estrategia en modo Plan (la pieza que trabaja por debajo del modo Plan de la Sesión 1). General-purpose: para tareas multi-paso que exploran y modifican. Normalmente Claude enruta solo." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Ya vienen de serie</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 48px;">Tres subagentes integrados</h2>
+    <div style="display:flex;gap:26px;align-items:stretch;">
+      <div style="flex:1;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:18px;padding:34px 32px;"><div style="font-size:30px;font-weight:800;color:var(--red);margin-bottom:12px;">Explore</div><p style="font-size:25px;line-height:1.45;margin:0;color:var(--ink);">Solo lectura, rápido y barato (Haiku por defecto). El que más notarás: mantiene la búsqueda intensiva fuera de tu conversación.</p></div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:34px 32px;"><div style="font-size:30px;font-weight:800;margin-bottom:12px;">Plan</div><p style="font-size:25px;line-height:1.45;margin:0;color:var(--muted);">Reúne contexto antes de presentarte una estrategia en modo Plan. La pieza que trabaja por debajo.</p></div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:34px 32px;"><div style="font-size:30px;font-weight:800;margin-bottom:12px;">General-purpose</div><p style="font-size:25px;line-height:1.45;margin:0;color:var(--muted);">Para tareas multi-paso que necesitan tanto explorar como modificar.</p></div>
+    </div>
+    <p style="font-size:var(--type-small);color:var(--muted);margin:40px 0 0;">Normalmente <strong style="color:var(--ink);">no los invocas tú</strong>: Claude enruta a ellos automáticamente según lo que pidas.</p>
+  </section>
+
+  <section data-label="Invocación y truco" data-screen-label="07" data-speaker-notes="La mayoría de las veces Claude decide solo cuándo delegar, a partir de la descripción de cada subagente. Pero también puedes dirigirlo: usa un subagente para lanzar los tests y devuélveme solo los que fallan. Y un truco práctico: cuando un subagente tarda, Ctrl+B lo manda al fondo y la conversación sigue mientras él trabaja; /tasks muestra lo que corre en segundo plano." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Cómo se usan</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 48px;">Invocación automática y manual</h2>
+    <div style="display:flex;gap:40px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:34px 38px;">
+        <div style="font-size:27px;font-weight:800;margin-bottom:14px;">Casi siempre, automática</div>
+        <p style="font-size:25px;line-height:1.45;margin:0 0 18px;color:var(--muted);">Claude decide cuándo delegar a partir de la <strong style="color:var(--ink);">descripción</strong> de cada subagente.</p>
+        <p style="font-size:25px;line-height:1.45;margin:0;color:var(--muted);">Pero puedes dirigirlo: «usa un subagente para lanzar los tests y devuélveme solo los que fallan».</p>
+      </div>
+      <div style="flex:1;background:#111827;border-radius:18px;padding:34px 38px;color:#fff;box-shadow:0 14px 36px rgba(17,24,39,.22);">
+        <div style="font-size:23px;font-weight:700;color:#FF9AA0;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:18px;">Truco práctico</div>
+        <p style="font-size:26px;line-height:1.5;margin:0;"><code style="font-family:var(--font-mono);background:#262B38;border-radius:8px;padding:4px 12px;">Ctrl+B</code> manda el subagente al fondo: la conversación sigue mientras él trabaja.</p>
+        <p style="font-size:26px;line-height:1.5;margin:18px 0 0;"><code style="font-family:var(--font-mono);background:#262B38;border-radius:8px;padding:4px 12px;">/tasks</code> muestra lo que corre en segundo plano.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Paralelismo" data-screen-label="08" data-speaker-notes="Para investigaciones independientes, puedes lanzar varios subagentes simultáneamente: investiga en paralelo los módulos de autenticación, base de datos y API usando subagentes separados. Cada uno explora su área en su ventana y luego Claude sintetiza. Funciona mejor cuando los caminos no dependen entre sí. El cálculo de criterio: para un presupuesto de tokens ajustado, explora en secuencia; para un presupuesto de tiempo ajustado, en paralelo. El coste en tokens es real, pero el ahorro de tiempo de reloj es grande." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Varios a la vez</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 40px;">Paralelismo para investigaciones independientes</h2>
+    <div style="background:#111827;border-radius:18px;padding:30px 40px;margin-bottom:36px;max-width:1560px;"><p style="font-size:28px;font-family:var(--font-mono);color:#E5E7EB;line-height:1.5;margin:0;">«Investiga <span style="color:#FF9AA0;">en paralelo</span> los módulos de autenticación, base de datos y API usando subagentes separados.»</p></div>
+    <div style="display:flex;gap:40px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 36px;"><div style="font-size:26px;font-weight:800;margin-bottom:10px;">Presupuesto de <span style="color:var(--red);">tokens</span> ajustado</div><p style="font-size:25px;color:var(--muted);line-height:1.4;margin:0;">Explora en <strong>secuencia</strong>. Cada subagente consume un contexto.</p></div>
+      <div style="flex:1;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:18px;padding:30px 36px;"><div style="font-size:26px;font-weight:800;margin-bottom:10px;color:var(--red);">Presupuesto de <span style="color:var(--ink);">tiempo</span> ajustado</div><p style="font-size:25px;color:var(--ink);line-height:1.4;margin:0;">Explora en <strong>paralelo</strong>. El ahorro de tiempo de reloj es grande.</p></div>
+    </div>
+  </section>
+
+  <section data-label="Crear uno propio" data-screen-label="09" data-speaker-notes="Cuando el mismo tipo de subagente se pide una y otra vez, defínelo una vez. Es un fichero markdown con frontmatter en .claude/agents/ (proyecto) o ~/.claude/agents/ (personal). El frontmatter es la configuración (nombre, descripción, tools, modelo); el cuerpo es el system prompt. La forma más fácil es el comando /agents, que te guía y puede generar un borrador. Tres detalles de criterio: tools restringe lo que puede hacer (empieza restrictivo); la description decide cuándo Claude delega (escríbela como una regla de triaje); model te deja bajar a un modelo más barato." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Cuando se repite, defínelo una vez</div>
+    <h2 style="font-size:48px;font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 36px;">Crear un subagente propio con <code style="font-family:var(--font-mono);color:var(--red);">/agents</code></h2>
+    <div style="display:flex;gap:44px;align-items:stretch;">
+      <pre style="flex:1.25;margin:0;background:#111827;border-radius:20px;padding:32px 38px;font-family:var(--font-mono);font-size:22px;line-height:1.55;color:#E5E7EB;white-space:pre-wrap;box-shadow:0 14px 36px rgba(17,24,39,.22);"><span style="color:#9CA3AF;">---</span>
+<span style="color:#FF9AA0;">name:</span> code-reviewer
+<span style="color:#FF9AA0;">description:</span> &gt; Revisa un diff y reporta
+  problemas por severidad. Úsalo tras
+  escribir o modificar código.
+<span style="color:#FF9AA0;">tools:</span> Read, Grep, Glob, Bash
+<span style="color:#FF9AA0;">model:</span> sonnet
+<span style="color:#9CA3AF;">---</span>
+Eres un revisor de código. Al invocarte:
+1. Lee el diff (<span style="color:#86E1A9;">git diff</span>).
+2. Busca bugs, seguridad y estilo.
+3. Lista priorizada con severidad y línea.</pre>
+      <ul style="flex:1;margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:22px;justify-content:center;">
+        <li style="display:flex;gap:18px;align-items:baseline;font-size:25px;line-height:1.4;"><span style="flex:none;width:12px;height:12px;border-radius:999px;background:var(--red);"></span><strong><code style="font-family:var(--font-mono);font-size:0.9em;">tools</code> restringe</strong> lo que puede hacer. Empieza restrictivo; añade solo lo necesario.</li>
+        <li style="display:flex;gap:18px;align-items:baseline;font-size:25px;line-height:1.4;"><span style="flex:none;width:12px;height:12px;border-radius:999px;background:var(--red);"></span>La <strong><code style="font-family:var(--font-mono);font-size:0.9em;">description</code> decide cuándo delega.</strong> «Úsalo cuando… Devuelve…».</li>
+        <li style="display:flex;gap:18px;align-items:baseline;font-size:25px;line-height:1.4;"><span style="flex:none;width:12px;height:12px;border-radius:999px;background:var(--red);"></span><strong><code style="font-family:var(--font-mono);font-size:0.9em;">model</code></strong> te deja bajar a un modelo más barato para lo que no necesita el grande.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section data-label="Subagente vs skill" data-screen-label="10" data-speaker-notes="La decisión de criterio de la lección. Es sutil porque ambos son ficheros markdown con frontmatter que cargan nombre y descripción al arrancar. La diferencia está en dónde ocurre el trabajo. Una skill trabaja en tu conversación principal, ves cada paso y lo guías; sirve para aplicar tu procedimiento viéndolo. Un subagente trabaja en una ventana aislada, ves solo el resultado; sirve para sacar trabajo ruidoso fuera de la vista." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">La decisión de criterio</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 40px;">Subagente vs. skill: ¿dónde ocurre el trabajo?</h2>
+    <div style="display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;overflow:hidden;">
+      <div style="display:grid;grid-template-columns:1fr 1.4fr 1.4fr;background:var(--ink);color:#fff;font-size:24px;font-weight:700;"><div style="padding:22px 30px;"></div><div style="padding:22px 30px;">Skill</div><div style="padding:22px 30px;">Subagente</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1.4fr 1.4fr;font-size:24px;border-bottom:1px solid var(--line);"><div style="padding:24px 30px;font-weight:700;color:var(--muted);">Dónde trabaja</div><div style="padding:24px 30px;">En tu conversación principal</div><div style="padding:24px 30px;font-weight:700;color:var(--red);">En una ventana aislada</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1.4fr 1.4fr;font-size:24px;border-bottom:1px solid var(--line);background:var(--gray-50);"><div style="padding:24px 30px;font-weight:700;color:var(--muted);">Qué ves</div><div style="padding:24px 30px;">Cada paso, y lo puedes guiar</div><div style="padding:24px 30px;">Solo el resultado final</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1.4fr 1.4fr;font-size:24px;"><div style="padding:24px 30px;font-weight:700;color:var(--muted);">Cuándo elegirlo</div><div style="padding:24px 30px;">Quieres ver y dirigir el proceso</div><div style="padding:24px 30px;">El aislamiento es lo que buscas: sacar el ruido</div></div>
+    </div>
+  </section>
+
+  <section data-label="Dos límites" data-screen-label="11" data-speaker-notes="Dos límites que conviene tener claros. Primero: un subagente no puede lanzar otro subagente; no hay recursión directa por esa vía. Segundo: los subagentes reportan al hilo que los lanzó, pero no se comunican entre sí. Si necesitas que varios agentes coordinen y se hablen, eso son los agent teams, una función más pesada y experimental fuera del alcance de hoy. Para el 95% de tu trabajo diario, subagentes que reportan al hilo principal es lo que necesitas." style="background:var(--red);display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="text-transform:uppercase;letter-spacing:0.14em;font-size:var(--type-over);font-weight:700;opacity:.85;margin-bottom:40px;">Dos límites que conviene tener claros</div>
+    <div style="display:flex;gap:40px;">
+      <div style="flex:1;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:20px;padding:44px;">
+        <div style="font-size:32px;font-weight:800;line-height:1.2;margin-bottom:16px;">No hay recursión</div>
+        <p style="font-size:26px;line-height:1.45;margin:0;opacity:.92;">Un subagente <strong>no puede lanzar otro subagente</strong>.</p>
+      </div>
+      <div style="flex:1;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:20px;padding:44px;">
+        <div style="font-size:32px;font-weight:800;line-height:1.2;margin-bottom:16px;">No se hablan entre sí</div>
+        <p style="font-size:26px;line-height:1.45;margin:0;opacity:.92;">Reportan al hilo que los lanzó, pero <strong>no se comunican</strong>. Coordinarse y hablarse son los <em>agent teams</em> (experimental, fuera de hoy).</p>
+      </div>
+    </div>
+    <p style="font-size:var(--type-lead);font-weight:500;line-height:1.4;margin:48px 0 0;max-width:1400px;opacity:.92;">Para el 95% de tu trabajo diario, subagentes que reportan al hilo principal es lo que necesitas.</p>
+  </section>
+
+  <section data-label="Cuándo NO usarlo" data-screen-label="12" data-speaker-notes="El aislamiento tiene un coste, y delegar a lo loco es un antipatrón. Cada subagente multiplica el uso de tokens: cinco en paralelo consumen cinco contextos; para tareas pequeñas el overhead no compensa, hazlas en el hilo principal. Si necesitas ver y dirigir cada paso, un subagente te lo oculta: ahí quieres una skill. Si las subtareas dependen unas de otras, el paralelismo no aplica. La señal de que sí merece la pena: segunda opinión fresca, subtareas independientes, o exploración extensa cuyos intermedios no vas a volver a mirar." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Delegar a lo loco es un antipatrón</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Cuándo <em>no</em> usar un subagente</h2>
+    <div style="display:flex;gap:40px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-100);border-radius:18px;padding:34px 38px;">
+        <div style="font-size:27px;font-weight:800;color:var(--gray-600);margin-bottom:16px;">Evítalo cuando…</div>
+        <ul style="margin:0;padding-left:24px;font-size:24px;line-height:1.55;color:var(--gray-600);"><li>La tarea es pequeña: cada subagente <strong>multiplica los tokens</strong></li><li>Necesitas <strong>ver y dirigir</strong> cada paso → te lo oculta</li><li>Las subtareas <strong>dependen</strong> unas de otras</li></ul>
+      </div>
+      <div style="flex:1;background:var(--color-success-subtle);border:1px solid #BBE9D6;border-radius:18px;padding:34px 38px;">
+        <div style="font-size:27px;font-weight:800;color:var(--color-success-text);margin-bottom:16px;">Sí merece la pena cuando…</div>
+        <ul style="margin:0;padding-left:24px;font-size:24px;line-height:1.55;color:var(--ink);"><li>Quieres una <strong>segunda opinión fresca</strong></li><li>Las subtareas son <strong>independientes</strong> entre sí</li><li>Hay <strong>exploración extensa</strong> cuyos intermedios no vas a reusar</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Ejercicio" data-screen-label="13" data-speaker-notes="El ejercicio, sobre un repo con algo de tamaño. Pídele a Claude que investigue en paralelo tres zonas independientes con subagentes separados, y observa que tu conversación recibe solo los tres resúmenes. Crea un subagente con /agents de revisión, restringido a lectura más Bash para el git diff, y comprueba que el ruido se queda en él. Y reflexiona sobre una tarea reciente: ¿skill o subagente? Esa decisión es el criterio que buscamos." style="background:#fff;display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Para practicar</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 40px;">Tres tareas</h2>
+    <div style="display:flex;flex-direction:column;gap:18px;max-width:1560px;">
+      <div style="display:flex;gap:24px;align-items:center;font-size:27px;"><span style="flex:none;width:46px;height:46px;border-radius:12px;background:var(--gray-100);color:var(--muted);font-weight:800;display:flex;align-items:center;justify-content:center;">1</span><strong style="font-weight:700;">Investiga en paralelo</strong>&nbsp;tres zonas independientes; observa que recibes solo los tres resúmenes.</div>
+      <div style="display:flex;gap:24px;align-items:center;font-size:27px;"><span style="flex:none;width:46px;height:46px;border-radius:12px;background:var(--gray-100);color:var(--muted);font-weight:800;display:flex;align-items:center;justify-content:center;">2</span>Crea un subagente <code style="font-family:var(--font-mono);font-size:0.9em;">/agents</code> de revisión (lectura + <code style="font-family:var(--font-mono);font-size:0.9em;">Bash</code>) y comprueba que el ruido se queda en él.</div>
+      <div style="display:flex;gap:24px;align-items:center;font-size:27px;font-weight:700;color:var(--red);"><span style="flex:none;width:46px;height:46px;border-radius:12px;background:var(--red);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;">3</span>Una tarea reciente: ¿la habrías hecho mejor con una skill o con un subagente?</div>
+    </div>
+  </section>
+
+  <section data-label="Resumen" data-screen-label="14" data-speaker-notes="Las ideas para llevarse a casa. Un subagente es una instancia aislada con su propia ventana que devuelve solo el resultado; el ruido se queda fuera de tu conversación. Tres de serie: Explore, Plan, General-purpose. Creas los tuyos con /agents; tools y model son criterio. La frontera con la skill es dónde ocurre el trabajo: ver y dirigir (skill) vs aislar (subagente). Y no delegues a lo loco: multiplica tokens." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Para llevarse a casa</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Resumen de la lección</h2>
+    <div style="display:flex;flex-direction:column;gap:20px;max-width:1560px;">
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">Un subagente es una <strong>instancia aislada</strong> con su propia ventana que devuelve <strong>solo el resultado</strong>. El ruido se queda fuera de tu conversación.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">Tres de serie: <strong>Explore</strong> (solo lectura, Haiku), <strong>Plan</strong> y <strong>General-purpose</strong>. Claude enruta solo.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">Creas los tuyos con <code style="font-family:var(--font-mono);font-size:0.9em;">/agents</code>. <code style="font-family:var(--font-mono);font-size:0.9em;">tools</code> restringe y <code style="font-family:var(--font-mono);font-size:0.9em;">model</code> abarata. Empieza restrictivo.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">La frontera con la skill: <strong>ver y dirigir</strong> (skill) vs. <strong>aislar el ruido</strong> (subagente).</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">No delegues a lo loco: cada subagente <strong>multiplica los tokens</strong>. Para lo pequeño, hilo principal.</p></div>
+    </div>
+  </section>
+
+  <section data-label="Cierre" data-screen-label="15" data-speaker-notes="Cierre y puente a la última lección de la sesión. Ya sabes dar a Claude memoria (CLAUDE.md), procedimientos (skills) y manos extra aisladas (subagentes). Falta conectarlo con el mundo exterior —tus apps, tus APIs— con los MCPs, y automatizar acciones deterministas en momentos concretos del ciclo de vida con los hooks. Eso cierra la sesión." style="background:var(--red);display:flex;flex-direction:column;justify-content:space-between;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="display:flex;align-items:center;gap:16px;"><span style="width:14px;height:14px;border-radius:999px;background:#fff;display:block;"></span><span style="text-transform:uppercase;letter-spacing:0.16em;font-size:var(--type-over);font-weight:700;opacity:.9;">Siguiente lección</span></div>
+    <div>
+      <h2 style="font-size:64px;font-weight:800;letter-spacing:-0.03em;line-height:1.06;margin:0;max-width:1480px;text-wrap:balance;">Conecta con el mundo exterior y garantiza comportamientos</h2>
+      <p style="font-size:var(--type-lead);font-weight:500;line-height:1.4;margin:36px 0 0;max-width:1360px;opacity:.92;">Los <strong>MCPs</strong> conectan Claude con tus apps y APIs; los <strong>hooks</strong> te dan control determinista en momentos concretos de su ciclo de vida.</p>
+    </div>
+    <div style="font-size:var(--type-small);font-weight:600;opacity:.8;">Sesión 3 · Lección 3 — MCPs y hooks</div>
+  </section>
+
+</x-import>
+</x-dc>
+</body>
+</html>

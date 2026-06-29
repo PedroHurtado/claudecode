@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/styles.css">
+  <script src="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/_ds_bundle.js"></script>
+  <style>
+    :root {
+      --type-display: 90px;
+      --type-title: 60px;
+      --type-subtitle: 40px;
+      --type-lead: 36px;
+      --type-body: 30px;
+      --type-small: 24px;
+      --type-mono: 24px;
+      --type-over: 24px;
+      --pad-x: 120px;
+      --pad-y: 92px;
+      --ink: #111827;
+      --muted: #656C79;
+      --red: #DF2F3A;
+      --red-subtle: #FFF0F1;
+      --line: #E5E7EB;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+  </style>
+</helmet>
+<x-import component-from-global-scope="deck-stage" from="./deck-stage.js" width="1920" height="1080" hint-size="100%,100%">
+
+  <section data-label="Portada" data-screen-label="Portada" data-speaker-notes="Sesión 2, primera lección. El prompting bien hecho ahorra iteraciones, pero tiene un techo: por buenos que sean tus prompts, Claude empieza cada sesión sin saber nada de TU proyecto. Hoy le damos memoria persistente con el CLAUDE.md." style="background:var(--red);display:flex;flex-direction:column;justify-content:space-between;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="display:flex;align-items:center;gap:16px;">
+      <span style="width:14px;height:14px;border-radius:999px;background:#fff;display:block;"></span>
+      <span style="text-transform:uppercase;letter-spacing:0.16em;font-size:var(--type-over);font-weight:700;opacity:.9;">Curso Claude Code · Sesión 2</span>
+    </div>
+    <div>
+      <div style="font-size:var(--type-subtitle);font-weight:600;opacity:.85;margin-bottom:18px;">Lección 1</div>
+      <h1 style="font-size:var(--type-display);font-weight:800;letter-spacing:-0.03em;line-height:1.0;margin:0;max-width:1420px;text-wrap:balance;">Gestión del contexto y CLAUDE.md</h1>
+      <p style="font-size:var(--type-lead);font-weight:500;line-height:1.4;margin:32px 0 0;max-width:1200px;opacity:.92;">Cómo darle a Claude memoria persistente de tu proyecto para dejar de re-explicar lo mismo cada mañana.</p>
+    </div>
+    <div style="font-size:var(--type-small);font-weight:600;opacity:.8;">Sesión 2 · Contexto y memoria del proyecto</div>
+  </section>
+
+  <section data-label="Dónde estamos" data-screen-label="01" data-speaker-notes="El puente con la Sesión 1. El prompting tiene un techo: cada vez que abres el terminal, para Claude vuelve a ser el primer día. No sabe nada de tu proyecto. Esta lección ataca justo ese hueco." style="background:#fff;display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Dónde estamos</div>
+    <h2 style="font-size:64px;font-weight:800;letter-spacing:-0.03em;line-height:1.06;margin:0;max-width:1500px;text-wrap:balance;">El prompting tiene un techo: Claude no sabe nada de <em>tu</em> proyecto</h2>
+    <p style="font-size:var(--type-lead);font-weight:500;line-height:1.45;margin:40px 0 0;max-width:1360px;color:var(--muted);">Por muy buenos que sean tus prompts, cada vez que abres el terminal vuelve a ser el primer día. Esta lección ataca ese hueco: darle <strong style="color:var(--ink);">memoria persistente</strong> del proyecto.</p>
+  </section>
+
+  <section data-label="Qué es el contexto" data-screen-label="02" data-speaker-notes="El modelo no ve tu proyecto. Ve una ventana de contexto: un bloque de texto finito que se arma al empezar cada sesión y contiene todo lo que el modelo sabe en ese momento. Si algo no está en esa ventana, para el modelo no existe." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">El concepto que lo limita todo</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 40px;">Qué es la ventana de contexto</h2>
+    <div style="display:flex;gap:48px;align-items:center;">
+      <p style="flex:1;font-size:var(--type-body);line-height:1.5;margin:0;">Claude no «ve» tu proyecto. Ve un <strong>bloque de texto finito</strong> que se arma al empezar cada sesión y contiene todo lo que sabe en ese momento.</p>
+      <div style="flex:none;width:620px;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:20px;padding:44px;">
+        <p style="font-size:34px;font-weight:800;line-height:1.25;margin:0;color:var(--ink);">Si algo no está en esa ventana, para el modelo <span style="color:var(--red);">no existe</span>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="De qué se compone" data-screen-label="03" data-speaker-notes="La ventana se compone, a grandes rasgos, de cuatro cosas: el prompt de sistema de Claude Code (no lo tocas), los ficheros CLAUDE.md que apliquen, el contenido de los archivos que Claude lee mientras trabaja, y tu conversación." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Qué entra en la ventana</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 48px;">Se compone de cuatro cosas</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:26px;">
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:32px 36px;"><div style="font-size:28px;font-weight:800;margin-bottom:10px;">Prompt de sistema</div><p style="font-size:25px;color:var(--muted);line-height:1.4;margin:0;">Cómo se comporta la herramienta y qué tools tiene. No lo tocas tú.</p></div>
+      <div style="background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:18px;padding:32px 36px;"><div style="font-size:28px;font-weight:800;margin-bottom:10px;color:var(--red);">Los CLAUDE.md</div><p style="font-size:25px;color:var(--color-error-text);line-height:1.4;margin:0;">Lo que aplica a tu sesión. Lo que vas a aprender a escribir hoy.</p></div>
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:32px 36px;"><div style="font-size:28px;font-weight:800;margin-bottom:10px;">Archivos leídos</div><p style="font-size:25px;color:var(--muted);line-height:1.4;margin:0;">El contenido que Claude lee mientras trabaja (Read, Grep, Glob…).</p></div>
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:32px 36px;"><div style="font-size:28px;font-weight:800;margin-bottom:10px;">Tu conversación</div><p style="font-size:25px;color:var(--muted);line-height:1.4;margin:0;">Tus mensajes y las respuestas del modelo.</p></div>
+    </div>
+  </section>
+
+  <section data-label="Dos propiedades" data-screen-label="04" data-speaker-notes="Dos propiedades que condicionan tu forma de trabajar. Es finita: tiene un límite de tokens; más contexto no es mejor, contexto relevante es mejor. Y arranca de cero en cada sesión: Claude no recuerda nada de ayer salvo lo que esté escrito en disco en un sitio que la herramienta cargue automáticamente." style="background:var(--red);display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="text-transform:uppercase;letter-spacing:0.14em;font-size:var(--type-over);font-weight:700;opacity:.85;margin-bottom:40px;">Dos propiedades que lo cambian todo</div>
+    <div style="display:flex;gap:40px;">
+      <div style="flex:1;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:20px;padding:44px;">
+        <div style="font-size:34px;font-weight:800;line-height:1.2;margin-bottom:16px;">Es finita</div>
+        <p style="font-size:26px;line-height:1.4;margin:0;opacity:.92;">Tiene un límite de tokens. Todo lo que metes «por si acaso» compite con lo que importa. Más contexto no es mejor: contexto <strong>relevante</strong> es mejor.</p>
+      </div>
+      <div style="flex:1;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:20px;padding:44px;">
+        <div style="font-size:34px;font-weight:800;line-height:1.2;margin-bottom:16px;">Arranca de cero</div>
+        <p style="font-size:26px;line-height:1.4;margin:0;opacity:.92;">Cada sesión empieza limpia. Claude no recuerda nada de ayer salvo lo que esté <strong>escrito en disco</strong> en un sitio que la herramienta cargue sola.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="La idea central" data-screen-label="05" data-speaker-notes="La idea central de la lección en una frase, con el ejemplo del compañero nuevo. Lo que le dirías el primer día —make test, no toques legacy, commits convencionales— es exactamente lo que va en el CLAUDE.md. Lo que no le dirías (esto es un bucle for) tampoco va: Claude ya lo sabe." style="background:var(--red);display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="text-transform:uppercase;letter-spacing:0.14em;font-size:var(--type-over);font-weight:700;opacity:.85;margin-bottom:36px;">La idea central, en una frase</div>
+    <h2 style="font-size:64px;font-weight:800;letter-spacing:-0.03em;line-height:1.08;margin:0;max-width:1520px;text-wrap:balance;">El CLAUDE.md es donde escribes lo que, si no, tendrías que volver a explicarle a Claude cada vez</h2>
+    <p style="font-size:var(--type-lead);font-weight:500;line-height:1.45;margin:44px 0 0;max-width:1400px;opacity:.92;">Es lo que le dirías a un compañero nuevo el primer día —«los tests con <code style="font-family:var(--font-mono);font-size:0.9em;">make test</code>, nunca toques <code style="font-family:var(--font-mono);font-size:0.9em;">legacy/</code>»—. Lo que <em>no</em> le dirías («esto es un bucle for») tampoco va: Claude ya lo sabe.</p>
+  </section>
+
+  <section data-label="El archivo CLAUDE.md" data-screen-label="06" data-speaker-notes="CLAUDE.md es un fichero markdown que Claude Code lee automáticamente al empezar cada sesión, y cuyo contenido se inyecta en la ventana. No hay que invocarlo ni mencionarlo: si existe en los sitios correctos, se carga." style="background:#fff;display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">El archivo</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 32px;max-width:1480px;">Se carga solo, al empezar cada sesión</h2>
+    <p style="font-size:var(--type-body);line-height:1.5;margin:0;max-width:1440px;">Un fichero de texto en markdown cuyo contenido se inyecta en la ventana de contexto. No hay que invocarlo, ni mencionarlo, ni hacer nada: <strong>si existe en los sitios correctos, se carga.</strong></p>
+  </section>
+
+  <section data-label="Los tres niveles" data-screen-label="07" data-speaker-notes="No hay un único CLAUDE.md, hay una jerarquía. Global (~/.claude/CLAUDE.md): tus preferencias personales en cualquier proyecto, solo tuyo. Proyecto (CLAUDE.md en la raíz): el contexto que todo el equipo necesita, se versiona con git. Local (CLAUDE.local.md): tus manías en este proyecto, no se versiona. Los niveles se suman, no se sustituyen; ante conflicto gana el más específico." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Una jerarquía, no un fichero</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Los tres niveles del CLAUDE.md</h2>
+    <div style="display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;overflow:hidden;">
+      <div style="display:grid;grid-template-columns:0.9fr 1.3fr 1.9fr 0.8fr;background:var(--ink);color:#fff;font-size:23px;font-weight:700;"><div style="padding:22px 28px;">Nivel</div><div style="padding:22px 28px;">Ubicación</div><div style="padding:22px 28px;">Para qué</div><div style="padding:22px 28px;">¿Se comparte?</div></div>
+      <div style="display:grid;grid-template-columns:0.9fr 1.3fr 1.9fr 0.8fr;font-size:24px;border-bottom:1px solid var(--line);"><div style="padding:24px 28px;font-weight:700;">Global</div><div style="padding:24px 28px;font-family:var(--font-mono);color:var(--red);font-weight:700;">~/.claude/CLAUDE.md</div><div style="padding:24px 28px;">Tus preferencias en <em>cualquier</em> proyecto: formato de commits, tu estilo de trabajo.</div><div style="padding:24px 28px;color:var(--muted);">No</div></div>
+      <div style="display:grid;grid-template-columns:0.9fr 1.3fr 1.9fr 0.8fr;font-size:24px;border-bottom:1px solid var(--line);background:var(--gray-50);"><div style="padding:24px 28px;font-weight:700;">Proyecto</div><div style="padding:24px 28px;font-family:var(--font-mono);color:var(--red);font-weight:700;">CLAUDE.md (raíz)</div><div style="padding:24px 28px;">Lo que <strong>todo el equipo</strong> necesita: build/test, convenciones, arquitectura.</div><div style="padding:24px 28px;color:var(--ink);font-weight:700;">Sí · git</div></div>
+      <div style="display:grid;grid-template-columns:0.9fr 1.3fr 1.9fr 0.8fr;font-size:24px;"><div style="padding:24px 28px;font-weight:700;">Local</div><div style="padding:24px 28px;font-family:var(--font-mono);color:var(--red);font-weight:700;">CLAUDE.local.md</div><div style="padding:24px 28px;">Tus manías <em>en este proyecto</em> que nadie más necesita ver.</div><div style="padding:24px 28px;color:var(--muted);">No</div></div>
+    </div>
+    <p style="font-size:var(--type-small);color:var(--muted);margin:32px 0 0;">Se <strong style="color:var(--ink);">suman</strong>, no se sustituyen. Ante conflicto gana la regla más específica (la más cercana a tu directorio).</p>
+  </section>
+
+  <section data-label="El comando /init" data-screen-label="08" data-speaker-notes="No escribes el CLAUDE.md desde una página en blanco. /init analiza tu proyecto y genera un borrador con overview, stack, estándares y git. Importante: es un borrador, no el resultado final. Lo que lo hace útil es lo que tú añades, recortas y precisas encima. Un autogenerado sin revisar está lleno de obviedades." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">El punto de partida</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 48px;">Inicializa el contexto con <code style="font-family:var(--font-mono);color:var(--red);">/init</code></h2>
+    <div style="display:flex;gap:44px;align-items:center;">
+      <div style="flex:none;width:540px;background:#111827;border-radius:20px;padding:44px;box-shadow:0 14px 36px rgba(17,24,39,.22);">
+        <div style="font-family:var(--font-mono);font-size:40px;font-weight:800;color:#fff;margin-bottom:22px;">/init</div>
+        <div style="font-family:var(--font-mono);font-size:23px;color:#9CA3AF;line-height:1.7;">analiza el proyecto →<br>overview · stack ·<br>estándares · git</div>
+      </div>
+      <div style="flex:1;background:var(--color-warning-subtle);border:1px solid #F7E4B5;border-radius:20px;padding:40px 44px;">
+        <div style="font-size:26px;font-weight:800;color:var(--color-warning-text);margin-bottom:14px;">Es un borrador, no el resultado</div>
+        <p style="font-size:28px;line-height:1.45;margin:0;color:var(--ink);">Lo que lo hace útil de verdad es lo que tú <strong>añades, recortas y precisas</strong> encima. Un CLAUDE.md autogenerado y sin revisar está lleno de obviedades que Claude ya sabe.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Qué poner y qué no" data-screen-label="09" data-speaker-notes="La parte que más valor aporta. El CLAUDE.md no es documentación ni un README: es un contrato de comportamiento. Cada línea debería cambiar cómo actúa Claude; si no lo hace, sobra. Sí: comandos, convenciones, reglas siempre/nunca, arquitectura a vista de pájaro, terminología propia. No: cosas volátiles, lo que Claude ya deduce del código, lo que bloquearía CI." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:18px;">Un contrato de comportamiento, no un README</div>
+    <h2 style="font-size:52px;font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 40px;">Cada línea debe cambiar lo que Claude hace</h2>
+    <div style="display:flex;gap:40px;align-items:stretch;">
+      <div style="flex:1;background:var(--color-success-subtle);border:1px solid #BBE9D6;border-radius:18px;padding:32px 38px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;"><span style="font-size:26px;color:var(--color-success);">✓</span><span style="font-size:28px;font-weight:800;color:var(--color-success-text);">Sí va</span></div>
+        <ul style="margin:0;padding-left:24px;font-size:24px;line-height:1.55;color:var(--ink);"><li>Comandos que no puede adivinar: build, test, linter, migraciones</li><li>Convenciones: commits, estilo no forzado por linter</li><li>Reglas «siempre X / nunca Y»</li><li>Arquitectura a vista de pájaro (4-5 bullets)</li><li>Terminología propia del proyecto</li></ul>
+      </div>
+      <div style="flex:1;background:var(--gray-100);border-radius:18px;padding:32px 38px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;"><span style="font-size:26px;color:var(--gray-500);">✕</span><span style="font-size:28px;font-weight:800;color:var(--gray-600);">No va</span></div>
+        <ul style="margin:0;padding-left:24px;font-size:24px;line-height:1.55;color:var(--gray-600);"><li>Cosas volátiles: el plan de sprint, la checklist de hoy</li><li>Lo que Claude deduce leyendo el código (referéncialo, no lo dupliques)</li><li>Lo que bloquearía un merge en CI → eso es un hook, no un consejo</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Contexto, no cortafuegos" data-screen-label="10" data-speaker-notes="El matiz clave que casi nadie cuenta. El CLAUDE.md se carga como contexto, no como configuración que se obliga a cumplir. Claude lo trata como instrucciones de mucho peso, pero las interpreta; no es un cortafuegos. Si necesitas garantizar que algo no ocurra pase lo que pase, usa un hook PreToolUse, que sí bloquea de forma determinista." style="background:var(--red);display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="text-transform:uppercase;letter-spacing:0.14em;font-size:var(--type-over);font-weight:700;opacity:.85;margin-bottom:36px;">El matiz que casi nadie cuenta</div>
+    <h2 style="font-size:62px;font-weight:800;letter-spacing:-0.03em;line-height:1.06;margin:0;max-width:1500px;text-wrap:balance;">Se carga como contexto, no como un cortafuegos</h2>
+    <p style="font-size:var(--type-lead);font-weight:500;line-height:1.45;margin:44px 0 0;max-width:1420px;opacity:.92;">Claude lo trata como instrucciones de mucho peso, pero las <strong>interpreta</strong>. Si necesitas <em>garantizar</em> que algo no ocurra pase lo que pase, no lo escribas como una frase y te quedes tranquilo: usa un hook <code style="font-family:var(--font-mono);font-size:0.9em;">PreToolUse</code>, que sí bloquea de forma determinista. (Sesiones 3 y 4.)</p>
+  </section>
+
+  <section data-label="Cómo se escribe" data-screen-label="11" data-speaker-notes="El cómo importa tanto como el qué. Imperativo, como órdenes: nunca uses mocks en línea, no solemos intentar evitarlos. Reserva los marcadores de énfasis: IMPORTANTE o DEBES solo en la una o dos reglas críticas; si todo es importante, nada lo es. Y mantenlo corto: 20-80 líneas para repos pequeños; a partir de ~200 se vuelve un documento largo y toca modularizar." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Cómo se escribe para que lo siga</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 48px;">Tres principios que se notan</h2>
+    <div style="display:flex;gap:26px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:32px 34px;"><div style="font-size:42px;font-weight:800;color:var(--red);margin-bottom:14px;">01</div><div style="font-size:27px;font-weight:800;margin-bottom:10px;">Imperativo, como órdenes</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">«Nunca uses mocks en línea; usa las factorías de <code style="font-family:var(--font-mono);font-size:0.9em;">src/test/factories/</code>», no «solemos intentar evitarlos».</p></div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:32px 34px;"><div style="font-size:42px;font-weight:800;color:var(--red);margin-bottom:14px;">02</div><div style="font-size:27px;font-weight:800;margin-bottom:10px;">Énfasis con moderación</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;"><code style="font-family:var(--font-mono);font-size:0.9em;">IMPORTANTE</code> solo en la una o dos reglas críticas. Si todo es importante, nada lo es.</p></div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:32px 34px;"><div style="font-size:42px;font-weight:800;color:var(--red);margin-bottom:14px;">03</div><div style="font-size:27px;font-weight:800;margin-bottom:10px;">Mantenlo corto</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">20-80 líneas para repos pequeños. A partir de ~200 se vuelve un documento largo: toca <strong>modularizar</strong>.</p></div>
+    </div>
+    <p style="font-size:var(--type-small);color:var(--muted);margin:40px 0 0;">Truco: los comentarios HTML (<code style="font-family:var(--font-mono);font-size:0.9em;">&lt;!-- … --&gt;</code>) se eliminan antes de inyectar el contenido. Notas para humanos sin gastar tokens.</p>
+  </section>
+
+  <section data-label="Global vs por archivos" data-screen-label="12" data-speaker-notes="Dos formas complementarias de dar contexto. Global: todo lo del CLAUDE.md raíz se inyecta en cada sesión; potente pero ocupa espacio siempre, por eso debe quedarse pequeño. Por archivos: referencia otros ficheros con @ruta, o ten un CLAUDE.md por subdirectorio en un monorepo. Lo transversal y estable arriba; lo profundo y específico, en ficheros con ámbito." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Dónde colocar cada cosa</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 48px;">Contexto global vs. por archivos</h2>
+    <div style="display:flex;gap:40px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:36px 40px;">
+        <div style="font-size:30px;font-weight:800;margin-bottom:14px;">Global (siempre)</div>
+        <p style="font-size:26px;color:var(--muted);line-height:1.4;margin:0;">El CLAUDE.md raíz se inyecta en <em>cada</em> sesión, trabajes donde trabajes. Potente, pero ocupa espacio siempre → mantenlo pequeño y estable.</p>
+      </div>
+      <div style="flex:1.15;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:18px;padding:36px 40px;">
+        <div style="font-size:30px;font-weight:800;margin-bottom:14px;color:var(--red);">Por archivos (con ámbito)</div>
+        <p style="font-size:26px;color:var(--ink);line-height:1.4;margin:0 0 16px;">Referencia con <code style="font-family:var(--font-mono);font-size:0.9em;">@ruta/al/fichero.md</code> → el raíz queda como índice. O un <strong>CLAUDE.md por subdirectorio</strong> en un monorepo.</p>
+        <p style="font-size:24px;color:var(--color-error-text);line-height:1.4;margin:0;">Lo transversal y estable, arriba. Lo profundo y específico, en ficheros con ámbito.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Datos sensibles" data-screen-label="13" data-speaker-notes="Dos problemas reales al recorrer el árbol. No quieres datos sensibles en el contexto (.env, credenciales): sé explícito sobre qué queda fuera y fuérzalo con permisos. Y no quieres que CLAUDE.md de otros equipos contaminen tu sesión en un monorepo: para eso está claudeMdExcludes, con patrones glob. Detalle de seguridad: los CLAUDE.md de managed policy no se pueden excluir, es deliberado." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Qué dejar fuera de la ventana</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Exclusión de archivos</h2>
+    <div style="display:flex;gap:40px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:34px 38px;">
+        <div style="font-size:27px;font-weight:800;margin-bottom:12px;">Datos sensibles</div>
+        <p style="font-size:25px;color:var(--muted);line-height:1.4;margin:0;">Un <code style="font-family:var(--font-mono);font-size:0.9em;">.env</code>, credenciales, un dump. No confíes en que «no lo va a leer»: díselo y <strong>fuérzalo con permisos</strong>. (Sesión 4.)</p>
+      </div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:34px 38px;">
+        <div style="font-size:27px;font-weight:800;margin-bottom:12px;">CLAUDE.md ajenos</div>
+        <p style="font-size:25px;color:var(--muted);line-height:1.4;margin:0;">En un monorepo, equipos vecinos contaminan tu sesión. El ajuste <code style="font-family:var(--font-mono);font-size:0.9em;color:var(--red);">claudeMdExcludes</code> define patrones glob que se saltan.</p>
+      </div>
+    </div>
+    <div style="display:flex;gap:24px;align-items:flex-start;background:var(--color-info-subtle);border:1px solid #BBD9F2;border-radius:16px;padding:28px 34px;margin-top:36px;">
+      <span style="flex:none;font-size:22px;font-weight:800;color:var(--color-info-text);text-transform:uppercase;letter-spacing:0.06em;">Seguridad</span>
+      <p style="font-size:25px;line-height:1.45;margin:0;color:var(--ink);">Los CLAUDE.md de <strong>managed policy</strong> (los que impone tu organización) no se pueden excluir. Es deliberado: garantiza que las instrucciones de toda la organización se apliquen siempre.</p>
+    </div>
+  </section>
+
+  <section data-label="Caso completo" data-screen-label="14" data-speaker-notes="El flujo entero sobre un repo de ejemplo —una API en Node con Postgres— para ver el criterio en acción. Generar el borrador con /init y abrirlo con /memory. Diagnosticarlo: obviedades fuera, lo blando lo concretas o fuera, los aciertos se quedan. Reescribir en imperativo y concreto. Probarlo con tareas representativas. Y mantenerlo: un buen CLAUDE.md tiende a encoger." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">De cero a un CLAUDE.md que aporta</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 48px;">El flujo completo, en cinco pasos</h2>
+    <div style="display:flex;gap:20px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 28px;"><div style="font-size:22px;font-weight:800;color:var(--red);margin-bottom:12px;">Paso 1</div><div style="font-size:25px;font-weight:700;margin-bottom:8px;">Generar</div><p style="font-size:22px;color:var(--muted);line-height:1.4;margin:0;"><code style="font-family:var(--font-mono);font-size:0.9em;">/init</code>, y ábrelo con <code style="font-family:var(--font-mono);font-size:0.9em;">/memory</code>.</p></div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 28px;"><div style="font-size:22px;font-weight:800;color:var(--red);margin-bottom:12px;">Paso 2</div><div style="font-size:25px;font-weight:700;margin-bottom:8px;">Diagnosticar</div><p style="font-size:22px;color:var(--muted);line-height:1.4;margin:0;">Obviedad, blanda o acierto.</p></div>
+      <div style="flex:1;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:18px;padding:30px 28px;"><div style="font-size:22px;font-weight:800;color:var(--red);margin-bottom:12px;">Paso 3</div><div style="font-size:25px;font-weight:700;margin-bottom:8px;">Reescribir</div><p style="font-size:22px;color:var(--color-error-text);line-height:1.4;margin:0;">En imperativo y concreto.</p></div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 28px;"><div style="font-size:22px;font-weight:800;color:var(--red);margin-bottom:12px;">Paso 4</div><div style="font-size:25px;font-weight:700;margin-bottom:8px;">Probarlo</div><p style="font-size:22px;color:var(--muted);line-height:1.4;margin:0;">Tareas representativas; ¿respeta las reglas?</p></div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 28px;"><div style="font-size:22px;font-weight:800;color:var(--red);margin-bottom:12px;">Paso 5</div><div style="font-size:25px;font-weight:700;margin-bottom:8px;">Mantenerlo</div><p style="font-size:22px;color:var(--muted);line-height:1.4;margin:0;">Un buen CLAUDE.md tiende a <strong>encoger</strong>.</p></div>
+    </div>
+    <p style="font-size:var(--type-small);color:var(--muted);margin:40px 0 0;">Tres tipos de línea en el borrador: <em>obviedades</em> (fuera), <em>blandas</em> («código limpio» → concretar o fuera) y <em>aciertos</em> (se quedan, afinados).</p>
+  </section>
+
+  <section data-label="Ejemplo de CLAUDE.md" data-screen-label="15" data-speaker-notes="Cómo podría quedar el núcleo del fichero. Fíjate: hay un solo IMPORTANTE, en la regla más crítica (no romper legacy). Los detalles largos están referenciados con @, no copiados. Cada línea cambia una decisión de Claude. Y está en imperativo: nunca edites, todo endpoint necesita." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">El resultado</div>
+    <h2 style="font-size:48px;font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 36px;">Cómo queda el núcleo del fichero</h2>
+    <div style="display:flex;gap:44px;align-items:stretch;">
+      <pre style="flex:1.35;margin:0;background:#111827;border-radius:20px;padding:34px 40px;font-family:var(--font-mono);font-size:22px;line-height:1.6;color:#E5E7EB;white-space:pre-wrap;box-shadow:0 14px 36px rgba(17,24,39,.22);"><span style="color:#9CA3AF;"># API de Pedidos — contexto</span>
+
+<span style="color:#9CA3AF;">## Comandos</span>
+- Tests: <span style="color:#FF9AA0;">make test</span> (NUNCA npm test)
+- Migraciones: <span style="color:#FF9AA0;">make db-migrate</span>
+
+<span style="color:#9CA3AF;">## Reglas</span>
+- <span style="color:#fff;font-weight:700;">IMPORTANTE:</span> nunca edites <span style="color:#FF9AA0;">legacy/</span>
+- Todo endpoint necesita su test
+
+<span style="color:#9CA3AF;">## Referencias</span>
+- Arquitectura: <span style="color:#86E1A9;">@docs/architecture.md</span></pre>
+      <ul style="flex:1;margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:22px;">
+        <li style="display:flex;gap:18px;align-items:baseline;font-size:26px;line-height:1.4;"><span style="flex:none;width:12px;height:12px;border-radius:999px;background:var(--red);"></span><strong>Un solo</strong> <code style="font-family:var(--font-mono);font-size:0.9em;">IMPORTANTE</code>, en la regla más crítica.</li>
+        <li style="display:flex;gap:18px;align-items:baseline;font-size:26px;line-height:1.4;"><span style="flex:none;width:12px;height:12px;border-radius:999px;background:var(--red);"></span>Los detalles largos, <strong>referenciados con <code style="font-family:var(--font-mono);font-size:0.9em;">@</code></strong>, no copiados.</li>
+        <li style="display:flex;gap:18px;align-items:baseline;font-size:26px;line-height:1.4;"><span style="flex:none;width:12px;height:12px;border-radius:999px;background:var(--red);"></span>Cada línea <strong>cambia una decisión</strong>. Sin relleno.</li>
+        <li style="display:flex;gap:18px;align-items:baseline;font-size:26px;line-height:1.4;"><span style="flex:none;width:12px;height:12px;border-radius:999px;background:var(--red);"></span>Todo en <strong>imperativo</strong>: «nunca edites», «todo endpoint necesita».</li>
+      </ul>
+    </div>
+  </section>
+
+  <section data-label="Errores frecuentes" data-screen-label="16" data-speaker-notes="Los errores típicos y su diagnóstico. No cumple una regla: suele ser vaga, contradice a otra, o necesita ser una garantía dura (muévela a CI o hook). Se ha vuelto un monstruo de 300 líneas: estás metiendo en el raíz cosas que deberían modularizarse. Una regla desapareció tras compactar: vivía solo en la conversación, nunca llegó al CLAUDE.md de disco." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Errores comunes</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 40px;">Qué falla y cómo se diagnostica</h2>
+    <div style="display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;overflow:hidden;">
+      <div style="display:grid;grid-template-columns:1.2fr 1.6fr;background:var(--ink);color:#fff;font-size:24px;font-weight:700;"><div style="padding:22px 30px;">Síntoma</div><div style="padding:22px 30px;">Causa probable</div></div>
+      <div style="display:grid;grid-template-columns:1.2fr 1.6fr;font-size:25px;border-bottom:1px solid var(--line);"><div style="padding:26px 30px;">«Le escribí la regla y no la cumple»</div><div style="padding:26px 30px;color:var(--muted);">Es vaga · contradice a otra · necesita ser garantía dura (→ CI o hook).</div></div>
+      <div style="display:grid;grid-template-columns:1.2fr 1.6fr;font-size:25px;border-bottom:1px solid var(--line);background:var(--gray-50);"><div style="padding:26px 30px;">«Se volvió un monstruo de 300 líneas»</div><div style="padding:26px 30px;color:var(--muted);">Metes en el raíz lo que debería modularizarse o directamente sobra.</div></div>
+      <div style="display:grid;grid-template-columns:1.2fr 1.6fr;font-size:25px;"><div style="padding:26px 30px;">«Una regla desapareció a mitad de sesión»</div><div style="padding:26px 30px;color:var(--muted);">Tras <code style="font-family:var(--font-mono);font-size:0.92em;color:var(--ink);">/compact</code>, vivía solo en la conversación. Si perder algo te duele, escríbelo en disco.</div></div>
+    </div>
+  </section>
+
+  <section data-label="Ejercicio" data-screen-label="17" data-speaker-notes="El ejercicio: sobre un repo tuyo, haz el flujo completo. /init y abre con /memory. Marca cada línea como obviedad, blanda o acierto. Reescríbelo en 20-40 líneas: imperativo, un único IMPORTANTE, al menos un detalle movido a un fichero con @. Pruébalo con dos tareas. El objetivo no es un CLAUDE.md completo, sino uno donde cada línea se gane su sitio." style="background:#fff;display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Para practicar</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">El ejercicio de la lección</h2>
+    <div style="display:flex;flex-direction:column;gap:18px;max-width:1540px;">
+      <div style="display:flex;gap:24px;align-items:center;font-size:27px;"><span style="flex:none;width:46px;height:46px;border-radius:12px;background:var(--gray-100);color:var(--muted);font-weight:800;display:flex;align-items:center;justify-content:center;">1</span>Lanza <code style="font-family:var(--font-mono);font-size:0.9em;">/init</code> y abre el resultado con <code style="font-family:var(--font-mono);font-size:0.9em;">/memory</code>.</div>
+      <div style="display:flex;gap:24px;align-items:center;font-size:27px;"><span style="flex:none;width:46px;height:46px;border-radius:12px;background:var(--gray-100);color:var(--muted);font-weight:800;display:flex;align-items:center;justify-content:center;">2</span>Marca cada línea como <em>obviedad</em>, <em>blanda</em> o <em>acierto</em>.</div>
+      <div style="display:flex;gap:24px;align-items:center;font-size:27px;"><span style="flex:none;width:46px;height:46px;border-radius:12px;background:var(--gray-100);color:var(--muted);font-weight:800;display:flex;align-items:center;justify-content:center;">3</span>Reescríbelo en 20-40 líneas: imperativo, un único <code style="font-family:var(--font-mono);font-size:0.9em;">IMPORTANTE</code>, un detalle movido a un fichero con <code style="font-family:var(--font-mono);font-size:0.9em;">@</code>.</div>
+      <div style="display:flex;gap:24px;align-items:center;font-size:27px;font-weight:700;color:var(--red);"><span style="flex:none;width:46px;height:46px;border-radius:12px;background:var(--red);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;">4</span>Pruébalo con dos tareas y comprueba si respeta tus reglas.</div>
+    </div>
+    <p style="font-size:var(--type-small);color:var(--muted);margin:40px 0 0;">El objetivo no es un CLAUDE.md «completo», sino uno donde <strong style="color:var(--ink);">cada línea se gane su sitio</strong>.</p>
+  </section>
+
+  <section data-label="Resumen" data-screen-label="18" data-speaker-notes="Las ideas para llevarse a casa. El contexto es una ventana finita que arranca de cero; lo que no está, no existe. El CLAUDE.md es la memoria en disco que se carga sola. Tres niveles que se suman. Es un contrato de comportamiento, no un README: cada línea cambia una decisión. Imperativo, énfasis con moderación, corto. Y es contexto interpretado, no un cortafuegos." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Para llevarse a casa</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Resumen de la lección</h2>
+    <div style="display:flex;flex-direction:column;gap:20px;max-width:1560px;">
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">El contexto es una <strong>ventana finita que arranca de cero</strong> en cada sesión. Lo que no está en ella, no existe para el modelo.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">El <strong>CLAUDE.md</strong> es la memoria en disco que se carga sola. Tres niveles —global, proyecto, local— que <strong>se suman</strong>.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">No es un README: es un <strong>contrato de comportamiento</strong>. Cada línea cambia una decisión, o sobra. <code style="font-family:var(--font-mono);font-size:0.9em;">/init</code> da el borrador; tú lo afilas.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">Se escribe en <strong>imperativo</strong>, con énfasis con moderación, y corto. Cuando crece, se <strong>modulariza</strong>.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">Es <strong>contexto interpretado, no un cortafuegos</strong>: para garantías duras, un hook.</p></div>
+    </div>
+  </section>
+
+  <section data-label="Cierre" data-screen-label="19" data-speaker-notes="Cierre y puente a la siguiente lección. Ya tienes memoria persistente del proyecto. Ahora vamos a hacer que Claude actúe de formas repetibles y bajo reglas con ámbito: reglas modulares en .claude/rules/ y slash commands para empaquetar los prompts que repites cada día." style="background:var(--red);display:flex;flex-direction:column;justify-content:space-between;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="display:flex;align-items:center;gap:16px;"><span style="width:14px;height:14px;border-radius:999px;background:#fff;display:block;"></span><span style="text-transform:uppercase;letter-spacing:0.16em;font-size:var(--type-over);font-weight:700;opacity:.9;">Siguiente lección</span></div>
+    <div>
+      <h2 style="font-size:64px;font-weight:800;letter-spacing:-0.03em;line-height:1.06;margin:0;max-width:1480px;text-wrap:balance;">Que Claude no solo sepa, sino que actúe de forma repetible</h2>
+      <p style="font-size:var(--type-lead);font-weight:500;line-height:1.4;margin:36px 0 0;max-width:1360px;opacity:.92;">Reglas modulares con ámbito en <code style="font-family:var(--font-mono);font-size:0.9em;">.claude/rules/</code> y slash commands para empaquetar los prompts que repites cada día.</p>
+    </div>
+    <div style="font-size:var(--type-small);font-weight:600;opacity:.8;">Sesión 2 · Lección 2 — Reglas y slash commands</div>
+  </section>
+
+</x-import>
+</x-dc>
+</body>
+</html>

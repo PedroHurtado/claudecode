@@ -1,0 +1,24 @@
+/* ─────────────────────────────────────────
+   Fudie Design System · link.css
+───────────────────────────────────────── */
+
+.fudie-link {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: var(--transition-colors);
+}
+
+.fudie-link:hover {
+  color: var(--color-text);
+}
+
+.fudie-link:focus-visible {
+  box-shadow: var(--shadow-focus);
+  border-radius: var(--radius-sm);
+}

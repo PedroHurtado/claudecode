@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/styles.css">
+  <script src="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/_ds_bundle.js"></script>
+  <style>
+    :root {
+      --type-display: 90px;
+      --type-title: 60px;
+      --type-subtitle: 40px;
+      --type-lead: 36px;
+      --type-body: 30px;
+      --type-small: 24px;
+      --type-mono: 24px;
+      --type-over: 24px;
+      --pad-x: 120px;
+      --pad-y: 92px;
+      --ink: #111827;
+      --muted: #656C79;
+      --red: #DF2F3A;
+      --red-subtle: #FFF0F1;
+      --line: #E5E7EB;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+  </style>
+</helmet>
+<x-import component-from-global-scope="deck-stage" from="./deck-stage.js" width="1920" height="1080" hint-size="100%,100%">
+
+  <section data-label="Portada" data-screen-label="Portada" data-speaker-notes="Lección 2, bloque de tarde. La decisión que más vas a repetir cada día: cuánta autonomía le das a Claude Code en cada tarea. Eso son los modos de trabajo, el corazón de la lección." style="background:var(--red);display:flex;flex-direction:column;justify-content:space-between;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="display:flex;align-items:center;gap:16px;">
+      <span style="width:14px;height:14px;border-radius:999px;background:#fff;display:block;"></span>
+      <span style="text-transform:uppercase;letter-spacing:0.16em;font-size:var(--type-over);font-weight:700;opacity:.9;">Curso Claude Code · Sesión 1</span>
+    </div>
+    <div>
+      <div style="font-size:var(--type-subtitle);font-weight:600;opacity:.85;margin-bottom:18px;">Lección 2</div>
+      <h1 style="font-size:var(--type-display);font-weight:800;letter-spacing:-0.03em;line-height:1.0;margin:0;max-width:1380px;text-wrap:balance;">Instalación, configuración y modos de trabajo</h1>
+      <p style="font-size:var(--type-lead);font-weight:500;line-height:1.4;margin:32px 0 0;max-width:1180px;opacity:.92;">Cuánta autonomía darle a Claude Code en cada tarea: la decisión más frecuente de tu día.</p>
+    </div>
+    <div style="font-size:var(--type-small);font-weight:600;opacity:.8;">Equipo interno · Bloque de tarde</div>
+  </section>
+
+  <section data-label="Qué es y qué no" data-screen-label="01" data-speaker-notes="No es un chat al lado del editor ni un autocompletado mejorado. Es un agente que vive en tu terminal, arranca en tu proyecto y considera ese punto como la raíz." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">El modelo mental correcto</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 56px;">Qué es Claude Code, y qué no es</h2>
+    <div style="display:flex;gap:40px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-100);border-radius:18px;padding:36px 40px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;"><span style="font-size:26px;color:var(--gray-500);">✕</span><span style="font-size:28px;font-weight:800;color:var(--gray-600);">No es</span></div>
+        <div style="display:flex;flex-direction:column;gap:16px;font-size:27px;color:var(--gray-600);line-height:1.35;">
+          <div>Un chat al lado del editor</div>
+          <div>Un autocompletado mejorado</div>
+          <div>Un asistente de copiar y pegar</div>
+        </div>
+      </div>
+      <div style="flex:1.3;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:18px;padding:36px 40px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:24px;"><span style="font-size:26px;color:var(--red);">✓</span><span style="font-size:28px;font-weight:800;color:var(--red);">Sí es</span></div>
+        <p style="font-size:29px;line-height:1.4;margin:0;color:var(--ink);">Un <strong>agente que vive en tu terminal</strong>. Arranca en el directorio de tu proyecto y lo considera la raíz desde la que lee y actúa.</p>
+        <p style="font-size:24px;color:var(--color-error-text);line-height:1.4;margin:22px 0 0;font-weight:600;">El entorno del modelo es tu entorno de desarrollo.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Un júnior con supervisión" data-screen-label="02" data-speaker-notes="La metáfora que mejor funciona en clase. No le darías a un júnior acceso a producción sin revisar; tampoco revisarías cada punto y coma. El equilibrio entre esos extremos es, literalmente, lo que configuran los modos." style="background:var(--red);display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="text-transform:uppercase;letter-spacing:0.14em;font-size:var(--type-over);font-weight:700;opacity:.85;margin-bottom:36px;">La metáfora que mejor funciona</div>
+    <h2 style="font-size:76px;font-weight:800;letter-spacing:-0.03em;line-height:1.05;margin:0;max-width:1480px;text-wrap:balance;">Trátalo como un desarrollador júnior muy rápido, pero que necesita supervisión</h2>
+    <p style="font-size:var(--type-lead);font-weight:500;line-height:1.4;margin:44px 0 0;max-width:1320px;opacity:.92;">No le das acceso a producción sin revisar; tampoco revisas cada punto y coma. El equilibrio entre esos dos extremos es, literalmente, lo que configuran los modos.</p>
+  </section>
+
+  <section data-label="Qué puede hacer" data-screen-label="03" data-speaker-notes="Desde la raíz del proyecto puede leer, crear y modificar archivos, ejecutar comandos de tu terminal, e integrarse con herramientas externas (MCP, Sesión 3). Tú fijas el objetivo y revisas; él actúa." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Sus capacidades</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 52px;">Qué puede hacer en tu proyecto</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:26px;">
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:32px 36px;"><div style="font-size:28px;font-weight:800;margin-bottom:10px;">Leer tu repositorio</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">Explora los archivos del proyecto para entender el contexto.</p></div>
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:32px 36px;"><div style="font-size:28px;font-weight:800;margin-bottom:10px;">Crear y modificar archivos</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">Escribe código directamente sobre tu árbol de trabajo.</p></div>
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:32px 36px;"><div style="font-size:28px;font-weight:800;margin-bottom:10px;">Ejecutar comandos</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">Instalar dependencias, lanzar tests, hacer commits.</p></div>
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:32px 36px;"><div style="font-size:28px;font-weight:800;margin-bottom:10px;">Integrarse con herramientas</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">Conexión con sistemas externos vía MCP (Sesión 3).</p></div>
+    </div>
+    <p style="font-size:var(--type-small);color:var(--ink);margin:44px 0 0;font-weight:600;">Tú fijas el objetivo, supervisas y revisas; él actúa.</p>
+  </section>
+
+  <section data-label="Instalación" data-screen-label="04" data-speaker-notes="Decisión deliberada del curso: no reproducimos el comando exacto. Cambia con frecuencia, ya está documentado, y no es donde está el valor. Lo instalamos juntos en directo contra la doc oficial." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Una decisión deliberada</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 16px;">Por qué no documentamos la instalación aquí</h2>
+    <p style="font-size:var(--type-body);color:var(--muted);margin:0 0 48px;max-width:1300px;">La instalamos juntos, en directo, contra la documentación oficial del día.</p>
+    <div style="display:flex;gap:26px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:32px 34px;"><div style="font-size:42px;font-weight:800;color:var(--red);margin-bottom:14px;">01</div><div style="font-size:27px;font-weight:700;margin-bottom:8px;">Cambia con frecuencia</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">Cualquier comando que escriba hoy puede estar obsoleto la semana que viene.</p></div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:32px 34px;"><div style="font-size:42px;font-weight:800;color:var(--red);margin-bottom:14px;">02</div><div style="font-size:27px;font-weight:700;margin-bottom:8px;">Ya está documentado</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">Duplicar la referencia de Anthropic solo introduce una copia que envejece.</p></div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:32px 34px;"><div style="font-size:42px;font-weight:800;color:var(--red);margin-bottom:14px;">03</div><div style="font-size:27px;font-weight:700;margin-bottom:8px;">No es donde está el valor</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">El valor es cómo se <em>trabaja</em>, no cómo se teclea el instalador.</p></div>
+    </div>
+  </section>
+
+  <section data-label="Lo que sí debes saber" data-screen-label="05" data-speaker-notes="Tres esenciales antes de seguir: se lanza con 'claude' dentro del directorio del proyecto; ese directorio es la raíz; y requiere internet (no hay modo offline)." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Lo que sí necesitas tener claro</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 52px;">Tres esenciales antes de seguir</h2>
+    <div style="display:flex;flex-direction:column;gap:24px;max-width:1480px;">
+      <div style="display:flex;gap:28px;align-items:center;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 36px;"><span style="flex:none;font-family:var(--font-mono);font-size:26px;font-weight:700;background:#111827;color:#fff;border-radius:10px;padding:12px 20px;">claude</span><p style="font-size:28px;line-height:1.35;margin:0;">Se lanza desde la terminal, <strong>dentro del directorio del proyecto</strong>.</p></div>
+      <div style="display:flex;gap:28px;align-items:center;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 36px;"><span style="flex:none;width:64px;height:64px;border-radius:14px;background:var(--red-subtle);color:var(--red);font-weight:800;font-size:30px;display:flex;align-items:center;justify-content:center;">↑</span><p style="font-size:28px;line-height:1.35;margin:0;">Ese directorio es la <strong>raíz</strong> desde la que lee y actúa. Lanzarlo desde la carpeta correcta importa.</p></div>
+      <div style="display:flex;gap:28px;align-items:center;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 36px;"><span style="flex:none;width:64px;height:64px;border-radius:14px;background:var(--red-subtle);color:var(--red);font-weight:800;font-size:30px;display:flex;align-items:center;justify-content:center;">⚡</span><p style="font-size:28px;line-height:1.35;margin:0;">Requiere <strong>conexión a internet</strong>: habla con la API de Anthropic. No hay modo offline.</p></div>
+    </div>
+  </section>
+
+  <section data-label="Los modos de trabajo" data-screen-label="06" data-speaker-notes="El núcleo de la lección. Lo que separa a quien usa Claude Code con criterio de quien lo sufre: elegir el nivel de autonomía adecuado para cada tarea." style="background:var(--red);display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="font-size:var(--type-over);font-weight:800;letter-spacing:0.14em;text-transform:uppercase;opacity:.8;margin-bottom:28px;">El núcleo de la lección</div>
+    <h2 style="font-size:84px;font-weight:800;letter-spacing:-0.03em;line-height:1.04;margin:0;max-width:1440px;text-wrap:balance;">Los modos de trabajo</h2>
+    <p style="font-size:var(--type-lead);font-weight:500;line-height:1.4;margin:40px 0 0;max-width:1340px;opacity:.92;">Claude Code puede actuar con distintos niveles de autonomía. Elegir el adecuado para cada tarea es la decisión más frecuente e importante de tu día a día.</p>
+  </section>
+
+  <section data-label="Nombres reales" data-screen-label="07" data-speaker-notes="El temario usa nombres que describen la idea, pero conviene conocer los nombres reales que verás en pantalla. Tres principales en el ciclo; dos avanzados (auto y bypassPermissions, el 'modo YOLO') fuera del ciclo, en la Sesión 4." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Una aclaración de nombres</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">El temario vs. lo que verás en la herramienta</h2>
+    <div style="display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;overflow:hidden;">
+      <div style="display:grid;grid-template-columns:1fr 1fr 1.3fr;background:var(--ink);color:#fff;font-size:24px;font-weight:700;"><div style="padding:22px 30px;">En el temario</div><div style="padding:22px 30px;">Nombre real</div><div style="padding:22px 30px;">Qué hace</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1.3fr;font-size:24px;border-bottom:1px solid var(--line);"><div style="padding:24px 30px;color:var(--muted);">Ask before edits</div><div style="padding:24px 30px;font-family:var(--font-mono);font-weight:700;color:var(--red);">default</div><div style="padding:24px 30px;">Pregunta antes de cada operación peligrosa</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1.3fr;font-size:24px;border-bottom:1px solid var(--line);background:var(--gray-50);"><div style="padding:24px 30px;color:var(--muted);">Edit automatically</div><div style="padding:24px 30px;font-family:var(--font-mono);font-weight:700;color:var(--red);">acceptEdits</div><div style="padding:24px 30px;">Aplica ediciones de archivo sin preguntar</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1fr 1.3fr;font-size:24px;"><div style="padding:24px 30px;color:var(--muted);">Plan</div><div style="padding:24px 30px;font-family:var(--font-mono);font-weight:700;color:var(--red);">plan</div><div style="padding:24px 30px;">Solo lectura: investiga y propone, no modifica</div></div>
+    </div>
+    <p style="font-size:var(--type-small);color:var(--muted);margin:32px 0 0;">Hay dos modos avanzados fuera del ciclo —<code style="font-size:1em;font-family:var(--font-mono);">auto</code> y <code style="font-size:1em;font-family:var(--font-mono);">bypassPermissions</code> (el «modo YOLO»)— que veremos en la Sesión 4.</p>
+  </section>
+
+  <section data-label="Cómo se cambia de modo" data-screen-label="08" data-speaker-notes="Poco intuitivo al principio: el modo NO se cambia pidiéndoselo a Claude en el chat. Se controla con la herramienta. Shift+Tab es el atajo que más usarás; lo practicamos hasta que sea automático." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">El gesto que más usarás</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 40px;">El modo no se cambia pidiéndoselo en el chat</h2>
+    <div style="display:flex;gap:44px;align-items:center;">
+      <div style="flex:none;width:560px;background:#111827;border-radius:20px;padding:44px;text-align:center;box-shadow:0 14px 36px rgba(17,24,39,.22);">
+        <div style="display:inline-flex;gap:14px;align-items:center;margin-bottom:28px;"><span style="font-family:var(--font-mono);font-size:30px;font-weight:700;color:#fff;background:#262B38;border-radius:12px;padding:14px 24px;">Shift</span><span style="color:#9CA3AF;font-size:28px;">+</span><span style="font-family:var(--font-mono);font-size:30px;font-weight:700;color:#fff;background:#262B38;border-radius:12px;padding:14px 24px;">Tab</span></div>
+        <div style="font-family:var(--font-mono);font-size:24px;color:#E5E7EB;line-height:1.7;">default → acceptEdits<br>→ plan → <span style="color:#9CA3AF;">(vuelta a empezar)</span></div>
+      </div>
+      <ul style="flex:1;margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:22px;">
+        <li style="display:flex;gap:20px;align-items:baseline;font-size:27px;line-height:1.4;"><span style="flex:none;width:12px;height:12px;border-radius:999px;background:var(--red);"></span>El modo activo aparece en la barra de estado, abajo a la izquierda.</li>
+        <li style="display:flex;gap:20px;align-items:baseline;font-size:27px;line-height:1.4;"><span style="flex:none;width:12px;height:12px;border-radius:999px;background:var(--red);"></span>Puedes arrancar en un modo: <code style="font-family:var(--font-mono);background:var(--gray-100);border-radius:6px;padding:2px 8px;">claude --permission-mode plan</code></li>
+        <li style="display:flex;gap:20px;align-items:baseline;font-size:27px;line-height:1.4;"><span style="flex:none;width:12px;height:12px;border-radius:999px;background:var(--red);"></span>Puedes fijar un modo por defecto con <code style="font-family:var(--font-mono);background:var(--gray-100);border-radius:6px;padding:2px 8px;">defaultMode</code> en <code style="font-family:var(--font-mono);background:var(--gray-100);border-radius:6px;padding:2px 8px;">.claude/settings.json</code></li>
+      </ul>
+    </div>
+  </section>
+
+  <section data-label="Modo Plan" data-screen-label="09" data-speaker-notes="Analiza y propone, pero no modifica nada. Lee, ejecuta comandos de solo lectura, razona y te presenta un plan. ¿Te suena? Es el chain of thought de la lección anterior, hecho herramienta." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="display:flex;align-items:baseline;gap:24px;margin-bottom:22px;"><span style="font-family:var(--font-mono);font-size:24px;font-weight:700;color:var(--red);">plan</span><div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);">Modo en profundidad</div></div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0;max-width:1320px;">Analiza y propone, pero no modifica nada</h2>
+    <div style="display:flex;gap:48px;margin-top:56px;align-items:center;">
+      <p style="flex:1;font-size:var(--type-body);line-height:1.5;margin:0;">Lee archivos, ejecuta comandos de exploración de <strong>solo lectura</strong>, razona sobre el problema y te presenta un plan de acción. No edita tu código fuente.</p>
+      <div style="flex:none;width:600px;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:20px;padding:40px;">
+        <p style="font-size:30px;line-height:1.4;margin:0;color:var(--ink);">Es exactamente el <strong>chain of thought</strong> de la lección anterior, convertido en una característica de la herramienta.</p>
+        <p style="font-size:24px;color:var(--color-error-text);line-height:1.4;margin:22px 0 0;">«Pensar antes de actuar» es tan útil que mereció un modo propio.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Plan · flujo y cuándo" data-screen-label="10" data-speaker-notes="El flujo: entras en Plan, planteas la tarea, Claude explora y redacta el plan, te pregunta, y tú apruebas/refinas/descartas. Regla de oro: si toca más de dos o tres archivos, planifica primero." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Modo Plan · el flujo real</div>
+    <h2 style="font-size:48px;font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Tu punto de partida para cualquier cosa no trivial</h2>
+    <div style="display:flex;gap:44px;align-items:stretch;">
+      <ol style="flex:1;margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:16px;">
+        <li style="display:flex;gap:20px;align-items:center;font-size:25px;"><span style="flex:none;width:42px;height:42px;border-radius:10px;background:var(--gray-100);color:var(--muted);font-weight:800;display:flex;align-items:center;justify-content:center;">1</span>Entras en modo Plan</li>
+        <li style="display:flex;gap:20px;align-items:center;font-size:25px;"><span style="flex:none;width:42px;height:42px;border-radius:10px;background:var(--gray-100);color:var(--muted);font-weight:800;display:flex;align-items:center;justify-content:center;">2</span>Le planteas la tarea</li>
+        <li style="display:flex;gap:20px;align-items:center;font-size:25px;"><span style="flex:none;width:42px;height:42px;border-radius:10px;background:var(--gray-100);color:var(--muted);font-weight:800;display:flex;align-items:center;justify-content:center;">3</span>Explora y redacta el plan: qué, dónde, en qué orden</li>
+        <li style="display:flex;gap:20px;align-items:center;font-size:25px;"><span style="flex:none;width:42px;height:42px;border-radius:10px;background:var(--gray-100);color:var(--muted);font-weight:800;display:flex;align-items:center;justify-content:center;">4</span>Te presenta el plan y pregunta cómo proceder</li>
+        <li style="display:flex;gap:20px;align-items:center;font-size:25px;font-weight:700;color:var(--red);"><span style="flex:none;width:42px;height:42px;border-radius:10px;background:var(--red);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;">5</span>Apruebas, refinas o descartas</li>
+      </ol>
+      <div style="flex:none;width:560px;background:#111827;border-radius:20px;padding:40px;display:flex;flex-direction:column;justify-content:center;box-shadow:0 14px 36px rgba(17,24,39,.22);">
+        <div style="font-size:24px;font-weight:700;color:#FF9AA0;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:18px;">La regla de oro</div>
+        <p style="font-size:32px;line-height:1.35;margin:0;color:#fff;">Si la tarea toca <strong>más de dos o tres archivos</strong>, planifica primero.</p>
+        <p style="font-size:24px;color:#9CA3AF;line-height:1.4;margin:22px 0 0;">El minuto que inviertes en leer el plan te ahorra deshacer trabajo después.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Modo default" data-screen-label="11" data-speaker-notes="El modo conservador y el comportamiento por defecto. Pregunta antes de cada operación peligrosa: escribir un archivo, ejecutar bash, una petición de red, una herramienta MCP. Es el caballo de batalla del trabajo cotidiano." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="display:flex;align-items:baseline;gap:24px;margin-bottom:22px;"><span style="font-family:var(--font-mono);font-size:24px;font-weight:700;color:var(--red);">default</span><div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);">Modo en profundidad</div></div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0;max-width:1320px;">Pregunta antes de cada acción: el caballo de batalla</h2>
+    <div style="display:flex;gap:48px;margin-top:56px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:20px;padding:38px;">
+        <div style="font-size:var(--type-small);font-weight:700;color:var(--muted);margin-bottom:18px;">Te pregunta antes de…</div>
+        <ul style="margin:0;padding-left:24px;font-size:27px;line-height:1.6;"><li>Escribir un archivo</li><li>Ejecutar muchos comandos de bash</li><li>Hacer una petición de red</li><li>Usar una herramienta MCP</li></ul>
+      </div>
+      <div style="flex:1;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:20px;padding:38px;display:flex;flex-direction:column;justify-content:center;">
+        <p style="font-size:30px;line-height:1.4;margin:0;color:var(--ink);">El término medio para el <strong>trabajo cotidiano</strong>: suficiente autonomía para avanzar, suficiente control para no llevarte sorpresas.</p>
+        <p style="font-size:24px;color:var(--color-error-text);line-height:1.4;margin:22px 0 0;">Confías en la dirección, pero quieres ver cada diff antes de que entre.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="El peligro silencioso" data-screen-label="12" data-speaker-notes="Una lección de criterio que casi nadie cuenta: cuantas más veces te pregunta, menos atención prestas. Aprobar el 90% sin leer es peor que un sistema automático bien diseñado: ilusión de control sin la sustancia." style="background:var(--red);display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="text-transform:uppercase;letter-spacing:0.14em;font-size:var(--type-over);font-weight:700;opacity:.85;margin-bottom:36px;">El peligro silencioso del modo default</div>
+    <h2 style="font-size:72px;font-weight:800;letter-spacing:-0.03em;line-height:1.05;margin:0;max-width:1480px;text-wrap:balance;">Cuantas más veces te pregunta, menos atención prestas</h2>
+    <p style="font-size:var(--type-lead);font-weight:500;line-height:1.4;margin:44px 0 0;max-width:1340px;opacity:.92;">Aprobar el 90% de los prompts pulsando Enter sin leerlos da la <em>ilusión</em> de control sin la sustancia. Si te descubres dándole a «sí» sin leer: baja a un modo automático <strong>con red de seguridad</strong>, o afina los permisos.</p>
+  </section>
+
+  <section data-label="Modo acceptEdits" data-screen-label="13" data-speaker-notes="Aplica las ediciones de archivo sin pedir permiso. Auto-aprueba también comandos de bajo riesgo en tu directorio (crear, mover, copiar), pero no lo sensible ni lo que sale de tu directorio. No es un cheque en blanco." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="display:flex;align-items:baseline;gap:24px;margin-bottom:22px;"><span style="font-family:var(--font-mono);font-size:24px;font-weight:700;color:var(--red);">acceptEdits</span><div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);">Modo en profundidad</div></div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0;max-width:1320px;">Edita solo, pero no es un cheque en blanco</h2>
+    <div style="display:flex;gap:48px;margin-top:56px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:20px;padding:38px;">
+        <div style="font-size:var(--type-small);font-weight:700;color:var(--muted);margin-bottom:16px;">Qué hace</div>
+        <p style="font-size:28px;line-height:1.4;margin:0;">Aplica las ediciones de archivo <strong>sin pedir permiso</strong>. Ves el resultado al final, no cada paso. La barra muestra «auto-accept edits».</p>
+      </div>
+      <div style="flex:1;background:var(--color-warning-subtle);border:1px solid #F7E4B5;border-radius:20px;padding:38px;">
+        <div style="font-size:var(--type-small);font-weight:700;color:var(--color-warning-text);margin-bottom:16px;">El matiz importante</div>
+        <p style="font-size:28px;line-height:1.4;margin:0;color:var(--ink);">Auto-aprueba comandos de bajo riesgo en tu directorio, pero <strong>no</strong> lo sensible ni lo que sale de él.</p>
+        <p style="font-size:24px;color:var(--color-warning-text);line-height:1.4;margin:20px 0 0;">«Confía en lo rutinario, sigue preguntando lo gordo.»</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="acceptEdits · sí y no" data-screen-label="14" data-speaker-notes="Sí: tareas mecánicas, código de usar y tirar, con red de seguridad sólida. No: código crítico que no puedes revisar de un vistazo, nada importante sin Git limpio o tests. La red de seguridad no es opcional." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">acceptEdits · el criterio</div>
+    <h2 style="font-size:48px;font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Solo es sensato con una red de seguridad detrás</h2>
+    <div style="display:flex;gap:40px;align-items:stretch;">
+      <div style="flex:1;background:var(--color-success-subtle);border:1px solid #BBE9D6;border-radius:18px;padding:34px 38px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;"><span style="font-size:26px;color:var(--color-success);">✓</span><span style="font-size:30px;font-weight:800;color:var(--color-success-text);">Cuándo sí</span></div>
+        <ul style="margin:0;padding-left:24px;font-size:25px;line-height:1.55;color:var(--ink);"><li>Tareas mecánicas: formateo, renombrados masivos</li><li>Código de usar y tirar: un script, un prototipo</li><li>Con control de versiones limpio detrás</li></ul>
+      </div>
+      <div style="flex:1;background:var(--color-error-subtle);border:1px solid #F6C9C9;border-radius:18px;padding:34px 38px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:20px;"><span style="font-size:26px;color:var(--color-error);">✕</span><span style="font-size:30px;font-weight:800;color:var(--color-error-text);">Cuándo no</span></div>
+        <ul style="margin:0;padding-left:24px;font-size:25px;line-height:1.55;color:var(--ink);"><li>Código crítico que no puedes revisar de un vistazo</li><li>Nada importante sin Git limpio y/o tests</li></ul>
+      </div>
+    </div>
+    <p style="font-size:var(--type-small);color:var(--ink);margin:40px 0 0;font-weight:600;">Va de la mano del flujo con Git de la Sesión 4: la red de seguridad es lo que hace este modo sensato en lugar de temerario.</p>
+  </section>
+
+  <section data-label="El criterio · dos preguntas" data-screen-label="15" data-speaker-notes="No existe un modo mejor. La decisión se reduce a dos preguntas: cuánto cuesta si se equivoca, y cuánto conoces tú este código. Cuanto más caro el error o menos lo conoces, más control: Plan o default." style="background:var(--red);display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="text-transform:uppercase;letter-spacing:0.14em;font-size:var(--type-over);font-weight:700;opacity:.85;margin-bottom:40px;">El criterio que de verdad importa</div>
+    <h2 style="font-size:60px;font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 52px;max-width:1300px;">No hay un modo mejor. Solo dos preguntas.</h2>
+    <div style="display:flex;gap:40px;">
+      <div style="flex:1;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:20px;padding:40px;">
+        <div style="font-size:64px;font-weight:800;line-height:1;margin-bottom:20px;opacity:.9;">1</div>
+        <div style="font-size:34px;font-weight:800;line-height:1.2;margin-bottom:14px;">¿Cuánto cuesta si se equivoca?</div>
+        <p style="font-size:25px;line-height:1.4;margin:0;opacity:.9;">Cuanto más caro el error → más control → Plan o default.</p>
+      </div>
+      <div style="flex:1;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:20px;padding:40px;">
+        <div style="font-size:64px;font-weight:800;line-height:1;margin-bottom:20px;opacity:.9;">2</div>
+        <div style="font-size:34px;font-weight:800;line-height:1.2;margin-bottom:14px;">¿Cuánto conozco este código?</div>
+        <p style="font-size:25px;line-height:1.4;margin:0;opacity:.9;">Cuanto menos lo conozco → más quiero ver antes → Plan o default.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Situación → modo" data-screen-label="16" data-speaker-notes="Una tabla para interiorizar el criterio. Refactor amplio o código desconocido: plan. Trabajo diario que dominas: default. Mecánico con Git limpio: acceptEdits. Producción: default revisando cada diff." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">El criterio, en una tabla</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 48px;">Cada situación, su modo</h2>
+    <div style="display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;overflow:hidden;">
+      <div style="display:grid;grid-template-columns:2fr 1fr;background:var(--ink);color:#fff;font-size:24px;font-weight:700;"><div style="padding:24px 34px;">Situación</div><div style="padding:24px 34px;">Modo recomendado</div></div>
+      <div style="display:grid;grid-template-columns:2fr 1fr;font-size:27px;border-bottom:1px solid var(--line);"><div style="padding:26px 34px;">Refactor amplio, migración, o código desconocido</div><div style="padding:26px 34px;font-family:var(--font-mono);font-weight:700;color:var(--red);">plan</div></div>
+      <div style="display:grid;grid-template-columns:2fr 1fr;font-size:27px;border-bottom:1px solid var(--line);background:var(--gray-50);"><div style="padding:26px 34px;">Trabajo diario sobre código que dominas</div><div style="padding:26px 34px;font-family:var(--font-mono);font-weight:700;color:var(--red);">default</div></div>
+      <div style="display:grid;grid-template-columns:2fr 1fr;font-size:27px;border-bottom:1px solid var(--line);"><div style="padding:26px 34px;">Tareas mecánicas con Git limpio detrás</div><div style="padding:26px 34px;font-family:var(--font-mono);font-weight:700;color:var(--red);">acceptEdits</div></div>
+      <div style="display:grid;grid-template-columns:2fr 1fr;font-size:27px;background:var(--gray-50);"><div style="padding:26px 34px;">Producción o zonas delicadas</div><div style="padding:26px 34px;font-family:var(--font-mono);font-weight:700;color:var(--red);">default <span style="font-family:var(--font-sans);font-weight:400;color:var(--muted);">· cada diff</span></div></div>
+    </div>
+  </section>
+
+  <section data-label="El patrón que funciona" data-screen-label="17" data-speaker-notes="El modo no es una configuración fija. Lo cambias según avanza la tarea: empiezas en Plan, apruebas y bajas a default/acceptEdits, y si surge algo inesperado vuelves a Plan. Ese vaivén con Shift+Tab es el ritmo natural." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">El patrón que mejor funciona</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 52px;">El modo se cambia sobre la marcha</h2>
+    <div style="display:flex;gap:24px;align-items:stretch;">
+      <div style="flex:1;background:var(--red);color:#fff;border-radius:20px;padding:36px 34px;"><div style="font-size:24px;font-weight:700;opacity:.85;margin-bottom:16px;">Paso 1</div><div style="font-size:34px;font-weight:800;font-family:var(--font-mono);margin-bottom:14px;">PLAN</div><p style="font-size:24px;line-height:1.4;margin:0;opacity:.92;">Acuerdas el enfoque con Claude. Ves qué va a tocar.</p></div>
+      <div style="flex:none;width:60px;display:flex;align-items:center;justify-content:center;font-size:40px;color:var(--gray-300);">→</div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:20px;padding:36px 34px;"><div style="font-size:24px;font-weight:700;color:var(--muted);margin-bottom:16px;">Paso 2</div><div style="font-size:30px;font-weight:800;font-family:var(--font-mono);margin-bottom:14px;color:var(--ink);">DEFAULT / ACCEPTEDITS</div><p style="font-size:24px;line-height:1.4;margin:0;color:var(--muted);">Ejecutas, con la supervisión que pida la criticidad.</p></div>
+      <div style="flex:none;width:60px;display:flex;align-items:center;justify-content:center;font-size:40px;color:var(--gray-300);">↩</div>
+      <div style="flex:1;background:var(--red);color:#fff;border-radius:20px;padding:36px 34px;"><div style="font-size:24px;font-weight:700;opacity:.85;margin-bottom:16px;">Si se complica</div><div style="font-size:34px;font-weight:800;font-family:var(--font-mono);margin-bottom:14px;">PLAN</div><p style="font-size:24px;line-height:1.4;margin:0;opacity:.92;">Replanteas antes de seguir.</p></div>
+    </div>
+    <p style="font-size:var(--type-small);color:var(--muted);margin:44px 0 0;">Plan para pensar, default/acceptEdits para ejecutar, y de vuelta a Plan cuando el terreno se complica.</p>
+  </section>
+
+  <section data-label="Errores comunes" data-screen-label="18" data-speaker-notes="Los errores típicos con los modos y su corrección. El hilo conductor: empieza deliberado en Plan, sube la autonomía solo con red de seguridad, y cambia de modo según la fase." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Errores comunes</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Qué evitar con los modos</h2>
+    <div style="display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;overflow:hidden;">
+      <div style="display:grid;grid-template-columns:1.2fr 1.2fr 1.2fr;background:var(--ink);color:#fff;font-size:24px;font-weight:700;"><div style="padding:20px 28px;">Error</div><div style="padding:20px 28px;">Consecuencia</div><div style="padding:20px 28px;">Corrección</div></div>
+      <div style="display:grid;grid-template-columns:1.2fr 1.2fr 1.2fr;font-size:24px;border-bottom:1px solid var(--line);"><div style="padding:20px 28px;">Empezar todo en acceptEdits «por ir rápido»</div><div style="padding:20px 28px;color:var(--muted);">Cambios sin revisar, difíciles de rastrear</div><div style="padding:20px 28px;">Empieza en Plan, sé deliberado al subir autonomía</div></div>
+      <div style="display:grid;grid-template-columns:1.2fr 1.2fr 1.2fr;font-size:24px;border-bottom:1px solid var(--line);background:var(--gray-50);"><div style="padding:20px 28px;">Aprobar a ciegas en default</div><div style="padding:20px 28px;color:var(--muted);">Ilusión de control, errores que se cuelan</div><div style="padding:20px 28px;">Baja a auto con red de seguridad, o afina permisos</div></div>
+      <div style="display:grid;grid-template-columns:1.2fr 1.2fr 1.2fr;font-size:24px;border-bottom:1px solid var(--line);"><div style="padding:20px 28px;">Usar acceptEdits sin Git limpio</div><div style="padding:20px 28px;color:var(--muted);">No puedes revertir un mal cambio</div><div style="padding:20px 28px;">Nunca automatices sin red de seguridad</div></div>
+      <div style="display:grid;grid-template-columns:1.2fr 1.2fr 1.2fr;font-size:24px;border-bottom:1px solid var(--line);background:var(--gray-50);"><div style="padding:20px 28px;">Cambiar de modo pidiéndoselo en el chat</div><div style="padding:20px 28px;color:var(--muted);">No funciona; el modo se controla aparte</div><div style="padding:20px 28px;">Usa Shift+Tab o --permission-mode</div></div>
+      <div style="display:grid;grid-template-columns:1.2fr 1.2fr 1.2fr;font-size:24px;"><div style="padding:20px 28px;">Quedarse siempre en un solo modo</div><div style="padding:20px 28px;color:var(--muted);">Demasiado lento o demasiado arriesgado</div><div style="padding:20px 28px;">Cambia de modo según la fase de la tarea</div></div>
+    </div>
+  </section>
+
+  <section data-label="Ejercicios" data-screen-label="19" data-speaker-notes="Tres ejercicios para salir con intuición propia, no con una regla memorizada. El primero —la misma tarea en tres modos— es el que mejor fija la diferencia de atención, control y velocidad." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Para practicar</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 52px;">Tres ejercicios</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:26px;">
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:34px;"><div style="font-size:24px;font-weight:800;color:var(--red);margin-bottom:14px;">Ejercicio 1</div><div style="font-size:27px;font-weight:700;margin-bottom:10px;">La misma tarea en tres modos</div><p style="font-size:24px;color:var(--muted);line-height:1.45;margin:0;">Repítela una vez por modo. Fíjate cómo cambia tu atención, control y velocidad.</p></div>
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:34px;"><div style="font-size:24px;font-weight:800;color:var(--red);margin-bottom:14px;">Ejercicio 2</div><div style="font-size:27px;font-weight:700;margin-bottom:10px;">Cazar el momento de cambiar</div><p style="font-size:24px;color:var(--muted);line-height:1.45;margin:0;">Tarea de 3-4 archivos. Empieza en Plan y practica volver con Shift+Tab.</p></div>
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:34px;"><div style="font-size:24px;font-weight:800;color:var(--red);margin-bottom:14px;">Ejercicio 3</div><div style="font-size:27px;font-weight:700;margin-bottom:10px;">El aprobar a ciegas</div><p style="font-size:24px;color:var(--muted);line-height:1.45;margin:0;">En default, sé honesto: ¿cuántas veces diste a «sí» sin leer el diff?</p></div>
+    </div>
+  </section>
+
+  <section data-label="Resumen" data-screen-label="20" data-speaker-notes="Las ideas para llevarse a casa. El criterio se reduce a dos preguntas —cuánto cuesta el error y cuánto conoces el código— y el modo se cambia sobre la marcha, no se fija una vez." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Para llevarse a casa</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Resumen de la lección</h2>
+    <div style="display:flex;flex-direction:column;gap:20px;max-width:1520px;">
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">Claude Code es un <strong>agente en tu terminal</strong> que actúa sobre tu proyecto real. Trátalo como un júnior rápido que necesita supervisión.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;"><strong>No memorizamos la instalación</strong>: cambia, ya está documentada, y no es donde está el valor.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">Tres modos: <strong>plan</strong> (propone), <strong>default</strong> (pregunta) y <strong>acceptEdits</strong> (edita solo). Se ciclan con Shift+Tab.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;"><strong>Plan</strong> es el punto de partida de todo lo no trivial. <strong>acceptEdits</strong> solo con red de seguridad.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">Dos preguntas: <strong>cuánto cuesta el error</strong> y <strong>cuánto conoces el código</strong>. Y el modo se cambia sobre la marcha.</p></div>
+    </div>
+  </section>
+
+  <section data-label="Cierre" data-screen-label="21" data-speaker-notes="El prompting tiene un límite: no le da a Claude conocimiento de TU proyecto. La Sesión 2 ataca ese hueco con CLAUDE.md, las reglas y los comandos personalizados." style="background:var(--red);display:flex;flex-direction:column;justify-content:space-between;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="display:flex;align-items:center;gap:16px;"><span style="width:14px;height:14px;border-radius:999px;background:#fff;display:block;"></span><span style="text-transform:uppercase;letter-spacing:0.16em;font-size:var(--type-over);font-weight:700;opacity:.9;">Siguiente sesión</span></div>
+    <div>
+      <h2 style="font-size:64px;font-weight:800;letter-spacing:-0.03em;line-height:1.06;margin:0;max-width:1460px;text-wrap:balance;">Darle a Claude Code memoria persistente de tu proyecto</h2>
+      <p style="font-size:var(--type-lead);font-weight:500;line-height:1.4;margin:36px 0 0;max-width:1320px;opacity:.92;">El archivo CLAUDE.md, las reglas y los comandos personalizados: justo el hueco que el prompting solo no podía cubrir.</p>
+    </div>
+    <div style="font-size:var(--type-small);font-weight:600;opacity:.8;">Sesión 2 · Contexto y memoria del proyecto</div>
+  </section>
+
+</x-import>
+</x-dc>
+</body>
+</html>

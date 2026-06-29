@@ -1,0 +1,47 @@
+/* ─────────────────────────────────────────
+   Fudie Design System · spaces.css
+   Escala de espaciado en múltiplos de 4px.
+───────────────────────────────────────── */
+
+:root {
+
+  /* ── Escala base (múltiplos de 4px) ── */
+  --space-1:  0.25rem;   /*  4px */
+  --space-2:  0.5rem;    /*  8px */
+  --space-3:  0.75rem;   /* 12px */
+  --space-4:  1rem;      /* 16px */
+  --space-5:  1.25rem;   /* 20px */
+  --space-6:  1.5rem;    /* 24px */
+  --space-8:  2rem;      /* 32px */
+  --space-10: 2.5rem;    /* 40px */
+  --space-12: 3rem;      /* 48px */
+  --space-16: 4rem;      /* 64px */
+  --space-20: 5rem;      /* 80px */
+  --space-24: 6rem;      /* 96px */
+
+  /* ── Aliases semánticos ── */
+  --space-xs:  var(--space-1);
+  --space-sm:  var(--space-2);
+  --space-md:  var(--space-4);
+  --space-lg:  var(--space-6);
+  --space-xl:  var(--space-8);
+  --space-2xl: var(--space-12);
+  --space-3xl: var(--space-16);
+
+  /* ── Layout ── */
+  --container-max:     75rem;
+  --container-padding: var(--space-6);
+
+  /* ── Dialog sizes (width) ── */
+  --dialog-sm:   clamp(280px, 30vw, 400px); /* @kind spacing */
+  --dialog-md:   clamp(380px, 50vw, 600px); /* @kind spacing */
+  --dialog-lg:   clamp(480px, 65vw, 800px); /* @kind spacing */
+  --dialog-xl:   clamp(600px, 80vw, 1100px); /* @kind spacing */
+  --dialog-full: clamp(280px, 95vw, 1400px); /* @kind spacing */
+
+  /* ── Componentes comunes ── */
+  --card-padding:   var(--space-6);
+  --modal-padding:  var(--space-6);
+  --input-padding-x: var(--space-4);
+  --input-padding-y: var(--space-3);
+}

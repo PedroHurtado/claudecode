@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/styles.css">
+  <script src="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/_ds_bundle.js"></script>
+  <style>
+    :root {
+      --type-display: 90px;
+      --type-title: 60px;
+      --type-subtitle: 40px;
+      --type-lead: 36px;
+      --type-body: 30px;
+      --type-small: 24px;
+      --type-mono: 24px;
+      --type-over: 24px;
+      --pad-x: 120px;
+      --pad-y: 92px;
+      --ink: #111827;
+      --muted: #656C79;
+      --red: #DF2F3A;
+      --red-subtle: #FFF0F1;
+      --line: #E5E7EB;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+  </style>
+</helmet>
+<x-import component-from-global-scope="deck-stage" from="./deck-stage.js" width="1920" height="1080" hint-size="100%,100%">
+
+  <section data-label="Portada" data-screen-label="Portada" data-speaker-notes="Sesión 3, última lección. Ya le diste a Claude memoria del proyecto, procedimientos reutilizables y manos extra aisladas. Pero todo eso vive dentro de tu entorno local. Hoy, las dos piezas que rompen ese límite en direcciones opuestas: los MCPs conectan con el mundo exterior; los hooks te dan control determinista sobre el comportamiento de Claude." style="background:var(--red);display:flex;flex-direction:column;justify-content:space-between;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="display:flex;align-items:center;gap:16px;">
+      <span style="width:14px;height:14px;border-radius:999px;background:#fff;display:block;"></span>
+      <span style="text-transform:uppercase;letter-spacing:0.16em;font-size:var(--type-over);font-weight:700;opacity:.9;">Curso Claude Code · Sesión 3</span>
+    </div>
+    <div>
+      <div style="font-size:var(--type-subtitle);font-weight:600;opacity:.85;margin-bottom:18px;">Lección 3</div>
+      <h1 style="font-size:var(--type-display);font-weight:800;letter-spacing:-0.03em;line-height:1.0;margin:0;max-width:1380px;text-wrap:balance;">MCPs y hooks</h1>
+      <p style="font-size:var(--type-lead);font-weight:500;line-height:1.4;margin:32px 0 0;max-width:1220px;opacity:.92;">Conecta Claude con el mundo exterior, y garantiza comportamientos deterministas en momentos concretos de su ciclo de vida.</p>
+    </div>
+    <div style="font-size:var(--type-small);font-weight:600;opacity:.8;">Sesión 3 · Skills, agentes, MCPs y hooks</div>
+  </section>
+
+  <section data-label="Dónde estamos" data-screen-label="01" data-speaker-notes="El puente. Ya tienes memoria del proyecto (CLAUDE.md), procedimientos reutilizables (skills) y manos extra aisladas (subagentes). Pero todo eso vive dentro de tu entorno local. Esta lección cubre dos piezas que rompen ese límite en direcciones opuestas: MCPs hacia fuera, hooks hacia el control." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Dónde estamos</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 16px;">Romper el límite local en dos direcciones</h2>
+    <p style="font-size:var(--type-body);color:var(--muted);margin:0 0 52px;max-width:1340px;">Memoria, procedimientos y manos extra ya viven en tu entorno. Estas dos piezas lo abren.</p>
+    <div style="display:flex;gap:40px;align-items:stretch;">
+      <div style="flex:1;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:18px;padding:36px 40px;">
+        <div style="font-size:30px;font-weight:800;color:var(--red);margin-bottom:12px;">MCPs → hacia fuera</div>
+        <p style="font-size:26px;color:var(--ink);line-height:1.4;margin:0;">Conectan Claude con el mundo exterior: tus apps, tus APIs, tus bases de datos.</p>
+      </div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:36px 40px;">
+        <div style="font-size:30px;font-weight:800;margin-bottom:12px;">Hooks → hacia el control</div>
+        <p style="font-size:26px;color:var(--muted);line-height:1.4;margin:0;">Control determinista sobre el comportamiento de Claude en momentos concretos.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Parte A · MCPs" data-screen-label="02" data-speaker-notes="Parte A: MCPs. La primera de las dos piezas: conectar Claude con el mundo exterior." style="background:var(--red);display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="font-size:var(--type-over);font-weight:800;letter-spacing:0.14em;text-transform:uppercase;opacity:.8;margin-bottom:28px;">Parte A</div>
+    <h2 style="font-size:84px;font-weight:800;letter-spacing:-0.03em;line-height:1.04;margin:0;max-width:1440px;text-wrap:balance;">MCPs</h2>
+    <p style="font-size:var(--type-lead);font-weight:500;line-height:1.4;margin:40px 0 0;max-width:1340px;opacity:.92;">Conectar Claude Code con herramientas externas, bases de datos y APIs a través de un protocolo unificado.</p>
+  </section>
+
+  <section data-label="Qué son los MCPs" data-screen-label="03" data-speaker-notes="MCP son las siglas de Model Context Protocol: un estándar abierto que permite a Claude Code conectarse a herramientas externas, bases de datos y APIs. El reparto de nombres que confunde al principio: Claude Code es el producto; MCP es el protocolo que habla. Claude Code actúa como cliente MCP y se conecta a servidores MCP que exponen capacidades: GitHub, navegador, una base de datos. MCP convierte Claude Code de una herramienta de edición en un agente que actúa sobre tus sistemas. La analogía: MCP es a las herramientas de IA lo que USB-C a los dispositivos." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Model Context Protocol</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 40px;">Qué son los MCPs</h2>
+    <div style="display:flex;gap:44px;align-items:stretch;">
+      <div style="flex:1;display:flex;flex-direction:column;gap:22px;">
+        <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 36px;"><p style="font-size:27px;line-height:1.45;margin:0;"><strong>Claude Code es el producto. MCP es el protocolo</strong> que habla. Claude Code actúa de <em>cliente</em> y se conecta a <em>servidores</em> MCP que exponen capacidades: GitHub, navegador, una BD.</p></div>
+        <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 36px;"><p style="font-size:27px;line-height:1.45;margin:0;">Convierte Claude Code de una herramienta de edición en un <strong>agente que actúa sobre tus sistemas</strong>.</p></div>
+      </div>
+      <div style="flex:none;width:560px;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:20px;padding:44px;display:flex;flex-direction:column;justify-content:center;">
+        <div style="font-size:23px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:16px;">La analogía</div>
+        <p style="font-size:32px;line-height:1.3;margin:0;color:var(--ink);">MCP es a las herramientas de IA lo que <strong>USB-C</strong> a los dispositivos: un conector estándar.</p>
+        <p style="font-size:23px;color:var(--color-error-text);line-height:1.4;margin:18px 0 0;">El mismo servidor funciona en Claude Code, Claude Desktop y otros clientes.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Dos transportes" data-screen-label="04" data-speaker-notes="Un servidor MCP se conecta de una de dos formas. HTTP (streamable): el estándar actual, peticiones HTTP normales con streaming opcional; es lo que usarás para servidores remotos, un SaaS en la nube. stdio (entrada/salida estándar): para servidores que corren como un proceso local en tu máquina. Existió un tercer transporte, SSE, pero está deprecado: úsalo solo si un servidor concreto todavía lo exige." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Configuración</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 48px;">Los dos tipos de transporte</h2>
+    <div style="display:flex;gap:40px;align-items:stretch;">
+      <div style="flex:1;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:18px;padding:34px 38px;">
+        <div style="font-family:var(--font-mono);font-size:30px;font-weight:800;color:var(--red);margin-bottom:14px;">HTTP</div>
+        <p style="font-size:26px;line-height:1.45;margin:0;color:var(--ink);">El <strong>estándar actual</strong> («streamable»). Peticiones HTTP con streaming opcional. Para servidores <strong>remotos</strong> (un SaaS en la nube).</p>
+      </div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:34px 38px;">
+        <div style="font-family:var(--font-mono);font-size:30px;font-weight:800;color:var(--red);margin-bottom:14px;">stdio</div>
+        <p style="font-size:26px;line-height:1.45;margin:0;color:var(--muted);">Entrada/salida estándar. Para servidores que corren como un <strong style="color:var(--ink);">proceso local</strong> en tu máquina.</p>
+      </div>
+    </div>
+    <div style="display:flex;gap:24px;align-items:center;background:var(--color-warning-subtle);border:1px solid #F7E4B5;border-radius:16px;padding:26px 34px;margin-top:36px;">
+      <span style="flex:none;font-size:22px;font-weight:800;color:var(--color-warning-text);text-transform:uppercase;letter-spacing:0.06em;">Deprecado</span>
+      <p style="font-size:25px;line-height:1.4;margin:0;color:var(--ink);">Existió un tercer transporte, <strong>SSE</strong> (Server-Sent Events). Úsalo solo si un servidor todavía lo exige; para todo lo nuevo, HTTP.</p>
+    </div>
+  </section>
+
+  <section data-label="claude mcp add" data-screen-label="05" data-speaker-notes="La sintaxis base, según el transporte. Servidor remoto por HTTP: claude mcp add --transport http nombre url. Con cabecera de autenticación, un Bearer token. Servidor local por stdio con un comando tras el doble guion. Detalle que ahorra errores: todas las opciones van antes del nombre del servidor, y el doble guion separa el nombre del comando. Comandos de gestión: list, get, remove, y /mcp dentro de Claude Code." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">El comando</div>
+    <h2 style="font-size:48px;font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 36px;"><code style="font-family:var(--font-mono);color:var(--red);">claude mcp add</code></h2>
+    <div style="display:flex;gap:40px;align-items:stretch;">
+      <pre style="flex:1.4;margin:0;background:#111827;border-radius:20px;padding:32px 38px;font-family:var(--font-mono);font-size:21px;line-height:1.6;color:#E5E7EB;white-space:pre-wrap;box-shadow:0 14px 36px rgba(17,24,39,.22);"><span style="color:#9CA3AF;"># Remoto por HTTP (ej. Notion)</span>
+claude mcp add <span style="color:#FF9AA0;">--transport http</span> notion \
+  https://mcp.notion.com/mcp
+
+<span style="color:#9CA3AF;"># Con Bearer token</span>
+claude mcp add --transport http secure \
+  https://api.example.com/mcp \
+  <span style="color:#FF9AA0;">--header</span> "Authorization: Bearer ..."
+
+<span style="color:#9CA3AF;"># Local por stdio</span>
+claude mcp add --transport stdio airtable \
+  <span style="color:#86E1A9;">--</span> npx -y airtable-mcp-server</pre>
+      <div style="flex:none;width:520px;display:flex;flex-direction:column;gap:20px;">
+        <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:26px 30px;"><p style="font-size:24px;line-height:1.45;margin:0;">Todas las opciones (<code style="font-family:var(--font-mono);font-size:0.86em;">--transport</code>, <code style="font-family:var(--font-mono);font-size:0.86em;">--env</code>, <code style="font-family:var(--font-mono);font-size:0.86em;">--scope</code>) van <strong>antes del nombre</strong>; el <code style="font-family:var(--font-mono);font-size:0.86em;">--</code> separa el comando del servidor stdio.</p></div>
+        <div style="background:#111827;border-radius:18px;padding:26px 30px;font-family:var(--font-mono);font-size:21px;color:#E5E7EB;line-height:1.7;">claude mcp <span style="color:#FF9AA0;">list</span><br>claude mcp <span style="color:#FF9AA0;">get</span> &lt;n&gt;<br>claude mcp <span style="color:#FF9AA0;">remove</span> &lt;n&gt;<br><span style="color:#86E1A9;">/mcp</span> <span style="color:#9CA3AF;">→ estado y OAuth</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Tres ámbitos" data-screen-label="06" data-speaker-notes="Igual que con el CLAUDE.md, los comandos y las skills, los servidores MCP tienen ámbito. local (por defecto): se guarda en ~/.claude.json asociado a la ruta del proyecto; para servidores personales, experimentales, o con credenciales que no quieres en git; solo carga en ese proyecto y es privado. project: .mcp.json en la raíz, lo comprometes en git, todo el equipo lo recibe al clonar. user: global, en todos tus proyectos. Y una capa de seguridad: los servidores de scope project que vienen al clonar aparecen como Pending approval y requieren que los apruebes." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Dónde carga y si se comparte</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 40px;">Los tres ámbitos</h2>
+    <div style="display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;overflow:hidden;">
+      <div style="display:grid;grid-template-columns:0.9fr 1.2fr 2fr;background:var(--ink);color:#fff;font-size:23px;font-weight:700;"><div style="padding:20px 28px;">Scope</div><div style="padding:20px 28px;">Dónde se guarda</div><div style="padding:20px 28px;">Para qué</div></div>
+      <div style="display:grid;grid-template-columns:0.9fr 1.2fr 2fr;font-size:24px;border-bottom:1px solid var(--line);"><div style="padding:24px 28px;font-family:var(--font-mono);font-weight:700;color:var(--red);">local</div><div style="padding:24px 28px;font-family:var(--font-mono);font-size:0.92em;color:var(--muted);">~/.claude.json</div><div style="padding:24px 28px;">Personales, experimentales o con credenciales fuera de git. Solo ese proyecto, privado para ti. <em>(por defecto)</em></div></div>
+      <div style="display:grid;grid-template-columns:0.9fr 1.2fr 2fr;font-size:24px;border-bottom:1px solid var(--line);background:var(--gray-50);"><div style="padding:24px 28px;font-family:var(--font-mono);font-weight:700;color:var(--red);">project</div><div style="padding:24px 28px;font-family:var(--font-mono);font-size:0.92em;color:var(--muted);">.mcp.json</div><div style="padding:24px 28px;">Lo comprometes en git: todo el equipo recibe la misma config al clonar.</div></div>
+      <div style="display:grid;grid-template-columns:0.9fr 1.2fr 2fr;font-size:24px;"><div style="padding:24px 28px;font-family:var(--font-mono);font-weight:700;color:var(--red);">user</div><div style="padding:24px 28px;font-family:var(--font-mono);font-size:0.92em;color:var(--muted);">~/.claude.json</div><div style="padding:24px 28px;">Disponible en todos tus proyectos.</div></div>
+    </div>
+    <div style="display:flex;gap:24px;align-items:center;background:var(--color-info-subtle);border:1px solid #BBD9F2;border-radius:16px;padding:24px 32px;margin-top:32px;">
+      <span style="flex:none;font-size:26px;color:var(--color-info-text);">⏸</span>
+      <p style="font-size:24px;line-height:1.4;margin:0;color:var(--ink);">Los servidores <strong>project</strong> que llegan al clonar aparecen como <strong>«Pending approval»</strong> y requieren que los apruebes. Clonar un repo no activa servidores sin revisar.</p>
+    </div>
+  </section>
+
+  <section data-label="Usar MCPs" data-screen-label="07" data-speaker-notes="Una vez conectado, Claude llama a las herramientas del servidor cuando tu petición encaja, explícita o implícitamente. Un matiz para no malinterpretar el comportamiento: Claude no llama a una herramienta MCP para preguntas de conocimiento general. Cómo funcionan las bases de datos de Notion se responde directo, sin tocar la tool. Qué hay en mi base de datos de Proyectos sí dispara la herramienta. La distinción: conocimiento general, respuesta directa; acceso a tus datos, llamada a la tool. Y con Tool Search, activado por defecto, las definiciones se cargan a demanda." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Cómo se comportan</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Conocimiento general vs. tus datos</h2>
+    <div style="display:flex;gap:40px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-100);border-radius:18px;padding:34px 38px;">
+        <div style="font-size:26px;font-weight:800;color:var(--gray-600);margin-bottom:16px;">Conocimiento general → respuesta directa</div>
+        <p style="font-size:26px;line-height:1.45;margin:0;color:var(--gray-600);">«¿Cómo funcionan las bases de datos de Notion?» se responde <strong>sin tocar la tool</strong>.</p>
+      </div>
+      <div style="flex:1;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:18px;padding:34px 38px;">
+        <div style="font-size:26px;font-weight:800;color:var(--red);margin-bottom:16px;">Acceso a tus datos → llamada a la tool</div>
+        <p style="font-size:26px;line-height:1.45;margin:0;color:var(--ink);">«¿Qué hay en mi base de datos de Proyectos?» <strong>sí dispara</strong> la herramienta.</p>
+      </div>
+    </div>
+    <p style="font-size:var(--type-small);color:var(--muted);margin:40px 0 0;">Con <strong style="color:var(--ink);">Tool Search</strong> (por defecto), las definiciones de tools se cargan a demanda: añadir servidores tiene impacto mínimo en el contexto. Aun así, no conectes lo que no usas.</p>
+  </section>
+
+  <section data-label="Parte B · Hooks" data-screen-label="08" data-speaker-notes="Parte B: hooks. Aquí cambiamos de filosofía. Todo lo anterior Claude lo interpreta. Los hooks son lo contrario: control determinista." style="background:var(--red);display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="font-size:var(--type-over);font-weight:800;letter-spacing:0.14em;text-transform:uppercase;opacity:.8;margin-bottom:28px;">Parte B</div>
+    <h2 style="font-size:84px;font-weight:800;letter-spacing:-0.03em;line-height:1.04;margin:0;max-width:1440px;text-wrap:balance;">Hooks</h2>
+    <p style="font-size:var(--type-lead);font-weight:500;line-height:1.4;margin:40px 0 0;max-width:1360px;opacity:.92;">Cambiamos de filosofía: todo lo anterior, Claude lo <em>interpreta</em>. Los hooks son lo contrario: <strong>control determinista</strong>.</p>
+  </section>
+
+  <section data-label="Qué es un hook" data-screen-label="09" data-speaker-notes="Un hook es un comando de shell, un endpoint HTTP o un prompt a un LLM que se ejecuta automáticamente en un punto concreto del ciclo de vida de Claude Code. La diferencia clave: una regla en el CLAUDE.md le pide a Claude que haga algo, y Claude normalmente lo hace. Un hook garantiza que algo ocurra, porque se ejecuta fuera del modelo, como un script disparado por un evento. Si necesitas que algo pase siempre, sin depender del criterio del modelo, es un hook. Esto cierra el círculo de la Sesión 2: una regla que bloquearía un merge en CI no va en el CLAUDE.md sino forzada, y los hooks son una forma de forzarla." style="background:#fff;display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Pedir vs. garantizar</div>
+    <h2 style="font-size:56px;font-weight:800;letter-spacing:-0.03em;line-height:1.06;margin:0 0 36px;max-width:1520px;">Una regla <em>pide</em>. Un hook <strong>garantiza</strong>.</h2>
+    <div style="display:flex;gap:40px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:34px 38px;">
+        <p style="font-size:27px;line-height:1.45;margin:0;color:var(--muted);">Una regla en el CLAUDE.md le <strong style="color:var(--ink);">pide</strong> a Claude que haga algo, y <em>normalmente</em> lo hace.</p>
+      </div>
+      <div style="flex:1.2;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:18px;padding:34px 38px;">
+        <p style="font-size:27px;line-height:1.45;margin:0;color:var(--ink);">Un hook —comando de shell, endpoint HTTP o prompt a un LLM— se ejecuta <strong>fuera del modelo</strong>, disparado por un evento. Si algo debe pasar <strong>siempre</strong>, sin depender del criterio del modelo, es un hook.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Tipos de handler" data-screen-label="10" data-speaker-notes="Tipos de handler de hook. command: un comando de shell, el más común. http: un endpoint que recibe el evento como POST. prompt y agent: usan el juicio de un LLM en vez de lógica fija, para decisiones que requieren evaluación semántica. Los tres primeros son deterministas; los dos últimos delegan en el modelo. Ventaja importante: los hooks tienen bajo coste de contexto, porque su configuración vive fuera de la ventana principal." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Tipos de handler</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 48px;">Cómo responde un hook</h2>
+    <div style="display:flex;gap:26px;align-items:stretch;">
+      <div style="flex:1;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:18px;padding:32px 30px;"><div style="font-family:var(--font-mono);font-size:27px;font-weight:800;color:var(--red);margin-bottom:10px;">command</div><p style="font-size:24px;line-height:1.4;margin:0;color:var(--ink);">Un comando de shell. El más común.</p></div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:32px 30px;"><div style="font-family:var(--font-mono);font-size:27px;font-weight:800;color:var(--red);margin-bottom:10px;">http</div><p style="font-size:24px;line-height:1.4;margin:0;color:var(--muted);">Un endpoint que recibe el evento como POST.</p></div>
+      <div style="flex:1.4;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:32px 30px;"><div style="font-family:var(--font-mono);font-size:27px;font-weight:800;color:var(--red);margin-bottom:10px;">prompt · agent</div><p style="font-size:24px;line-height:1.4;margin:0;color:var(--muted);">Usan el <strong style="color:var(--ink);">juicio de un LLM</strong> en vez de lógica fija, para decisiones semánticas.</p></div>
+    </div>
+    <div style="display:flex;gap:40px;margin-top:36px;">
+      <p style="flex:1;font-size:var(--type-small);color:var(--muted);margin:0;">Los tres primeros son <strong style="color:var(--ink);">deterministas</strong>; los dos últimos delegan en el modelo.</p>
+      <p style="flex:1;font-size:var(--type-small);color:var(--muted);margin:0;"><strong style="color:var(--ink);">Bajo coste de contexto:</strong> su configuración vive fuera de la ventana principal.</p>
+    </div>
+  </section>
+
+  <section data-label="Ejemplo · auto-formateo" data-screen-label="11" data-speaker-notes="El hook más popular: auto-formatear cada fichero que Claude edita. En .claude/settings.json, un PostToolUse con matcher Write/Edit/MultiEdit que lanza prettier sobre el fichero editado. Cada vez que Claude escribe o edita, se formatea solo. Tú no apruebas nada." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">El hook más popular</div>
+    <h2 style="font-size:48px;font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 36px;">Auto-formatear cada fichero editado</h2>
+    <div style="display:flex;gap:44px;align-items:center;">
+      <pre style="flex:1.3;margin:0;background:#111827;border-radius:20px;padding:32px 38px;font-family:var(--font-mono);font-size:22px;line-height:1.6;color:#E5E7EB;white-space:pre-wrap;box-shadow:0 14px 36px rgba(17,24,39,.22);">{
+  "hooks": {
+    "<span style="color:#FF9AA0;">PostToolUse</span>": [{
+      "matcher": "<span style="color:#86E1A9;">Write|Edit|MultiEdit</span>",
+      "hooks": [{
+        "type": "command",
+        "command": "npx prettier --write
+          \"$CLAUDE_TOOL_INPUT_FILE_PATH\""
+      }]
+    }]
+  }
+}</pre>
+      <div style="flex:none;width:520px;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:20px;padding:40px 44px;">
+        <p style="font-size:30px;line-height:1.4;margin:0;color:var(--ink);">Cada vez que Claude escribe o edita un fichero, <strong>se formatea solo</strong>.</p>
+        <p style="font-size:24px;color:var(--color-error-text);line-height:1.4;margin:20px 0 0;">Tú no apruebas nada.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Ejemplo · bloquear + exit 2" data-screen-label="12" data-speaker-notes="Bloquear un comando peligroso, un guardarraíl de seguridad. Un PreToolUse con matcher Bash que busca rm -rf o DROP TABLE y sale con código 2 si los encuentra. Aquí está la pieza clave de los hooks: el código de salida 2. En un PreToolUse, salir con código 2 bloquea la acción antes de que ocurra, y el mensaje de stderr se le pasa a Claude como la razón del bloqueo. Salir con 0 la permite. Salir con 1 es un error no bloqueante: la acción sigue. Por eso todo hook de seguridad debe usar exit 2, no 1, o no protege de nada." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Un guardarraíl de seguridad</div>
+    <h2 style="font-size:48px;font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 36px;">Bloquear un comando peligroso · el <code style="font-family:var(--font-mono);color:var(--red);">exit 2</code></h2>
+    <div style="display:flex;gap:44px;align-items:stretch;">
+      <pre style="flex:1.25;margin:0;background:#111827;border-radius:20px;padding:30px 36px;font-family:var(--font-mono);font-size:21px;line-height:1.55;color:#E5E7EB;white-space:pre-wrap;box-shadow:0 14px 36px rgba(17,24,39,.22);">"<span style="color:#FF9AA0;">PreToolUse</span>": [{
+  "matcher": "Bash",
+  "hooks": [{
+    "type": "command",
+    "command": "echo \"$CLAUDE_TOOL_INPUT\"
+      | grep -qE '<span style="color:#86E1A9;">rm -rf|DROP TABLE</span>'
+      && <span style="color:#fff;font-weight:700;">exit 2</span> || exit 0"
+  }]
+}]</pre>
+      <div style="flex:1;display:flex;flex-direction:column;gap:16px;justify-content:center;">
+        <div style="background:var(--color-error-subtle);border:1px solid #F6C9C9;border-radius:16px;padding:24px 30px;"><div style="font-family:var(--font-mono);font-size:24px;font-weight:800;color:var(--color-error-text);margin-bottom:6px;">exit 2</div><p style="font-size:24px;line-height:1.4;margin:0;color:var(--ink);"><strong>Bloquea</strong> la acción. El <code style="font-family:var(--font-mono);font-size:0.86em;">stderr</code> se le pasa a Claude como la razón.</p></div>
+        <div style="background:var(--color-success-subtle);border:1px solid #BBE9D6;border-radius:16px;padding:24px 30px;"><div style="font-family:var(--font-mono);font-size:24px;font-weight:800;color:var(--color-success-text);margin-bottom:6px;">exit 0</div><p style="font-size:24px;line-height:1.4;margin:0;color:var(--ink);">Permite la acción.</p></div>
+        <div style="background:var(--color-warning-subtle);border:1px solid #F7E4B5;border-radius:16px;padding:24px 30px;"><div style="font-family:var(--font-mono);font-size:24px;font-weight:800;color:var(--color-warning-text);margin-bottom:6px;">exit 1</div><p style="font-size:24px;line-height:1.4;margin:0;color:var(--ink);">Error <strong>no</strong> bloqueante: la acción sigue. Seguridad → siempre <code style="font-family:var(--font-mono);font-size:0.86em;">exit 2</code>.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Eventos de ciclo de vida" data-screen-label="13" data-speaker-notes="Los hooks se disparan en puntos concretos. Hay del orden de treinta, pero basta entender los que se usan el 95% del tiempo y en qué cadencia ocurren. Una vez por sesión: SessionStart (ideal para inyectar contexto fresco; su salida se añade al contexto) y SessionEnd. Una vez por turno: UserPromptSubmit (antes de procesar tu prompt; puede inyectar o bloquear) y Stop (cuando Claude termina; puede impedir que el turno termine). En cada llamada a herramienta: PreToolUse (el más potente, aprueba o deniega con exit 2) y PostToolUse (valida o formatea a posteriori; no puede deshacer la ejecución)." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Tres cadencias</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 40px;">Eventos de ciclo de vida</h2>
+    <div style="display:flex;gap:26px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 32px;">
+        <div style="font-size:23px;font-weight:800;color:var(--red);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:18px;">Por sesión</div>
+        <div style="font-family:var(--font-mono);font-size:23px;font-weight:700;margin-bottom:6px;">SessionStart</div><p style="font-size:22px;color:var(--muted);line-height:1.35;margin:0 0 14px;">Inyecta contexto fresco (rama, commits). Su salida se añade al contexto.</p>
+        <div style="font-family:var(--font-mono);font-size:23px;font-weight:700;margin-bottom:6px;">SessionEnd</div><p style="font-size:22px;color:var(--muted);line-height:1.35;margin:0;">Al terminar.</p>
+      </div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 32px;">
+        <div style="font-size:23px;font-weight:800;color:var(--red);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:18px;">Por turno</div>
+        <div style="font-family:var(--font-mono);font-size:23px;font-weight:700;margin-bottom:6px;">UserPromptSubmit</div><p style="font-size:22px;color:var(--muted);line-height:1.35;margin:0 0 14px;">Antes de procesar tu prompt. Puede inyectar o bloquear.</p>
+        <div style="font-family:var(--font-mono);font-size:23px;font-weight:700;margin-bottom:6px;">Stop</div><p style="font-size:22px;color:var(--muted);line-height:1.35;margin:0;">Puede <strong>impedir</strong> que el turno termine («los tests fallan»).</p>
+      </div>
+      <div style="flex:1.15;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:18px;padding:30px 32px;">
+        <div style="font-size:23px;font-weight:800;color:var(--red);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:18px;">Por llamada a tool</div>
+        <div style="font-family:var(--font-mono);font-size:23px;font-weight:700;margin-bottom:6px;color:var(--red);">PreToolUse</div><p style="font-size:22px;color:var(--ink);line-height:1.35;margin:0 0 14px;">El <strong>más potente</strong>: aprueba o deniega (exit 2).</p>
+        <div style="font-family:var(--font-mono);font-size:23px;font-weight:700;margin-bottom:6px;color:var(--red);">PostToolUse</div><p style="font-size:22px;color:var(--ink);line-height:1.35;margin:0;">Valida o formatea a posteriori. <strong>No</strong> puede deshacer.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Hooks + subagentes · .env" data-screen-label="14" data-speaker-notes="Un detalle que conecta con la lección anterior: los hooks se disparan también para las acciones de los subagentes. Si Claude lanza un subagente, tus PreToolUse y PostToolUse se ejecutan para cada tool que use; sin eso, un subagente podría saltarse tus guardarraíles. SubagentStop te deja correr validaciones cuando un subagente termina. El caso que cierra la sesión: un PreToolUse que bloquea la lectura de ficheros .env con exit 2. Es protección garantizada, no le he pedido a Claude que no lea el .env y espero que haga caso. La combinación robusta es un hook más una regla de permiso deny." style="background:#fff;display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Conecta con los subagentes</div>
+    <h2 style="font-size:48px;font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 36px;">Los guardarraíles cubren también a los subagentes</h2>
+    <div style="display:flex;gap:40px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:32px 38px;">
+        <p style="font-size:26px;line-height:1.45;margin:0;">Tus <code style="font-family:var(--font-mono);font-size:0.88em;">PreToolUse</code> y <code style="font-family:var(--font-mono);font-size:0.88em;">PostToolUse</code> se ejecutan para <strong>cada tool que use un subagente</strong>. Sin eso, un subagente podría saltarse tus guardarraíles. <code style="font-family:var(--font-mono);font-size:0.88em;">SubagentStop</code> valida cuando uno termina.</p>
+      </div>
+      <div style="flex:1.1;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:18px;padding:32px 38px;">
+        <div style="font-size:24px;font-weight:800;color:var(--red);margin-bottom:12px;">El caso que cierra la sesión</div>
+        <p style="font-size:26px;line-height:1.45;margin:0;color:var(--ink);">Un <code style="font-family:var(--font-mono);font-size:0.88em;">PreToolUse</code> que bloquea leer ficheros <code style="font-family:var(--font-mono);font-size:0.88em;">.env</code> (exit 2). Protección <strong>garantizada</strong>, no «le pedí a Claude que no lo lea». La combinación robusta: un <strong>hook</strong> + una regla de permiso <code style="font-family:var(--font-mono);font-size:0.88em;">deny</code>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Ejercicio" data-screen-label="15" data-speaker-notes="El ejercicio, en dos bloques. MCP: conecta un servidor de scope local con claude mcp add --transport http, verifícalo con list y /mcp; pídele algo que use tus datos y algo de conocimiento general, y observa que solo lo primero dispara la tool. Hooks: añade un PostToolUse que auto-formatee tras cada edición; y un PreToolUse que bloquee con exit 2 un patrón peligroso (rm -rf o leer .env), provoca la acción y verifica que se bloquea y Claude recibe la razón. El objetivo es sentir la diferencia entre pedir y garantizar." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Para practicar</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 40px;">Ejercicio</h2>
+    <div style="display:flex;gap:40px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:32px 36px;">
+        <div style="font-size:26px;font-weight:800;color:var(--red);margin-bottom:18px;">MCP</div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div style="display:flex;gap:16px;align-items:baseline;font-size:24px;line-height:1.4;"><span style="flex:none;width:32px;height:32px;border-radius:8px;background:var(--gray-200);color:var(--muted);font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center;">1</span>Conecta un servidor local con <code style="font-family:var(--font-mono);font-size:0.86em;">add --transport http</code>; verifícalo con <code style="font-family:var(--font-mono);font-size:0.86em;">list</code> y <code style="font-family:var(--font-mono);font-size:0.86em;">/mcp</code>.</div>
+          <div style="display:flex;gap:16px;align-items:baseline;font-size:24px;line-height:1.4;"><span style="flex:none;width:32px;height:32px;border-radius:8px;background:var(--gray-200);color:var(--muted);font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center;">2</span>Pídele algo con <strong>tus datos</strong> y algo de conocimiento general; solo lo primero dispara la tool.</div>
+        </div>
+      </div>
+      <div style="flex:1;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:18px;padding:32px 36px;">
+        <div style="font-size:26px;font-weight:800;color:var(--red);margin-bottom:18px;">Hooks</div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div style="display:flex;gap:16px;align-items:baseline;font-size:24px;line-height:1.4;color:var(--ink);"><span style="flex:none;width:32px;height:32px;border-radius:8px;background:#fff;color:var(--red);font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center;">3</span>Un <code style="font-family:var(--font-mono);font-size:0.86em;">PostToolUse</code> que auto-formatee tras cada edición.</div>
+          <div style="display:flex;gap:16px;align-items:baseline;font-size:24px;line-height:1.4;color:var(--ink);"><span style="flex:none;width:32px;height:32px;border-radius:8px;background:#fff;color:var(--red);font-weight:800;font-size:20px;display:flex;align-items:center;justify-content:center;">4</span>Un <code style="font-family:var(--font-mono);font-size:0.86em;">PreToolUse</code> con <code style="font-family:var(--font-mono);font-size:0.86em;">exit 2</code> que bloquee <code style="font-family:var(--font-mono);font-size:0.86em;">rm -rf</code> o leer <code style="font-family:var(--font-mono);font-size:0.86em;">.env</code>. Provócalo y verifica el bloqueo.</div>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:var(--type-small);color:var(--muted);margin:36px 0 0;">El objetivo: sentir la diferencia entre <strong style="color:var(--ink);">pedir</strong> (lo que Claude interpreta) y <strong style="color:var(--ink);">garantizar</strong> (un hook, que se ejecuta pase lo que pase).</p>
+  </section>
+
+  <section data-label="Resumen" data-screen-label="16" data-speaker-notes="Las ideas para llevarse a casa. MCP es un protocolo estándar (USB-C) que conecta Claude Code, como cliente, a servidores externos. Se añade con claude mcp add por HTTP o stdio, con tres ámbitos y aprobación de los de proyecto. Claude llama a la tool para tus datos, no para conocimiento general. Un hook garantiza un comportamiento fuera del modelo; el exit 2 de un PreToolUse bloquea. Tres cadencias: sesión, turno, tool. Y cubren también a los subagentes." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Para llevarse a casa</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 40px;">Resumen de la lección</h2>
+    <div style="display:flex;flex-direction:column;gap:18px;max-width:1580px;">
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:27px;line-height:1.4;margin:0;"><strong>MCP</strong> es un protocolo estándar (el «USB-C» de la IA): Claude Code, de cliente, se conecta a <strong>servidores</strong> externos.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:27px;line-height:1.4;margin:0;">Se añade con <code style="font-family:var(--font-mono);font-size:0.9em;">claude mcp add</code> (HTTP o stdio), <strong>tres ámbitos</strong>, y los de proyecto piden aprobación.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:27px;line-height:1.4;margin:0;">Claude llama a la tool para <strong>tus datos</strong>, no para conocimiento general.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:27px;line-height:1.4;margin:0;">Un <strong>hook garantiza</strong> un comportamiento fuera del modelo. El <code style="font-family:var(--font-mono);font-size:0.9em;">exit 2</code> de un <code style="font-family:var(--font-mono);font-size:0.9em;">PreToolUse</code> bloquea.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:27px;line-height:1.4;margin:0;">Tres cadencias —<strong>sesión, turno, tool</strong>— y se disparan también para los subagentes.</p></div>
+    </div>
+  </section>
+
+  <section data-label="Cierre" data-screen-label="17" data-speaker-notes="Cierre de la Sesión 3 y puente a la última. Ya tienes memoria, procedimientos, manos extra, conexión al exterior y control determinista. La Sesión 4, el 2 de julio, es la última: sesiones largas (compactación y limpieza), flujo con Git (commits, PRs, worktrees), testing y TDD asistido, automatización y modo headless en CI, y el bloque de seguridad: permisos, riesgos de MCPs de terceros, protección de datos, y el criterio final para elegir entre CLAUDE.md, skills, subagentes y MCP según la tarea." style="background:var(--red);display:flex;flex-direction:column;justify-content:space-between;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="display:flex;align-items:center;gap:16px;"><span style="width:14px;height:14px;border-radius:999px;background:#fff;display:block;"></span><span style="text-transform:uppercase;letter-spacing:0.16em;font-size:var(--type-over);font-weight:700;opacity:.9;">Siguiente sesión · 2 de julio</span></div>
+    <div>
+      <h2 style="font-size:60px;font-weight:800;letter-spacing:-0.03em;line-height:1.07;margin:0;max-width:1500px;text-wrap:balance;">La última: sesiones largas, Git, testing, CI y seguridad</h2>
+      <p style="font-size:var(--type-lead);font-weight:500;line-height:1.4;margin:34px 0 0;max-width:1380px;opacity:.92;">Compactación y limpieza de contexto, flujo con Git y worktrees, TDD asistido, modo headless, y el criterio final para elegir entre CLAUDE.md, skills, subagentes y MCP según la tarea.</p>
+    </div>
+    <div style="font-size:var(--type-small);font-weight:600;opacity:.8;">Sesión 4 · Sesiones largas, flujo y seguridad</div>
+  </section>
+
+</x-import>
+</x-dc>
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Curso Claude Code · Índice de presentaciones</title>
+<link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/tokens/colors.css">
+<link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/tokens/typography.css">
+<style>
+  :root {
+    --ink: #111827;
+    --muted: #656C79;
+    --red: #DF2F3A;
+    --red-subtle: #FFF0F1;
+    --line: #E5E7EB;
+    --gray-50: #F9FAFB;
+    --gray-100: #F3F4F6;
+    --font-sans: 'Plus Jakarta Sans', system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: var(--font-sans);
+    color: var(--ink);
+    background: #fff;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ---------- Portada ---------- */
+  .hero {
+    background: var(--red);
+    color: #fff;
+    padding: 88px 7vw 96px;
+  }
+  .hero__over {
+    display: flex; align-items: center; gap: 14px;
+    text-transform: uppercase; letter-spacing: 0.16em;
+    font-size: 14px; font-weight: 700; opacity: .9;
+    margin-bottom: 56px;
+  }
+  .hero__dot { width: 12px; height: 12px; border-radius: 999px; background: #fff; }
+  .hero__title {
+    font-size: clamp(40px, 6vw, 76px);
+    font-weight: 800; letter-spacing: -0.03em; line-height: 1.02;
+    margin: 0; max-width: 1100px; text-wrap: balance;
+  }
+  .hero__lead {
+    font-size: clamp(18px, 2.2vw, 30px);
+    font-weight: 500; line-height: 1.4;
+    margin: 28px 0 0; max-width: 880px; opacity: .92;
+  }
+  .hero__meta {
+    margin-top: 56px; display: flex; flex-wrap: wrap; gap: 28px;
+    font-size: 15px; font-weight: 600; opacity: .85;
+  }
+  .hero__meta span { display: flex; align-items: center; gap: 10px; }
+  .hero__meta b { font-size: 26px; font-weight: 800; opacity: 1; }
+
+  /* ---------- Layout ---------- */
+  main { padding: 80px 7vw 120px; max-width: 1400px; margin: 0 auto; }
+
+  .session { margin-bottom: 72px; }
+  .session:last-child { margin-bottom: 0; }
+  .session__head {
+    display: flex; align-items: baseline; gap: 20px;
+    border-bottom: 2px solid var(--line);
+    padding-bottom: 18px; margin-bottom: 36px;
+  }
+  .session__num {
+    font-size: clamp(34px, 4vw, 52px); font-weight: 800;
+    color: var(--red); line-height: 1; letter-spacing: -0.02em;
+  }
+  .session__label {
+    text-transform: uppercase; letter-spacing: 0.12em;
+    font-size: 13px; font-weight: 700; color: var(--muted);
+    margin-bottom: 6px;
+  }
+  .session__title {
+    font-size: clamp(22px, 2.6vw, 34px); font-weight: 800;
+    letter-spacing: -0.02em; margin: 0; line-height: 1.1;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 24px;
+  }
+
+  /* ---------- Tarjeta ---------- */
+  .card {
+    display: flex; flex-direction: column;
+    text-decoration: none; color: inherit;
+    background: var(--gray-50);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 32px 32px 28px;
+    transition: transform .18s ease, box-shadow .18s ease,
+                border-color .18s ease, background .18s ease;
+  }
+  .card:hover {
+    transform: translateY(-4px);
+    border-color: var(--red);
+    background: #fff;
+    box-shadow: 0 18px 40px -18px rgba(223, 47, 58, 0.45);
+  }
+  .card__top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 22px; }
+  .card__lesson {
+    font-size: 13px; font-weight: 800; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--red);
+  }
+  .card__index {
+    font-size: 40px; font-weight: 800; line-height: 1;
+    color: var(--line); transition: color .18s ease;
+  }
+  .card:hover .card__index { color: var(--red-subtle); }
+  .card__title {
+    font-size: 24px; font-weight: 800; letter-spacing: -0.015em;
+    line-height: 1.18; margin: 0 0 14px;
+  }
+  .card__desc {
+    font-size: 16px; line-height: 1.5; color: var(--muted);
+    margin: 0 0 26px; flex: 1;
+  }
+  .card__cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 15px; font-weight: 700; color: var(--ink);
+  }
+  .card__cta .arrow { transition: transform .18s ease; color: var(--red); }
+  .card:hover .card__cta .arrow { transform: translateX(5px); }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 36px 7vw; text-align: center;
+    font-size: 14px; color: var(--muted);
+  }
+</style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="hero__over"><span class="hero__dot"></span>Curso Claude Code · Material de presentaciones</div>
+    <h1 class="hero__title">Índice del curso de Claude Code</h1>
+    <p class="hero__lead">Las cuatro sesiones del curso, de prompting a seguridad y criterio. Abre cualquier lección para presentarla.</p>
+    <div class="hero__meta">
+      <span><b>4</b>&nbsp;sesiones</span>
+      <span><b>12</b>&nbsp;lecciones</span>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Sesión 1 -->
+    <section class="session">
+      <div class="session__head">
+        <div class="session__num">01</div>
+        <div>
+          <div class="session__label">Sesión 1 · Fundamentos</div>
+          <h2 class="session__title">Prompting e instalación</h2>
+        </div>
+      </div>
+      <div class="grid">
+        <a class="card" href="Leccion 1 - Prompting aplicado.dc.html">
+          <div class="card__top"><span class="card__lesson">Lección 1</span><span class="card__index">01</span></div>
+          <h3 class="card__title">Prompting aplicado a Claude Code</h3>
+          <p class="card__desc">Por qué Claude responde como responde y cinco técnicas para reducir la ambigüedad.</p>
+          <span class="card__cta">Abrir presentación <span class="arrow">→</span></span>
+        </a>
+        <a class="card" href="Leccion 2 - Instalacion y modos.dc.html">
+          <div class="card__top"><span class="card__lesson">Lección 2</span><span class="card__index">02</span></div>
+          <h3 class="card__title">Instalación, configuración y modos de trabajo</h3>
+          <p class="card__desc">La decisión que más vas a repetir: cuánta autonomía darle a Claude Code en cada tarea.</p>
+          <span class="card__cta">Abrir presentación <span class="arrow">→</span></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Sesión 2 -->
+    <section class="session">
+      <div class="session__head">
+        <div class="session__num">02</div>
+        <div>
+          <div class="session__label">Sesión 2 · Contexto del proyecto</div>
+          <h2 class="session__title">Memoria, reglas y comandos</h2>
+        </div>
+      </div>
+      <div class="grid">
+        <a class="card" href="Sesion 2 - Gestion del contexto y CLAUDE.md.dc.html">
+          <div class="card__top"><span class="card__lesson">Lección 1</span><span class="card__index">01</span></div>
+          <h3 class="card__title">Gestión del contexto y CLAUDE.md</h3>
+          <p class="card__desc">Darle a Claude memoria persistente de tu proyecto para que no empiece cada sesión a ciegas.</p>
+          <span class="card__cta">Abrir presentación <span class="arrow">→</span></span>
+        </a>
+        <a class="card" href="Sesion 2 - Reglas y slash commands.dc.html">
+          <div class="card__top"><span class="card__lesson">Lección 2</span><span class="card__index">02</span></div>
+          <h3 class="card__title">Reglas y slash commands</h3>
+          <p class="card__desc">Reglas con ámbito para no tener un único bloque gigante, y comandos para empaquetar flujos repetidos.</p>
+          <span class="card__cta">Abrir presentación <span class="arrow">→</span></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Sesión 3 -->
+    <section class="session">
+      <div class="session__head">
+        <div class="session__num">03</div>
+        <div>
+          <div class="session__label">Sesión 3 · Ampliar capacidades</div>
+          <h2 class="session__title">Skills, agentes y conexiones</h2>
+        </div>
+      </div>
+      <div class="grid">
+        <a class="card" href="01-skills.dc.html">
+          <div class="card__top"><span class="card__lesson">Lección 1</span><span class="card__index">01</span></div>
+          <h3 class="card__title">Skills</h3>
+          <p class="card__desc">Encapsular tu conocimiento de proyecto en procedimientos reutilizables dentro de la conversación.</p>
+          <span class="card__cta">Abrir presentación <span class="arrow">→</span></span>
+        </a>
+        <a class="card" href="02-agentes-y-subagentes.dc.html">
+          <div class="card__top"><span class="card__lesson">Lección 2</span><span class="card__index">02</span></div>
+          <h3 class="card__title">Agentes y subagentes</h3>
+          <p class="card__desc">Sacar el trabajo ruidoso de la ventana principal delegándolo en manos aisladas.</p>
+          <span class="card__cta">Abrir presentación <span class="arrow">→</span></span>
+        </a>
+        <a class="card" href="03-mcps-y-hooks.dc.html">
+          <div class="card__top"><span class="card__lesson">Lección 3</span><span class="card__index">03</span></div>
+          <h3 class="card__title">MCPs y hooks</h3>
+          <p class="card__desc">Conectar con el mundo exterior (MCPs) y tomar control determinista del comportamiento (hooks).</p>
+          <span class="card__cta">Abrir presentación <span class="arrow">→</span></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Sesión 4 -->
+    <section class="session">
+      <div class="session__head">
+        <div class="session__num">04</div>
+        <div>
+          <div class="session__label">Sesión 4 · Flujo profesional</div>
+          <h2 class="session__title">Escala, calidad y criterio</h2>
+        </div>
+      </div>
+      <div class="grid">
+        <a class="card" href="01-sesiones-largas.dc.html">
+          <div class="card__top"><span class="card__lesson">Lección 1</span><span class="card__index">01</span></div>
+          <h3 class="card__title">Gestión de sesiones largas</h3>
+          <p class="card__desc">Qué hacer cuando una sesión se alarga tanto que la ventana de contexto se llena igualmente.</p>
+          <span class="card__cta">Abrir presentación <span class="arrow">→</span></span>
+        </a>
+        <a class="card" href="02-flujo-git.dc.html">
+          <div class="card__top"><span class="card__lesson">Lección 2</span><span class="card__index">02</span></div>
+          <h3 class="card__title">Flujo de trabajo con Git</h3>
+          <p class="card__desc">Cómo Claude Code trabaja con Git y los worktrees que hacen posible el paralelismo real.</p>
+          <span class="card__cta">Abrir presentación <span class="arrow">→</span></span>
+        </a>
+        <a class="card" href="03-testing-tdd.dc.html">
+          <div class="card__top"><span class="card__lesson">Lección 3</span><span class="card__index">03</span></div>
+          <h3 class="card__title">Testing y TDD asistido</h3>
+          <p class="card__desc">Que el testing sea el motor que guía la implementación, no un añadido al final.</p>
+          <span class="card__cta">Abrir presentación <span class="arrow">→</span></span>
+        </a>
+        <a class="card" href="04-automatizacion-headless.dc.html">
+          <div class="card__top"><span class="card__lesson">Lección 4</span><span class="card__index">04</span></div>
+          <h3 class="card__title">Automatización y modo headless</h3>
+          <p class="card__desc">Ejecutar Claude Code sin nadie delante: el modo headless y su integración en CI.</p>
+          <span class="card__cta">Abrir presentación <span class="arrow">→</span></span>
+        </a>
+        <a class="card" href="05-seguridad-y-criterio.dc.html">
+          <div class="card__top"><span class="card__lesson">Lección 5</span><span class="card__index">05</span></div>
+          <h3 class="card__title">Seguridad, buenas prácticas y criterio de elección</h3>
+          <p class="card__desc">Permisos, aislamiento y datos sensibles, y el criterio que unifica todo el curso.</p>
+          <span class="card__cta">Abrir presentación <span class="arrow">→</span></span>
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>Curso Claude Code · Índice de presentaciones</footer>
+
+</body>
+</html>

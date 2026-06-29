@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/styles.css">
+  <script src="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/_ds_bundle.js"></script>
+  <style>
+    :root {
+      --type-display: 90px;
+      --type-title: 60px;
+      --type-subtitle: 40px;
+      --type-lead: 36px;
+      --type-body: 30px;
+      --type-small: 24px;
+      --type-mono: 24px;
+      --type-over: 24px;
+      --pad-x: 120px;
+      --pad-y: 92px;
+      --ink: #111827;
+      --muted: #656C79;
+      --red: #DF2F3A;
+      --red-subtle: #FFF0F1;
+      --line: #E5E7EB;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+  </style>
+</helmet>
+<x-import component-from-global-scope="deck-stage" from="./deck-stage.js" width="1920" height="1080" hint-size="100%,100%">
+
+  <section data-label="Portada" data-screen-label="Portada" data-speaker-notes="Sesión 3, primera lección. Cerramos ayer con una promesa: cuando un slash command se te queda corto, toca convertirlo en skill. Hoy abrimos esa caja. Y el punto a dejar clarísimo desde el principio: una skill no es documentar la API de Anthropic; encapsula TU conocimiento de proyecto." style="background:var(--red);display:flex;flex-direction:column;justify-content:space-between;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="display:flex;align-items:center;gap:16px;">
+      <span style="width:14px;height:14px;border-radius:999px;background:#fff;display:block;"></span>
+      <span style="text-transform:uppercase;letter-spacing:0.16em;font-size:var(--type-over);font-weight:700;opacity:.9;">Curso Claude Code · Sesión 3</span>
+    </div>
+    <div>
+      <div style="font-size:var(--type-subtitle);font-weight:600;opacity:.85;margin-bottom:18px;">Lección 1</div>
+      <h1 style="font-size:var(--type-display);font-weight:800;letter-spacing:-0.03em;line-height:1.0;margin:0;max-width:1380px;text-wrap:balance;">Skills</h1>
+      <p style="font-size:var(--type-lead);font-weight:500;line-height:1.4;margin:32px 0 0;max-width:1200px;opacity:.92;">Empaqueta tu conocimiento de proyecto en procedimientos que Claude invoca solo y que arrastran sus propios ficheros de apoyo.</p>
+    </div>
+    <div style="font-size:var(--type-small);font-weight:600;opacity:.8;">Sesión 3 · Skills, agentes, MCPs y hooks</div>
+  </section>
+
+  <section data-label="Dónde estamos" data-screen-label="01" data-speaker-notes="El puente con ayer. Cuando un slash command se te queda corto —necesitas que Claude lo invoque solo, o que arrastre plantillas y scripts— la señal es que toca convertirlo en skill. Y antes de nada, el punto que pediste recalcar." style="background:#fff;display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Dónde estamos</div>
+    <h2 style="font-size:64px;font-weight:800;letter-spacing:-0.03em;line-height:1.06;margin:0;max-width:1500px;text-wrap:balance;">Cuando un comando se queda corto, la señal es: toca una skill</h2>
+    <p style="font-size:var(--type-lead);font-weight:500;line-height:1.45;margin:40px 0 0;max-width:1380px;color:var(--muted);">Necesitas que Claude lo invoque <strong style="color:var(--ink);">solo</strong> cuando es relevante, o que <strong style="color:var(--ink);">arrastre sus propios ficheros</strong> de apoyo. Hoy abrimos esa caja.</p>
+  </section>
+
+  <section data-label="Qué es una skill" data-screen-label="02" data-speaker-notes="Una skill es una carpeta con un SKILL.md dentro, más —opcionalmente— scripts, documentación de referencia y plantillas. Claude la carga dinámicamente cuando la juzga relevante. La analogía: es el manual de onboarding que le escribirías a un compañero nuevo para una tarea concreta. Conocimiento procedimental, específico, reutilizable." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">El concepto</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 40px;">Qué es una skill</h2>
+    <div style="display:flex;gap:48px;align-items:center;">
+      <p style="flex:1;font-size:var(--type-body);line-height:1.5;margin:0;">Una <strong>carpeta</strong> con un fichero <code style="font-family:var(--font-mono);font-size:0.9em;color:var(--red);">SKILL.md</code> dentro, más —opcionalmente— scripts, referencias y plantillas. Claude la carga <strong>cuando la juzga relevante</strong>.</p>
+      <div style="flex:none;width:640px;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:20px;padding:44px;">
+        <p style="font-size:30px;line-height:1.4;margin:0;color:var(--ink);">Es el <strong>manual de onboarding</strong> que le escribirías a un compañero nuevo para una tarea concreta.</p>
+        <p style="font-size:24px;color:var(--color-error-text);line-height:1.4;margin:20px 0 0;">«Así desplegamos <em>nosotros</em>». Conocimiento procedimental, específico, reutilizable.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="No es documentar una API" data-screen-label="03" data-speaker-notes="El punto que separa una skill útil de una inútil. Una skill no es documentación de una API que ya existe. Si la información ya está en la referencia oficial, meterla en una skill no aporta: Claude ya la conoce. Lo que aporta una skill es lo que el modelo NO tiene de serie: cómo hacéis las cosas vosotros. La pregunta de control: ¿se lo enseño porque no lo sabe, o lo copio de donde ya está? Si es lo segundo, bórralo." style="background:var(--red);display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="text-transform:uppercase;letter-spacing:0.14em;font-size:var(--type-over);font-weight:700;opacity:.85;margin-bottom:36px;">El punto que separa una skill útil de una inútil</div>
+    <h2 style="font-size:62px;font-weight:800;letter-spacing:-0.03em;line-height:1.06;margin:0;max-width:1500px;text-wrap:balance;">Una skill no es documentación de una API que ya existe</h2>
+    <div style="background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:20px;padding:36px 44px;margin-top:44px;max-width:1480px;">
+      <p style="font-size:30px;line-height:1.45;margin:0;">La pregunta de control al escribir una skill: <strong>«¿esto se lo enseño a Claude porque no lo sabe, o lo copio de un sitio donde ya está?»</strong> Si es lo segundo, bórralo. Lo que aporta una skill es lo que el modelo <em>no</em> tiene de serie: cómo hacéis las cosas <em>vosotros</em>.</p>
+    </div>
+  </section>
+
+  <section data-label="Skill vs comando" data-screen-label="04" data-speaker-notes="La diferencia con un slash command, en una frase. Un comando es un prompt reutilizable que TÚ disparas. Una skill es eso más dos cosas: Claude puede invocarla solo cuando detecta que es relevante, y puede arrastrar ficheros de apoyo. Como vimos ayer, comandos y skills se fusionaron: la skill es el formato recomendado, el comando es su versión mínima de un fichero." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">La diferencia, en una frase</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 48px;">Skill vs. slash command</h2>
+    <div style="display:flex;gap:40px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-100);border-radius:18px;padding:38px 42px;">
+        <div style="font-family:var(--font-mono);font-size:30px;font-weight:800;color:var(--gray-600);margin-bottom:16px;">/comando</div>
+        <p style="font-size:28px;line-height:1.4;margin:0;color:var(--ink);">Un prompt reutilizable que <strong>tú</strong> disparas tecleándolo.</p>
+      </div>
+      <div style="flex:1.3;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:18px;padding:38px 42px;">
+        <div style="font-size:30px;font-weight:800;color:var(--red);margin-bottom:16px;">Skill = eso + dos cosas</div>
+        <ul style="margin:0;padding-left:24px;font-size:27px;line-height:1.5;color:var(--ink);"><li>Claude la <strong>invoca solo</strong> cuando la detecta relevante</li><li>Puede <strong>arrastrar ficheros</strong>: scripts, referencias, plantillas</li></ul>
+        <p style="font-size:24px;color:var(--color-error-text);line-height:1.4;margin:20px 0 0;">Se fusionaron: la skill es el formato recomendado; el comando, su versión mínima de un fichero.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Cuándo sí y cuándo no" data-screen-label="05" data-speaker-notes="No todo merece ser una skill. Créala cuando: repites un procedimiento especializado multi-paso, se beneficia de ficheros de apoyo, y quieres que Claude lo aplique automáticamente. No la crees cuando: es una instrucción de una línea que aplica siempre (eso es CLAUDE.md), es algo que Claude ya sabe hacer (las skills se infra-disparan para tareas triviales), o es documentación de algo ya documentado fuera." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">El criterio</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Cuándo crear una skill (y cuándo no)</h2>
+    <div style="display:flex;gap:40px;align-items:stretch;">
+      <div style="flex:1;background:var(--color-success-subtle);border:1px solid #BBE9D6;border-radius:18px;padding:34px 38px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;"><span style="font-size:26px;color:var(--color-success);">✓</span><span style="font-size:28px;font-weight:800;color:var(--color-success-text);">Créala cuando</span></div>
+        <ul style="margin:0;padding-left:24px;font-size:25px;line-height:1.55;color:var(--ink);"><li>Repites un procedimiento <strong>especializado y multi-paso</strong></li><li>Se beneficia de <strong>ficheros de apoyo</strong>: script, plantilla, referencia larga</li><li>Quieres que Claude lo aplique <strong>solo</strong>, sin pedírselo</li></ul>
+      </div>
+      <div style="flex:1;background:var(--gray-100);border-radius:18px;padding:34px 38px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;"><span style="font-size:26px;color:var(--gray-500);">✕</span><span style="font-size:28px;font-weight:800;color:var(--gray-600);">No la crees cuando</span></div>
+        <ul style="margin:0;padding-left:24px;font-size:25px;line-height:1.55;color:var(--gray-600);"><li>Es una instrucción de una línea que aplica siempre → <strong>CLAUDE.md</strong></li><li>Claude ya lo sabe hacer (se «infra-disparan» en lo trivial)</li><li>Es documentación de algo ya documentado fuera</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="CLAUDE.md vs skills" data-screen-label="06" data-speaker-notes="La frontera clara. El CLAUDE.md es para lo que Claude debe saber siempre y que es corto. Una skill es para conocimiento especializado que solo importa cuando estás en esa tarea y que puede ser extenso. Meter la metodología entera en el CLAUDE.md la cargaría en todas las sesiones. La skill la mantiene disponible sin ensuciar el contexto base: solo entra cuando hace falta. Eso es progressive disclosure." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">La frontera clara</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 48px;">CLAUDE.md vs. skills</h2>
+    <div style="display:flex;gap:40px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:36px 40px;">
+        <div style="font-family:var(--font-mono);font-size:26px;font-weight:700;color:var(--red);margin-bottom:14px;">CLAUDE.md</div>
+        <p style="font-size:27px;line-height:1.45;margin:0;">Lo que Claude debe saber <strong>siempre</strong> y que es <strong>corto</strong>. «Usa <code style="font-family:var(--font-mono);font-size:0.88em;">async/await</code>», «tests con <code style="font-family:var(--font-mono);font-size:0.88em;">make test</code>».</p>
+      </div>
+      <div style="flex:1.2;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:18px;padding:36px 40px;">
+        <div style="font-size:26px;font-weight:700;color:var(--red);margin-bottom:14px;">Skill</div>
+        <p style="font-size:27px;line-height:1.45;margin:0;color:var(--ink);">Conocimiento especializado que solo importa <strong>en esa tarea</strong> y que puede ser <strong>extenso</strong>. Disponible sin ensuciar el contexto base: solo entra cuando hace falta.</p>
+        <p style="font-size:23px;color:var(--color-error-text);line-height:1.4;margin:18px 0 0;font-weight:700;">→ Eso es progressive disclosure.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Estructura de carpeta" data-screen-label="07" data-speaker-notes="La estructura. SKILL.md es obligatorio: frontmatter YAML (name + description) más instrucciones en markdown. scripts/ para código ejecutable determinista, references/ para documentación que se carga cuando hace falta, assets/ para ficheros que van en la salida. El nombre de la carpeta es el identificador. Viven en .claude/skills/ (proyecto) o ~/.claude/skills/ (personal). Ante choque de nombre, gana la de proyecto." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Por dentro</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">La estructura de una skill</h2>
+    <div style="display:flex;gap:44px;align-items:stretch;">
+      <pre style="flex:1.2;margin:0;background:#111827;border-radius:20px;padding:36px 40px;font-family:var(--font-mono);font-size:24px;line-height:1.7;color:#E5E7EB;white-space:pre-wrap;box-shadow:0 14px 36px rgba(17,24,39,.22);">mi-skill/
+├── <span style="color:#FF9AA0;">SKILL.md</span>      <span style="color:#9CA3AF;">(obligatorio)</span>
+│   ├── frontmatter <span style="color:#9CA3AF;">name + description</span>
+│   └── instrucciones (markdown)
+├── <span style="color:#86E1A9;">scripts/</span>      <span style="color:#9CA3AF;">código determinista</span>
+├── <span style="color:#86E1A9;">references/</span>   <span style="color:#9CA3AF;">docs a demanda</span>
+└── <span style="color:#86E1A9;">assets/</span>       <span style="color:#9CA3AF;">material de salida</span></pre>
+      <div style="flex:none;width:560px;display:flex;flex-direction:column;gap:22px;">
+        <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:28px 32px;"><p style="font-size:25px;line-height:1.4;margin:0;">El <strong>nombre de la carpeta</strong> es el identificador de la skill.</p></div>
+        <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:28px 32px;"><p style="font-size:25px;line-height:1.4;margin:0;"><code style="font-family:var(--font-mono);font-size:0.86em;color:var(--red);">.claude/skills/</code> (proyecto, en git) o <code style="font-family:var(--font-mono);font-size:0.86em;color:var(--red);">~/.claude/skills/</code> (personal).</p></div>
+        <div style="background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:18px;padding:28px 32px;"><p style="font-size:25px;line-height:1.4;margin:0;color:var(--ink);">Si una de proyecto y una personal comparten nombre, <strong>gana la de proyecto</strong>.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Progressive disclosure" data-screen-label="08" data-speaker-notes="La idea que hace que las skills escalen sin penalizar el contexto. La información se carga en niveles. Nivel 1: el frontmatter, name + description, lo único que se carga al arrancar; Claude solo sabe que la skill existe y cuándo usarla. Nivel 2: el cuerpo del SKILL.md, que lee solo si decide que es relevante. Nivel 3: los ficheros de apoyo, que se acceden solo cuando hacen falta. Un references de 2.000 líneas no gasta ni un token hasta que Claude lo abre." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Por qué escala sin penalizar el contexto</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Progressive disclosure: carga en tres niveles</h2>
+    <div style="display:flex;gap:26px;align-items:stretch;">
+      <div style="flex:1;background:var(--red);color:#fff;border-radius:18px;padding:34px 32px;"><div style="font-size:24px;font-weight:700;opacity:.85;margin-bottom:14px;">Nivel 1 · al arrancar</div><div style="font-size:28px;font-weight:800;margin-bottom:12px;">El frontmatter</div><p style="font-size:24px;line-height:1.4;margin:0;opacity:.92;"><code style="font-family:var(--font-mono);font-size:0.86em;">name</code> + <code style="font-family:var(--font-mono);font-size:0.86em;">description</code>. Claude solo sabe que <em>existe</em> y <em>cuándo usarla</em>. Por eso puedes tener muchas.</p></div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:34px 32px;"><div style="font-size:24px;font-weight:700;color:var(--muted);margin-bottom:14px;">Nivel 2 · si es relevante</div><div style="font-size:28px;font-weight:800;margin-bottom:12px;">El cuerpo del SKILL.md</div><p style="font-size:24px;line-height:1.4;margin:0;color:var(--muted);">Las instrucciones. Claude las lee <strong>solo si decide</strong> que la skill aplica, tras leer la descripción.</p></div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:34px 32px;"><div style="font-size:24px;font-weight:700;color:var(--muted);margin-bottom:14px;">Nivel 3 · cuando hace falta</div><div style="font-size:28px;font-weight:800;margin-bottom:12px;">Los ficheros de apoyo</div><p style="font-size:24px;line-height:1.4;margin:0;color:var(--muted);">Un <code style="font-family:var(--font-mono);font-size:0.86em;">references/</code> de 2.000 líneas <strong>no gasta ni un token</strong> hasta que Claude lo abre.</p></div>
+    </div>
+    <p style="font-size:var(--type-small);color:var(--muted);margin:38px 0 0;">Consecuencia práctica: mantén el SKILL.md <strong style="color:var(--ink);">corto</strong> (&lt; 500 líneas) y mueve el detalle a <code style="font-family:var(--font-mono);font-size:0.9em;">references/</code>.</p>
+  </section>
+
+  <section data-label="El campo description" data-screen-label="09" data-speaker-notes="El description es lo más importante de toda la skill, porque es lo que Claude usa para decidir si la activa. Dos errores fatales: demasiado vago (ayuda con informes; Claude no sabe cuándo dispararla) y demasiado tímido (las skills tienden a infra-dispararse). El antídoto es hacer las descripciones un poco insistentes, enumerando los disparadores con las palabras que aparecerían en la petición del usuario. Escríbela en tercera persona y enfócala en cuándo se dispara." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Lo que de verdad decide si funciona</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">El campo <code style="font-family:var(--font-mono);color:var(--red);">description</code></h2>
+    <div style="display:flex;gap:40px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-100);border-radius:18px;padding:34px 38px;">
+        <div style="font-size:27px;font-weight:800;color:var(--gray-600);margin-bottom:16px;">Dos errores fatales</div>
+        <p style="font-size:25px;line-height:1.45;margin:0 0 16px;color:var(--gray-600);"><strong>Vago:</strong> «Ayuda con informes». Claude no sabe cuándo dispararla.</p>
+        <p style="font-size:25px;line-height:1.45;margin:0;color:var(--gray-600);"><strong>Tímido:</strong> tiende a <em>infra-dispararse</em>: no la usa cuando sería útil.</p>
+      </div>
+      <div style="flex:1.25;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:18px;padding:34px 38px;">
+        <div style="font-size:27px;font-weight:800;color:var(--red);margin-bottom:16px;">El antídoto: descripciones «insistentes»</div>
+        <p style="font-size:25px;line-height:1.45;margin:0;color:var(--ink);">Di <strong>qué hace y cuándo usarla</strong>, enumerando los disparadores con las palabras que aparecerían en la petición. En <strong>tercera persona</strong> y enfocada en el <em>cuándo</em>.</p>
+        <p style="font-size:22px;color:var(--color-error-text);line-height:1.4;margin:18px 0 0;">«Úsala siempre que el usuario mencione incidencias, postmortems o un fallo de producción, aunque no diga "informe".»</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Ejemplo de frontmatter" data-screen-label="10" data-speaker-notes="Un buen frontmatter: fíjate en que la descripción enumera los disparadores. name: incident-report. La description usa el bloque YAML multilínea y lista cuándo usarla: una incidencia, un postmortem, un fallo de producción, documentar un corte, aunque no diga la palabra informe." style="background:#fff;display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Un buen ejemplo</div>
+    <h2 style="font-size:48px;font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 36px;">El frontmatter enumera los disparadores</h2>
+    <pre style="margin:0;background:#111827;border-radius:20px;padding:40px 46px;font-family:var(--font-mono);font-size:27px;line-height:1.65;color:#E5E7EB;white-space:pre-wrap;box-shadow:0 14px 36px rgba(17,24,39,.22);max-width:1560px;"><span style="color:#9CA3AF;">---</span>
+<span style="color:#FF9AA0;">name:</span> incident-report
+<span style="color:#FF9AA0;">description:</span> &gt;
+  Genera informes de incidencia con el formato y las
+  secciones que usa el equipo. <span style="color:#fff;">Úsala cuando el usuario</span>
+  <span style="color:#fff;">mencione una incidencia, un postmortem, un fallo de</span>
+  <span style="color:#fff;">producción</span>, o pida documentar un corte de servicio,
+  aunque no diga la palabra <span style="color:#86E1A9;">"informe"</span>.
+<span style="color:#9CA3AF;">---</span></pre>
+  </section>
+
+  <section data-label="Las tres carpetas" data-screen-label="11" data-speaker-notes="Las tres carpetas de apoyo cubren tres necesidades distintas. scripts/ para lo determinista: cuando una tarea requiere fiabilidad exacta o es código que Claude reescribiría una y otra vez; es eficiente en tokens y hace lo mismo siempre. references/ para el conocimiento que se carga a demanda: esquemas de BD, plantillas, especificaciones. assets/ para lo que va en la salida: plantillas de documento, logos, fuentes." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Saber cuál usar es criterio puro</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Scripts, referencias y plantillas</h2>
+    <div style="display:flex;gap:26px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:34px 32px;"><div style="font-family:var(--font-mono);font-size:27px;font-weight:800;color:var(--red);margin-bottom:12px;">scripts/</div><div style="font-size:25px;font-weight:700;margin-bottom:8px;">Para lo determinista</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">Fiabilidad exacta o código que Claude reescribiría. Eficiente en tokens y hace lo mismo siempre.</p></div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:34px 32px;"><div style="font-family:var(--font-mono);font-size:27px;font-weight:800;color:var(--red);margin-bottom:12px;">references/</div><div style="font-size:25px;font-weight:700;margin-bottom:8px;">Conocimiento a demanda</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">Esquemas de BD, plantillas, especificaciones. Claude las abre solo si la tarea lo pide.</p></div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:34px 32px;"><div style="font-family:var(--font-mono);font-size:27px;font-weight:800;color:var(--red);margin-bottom:12px;">assets/</div><div style="font-size:25px;font-weight:700;margin-bottom:8px;">Lo que va en la salida</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">Plantillas de documento, logos, fuentes, iconos. Material que acaba en el resultado.</p></div>
+    </div>
+  </section>
+
+  <section data-label="SKILL.md que orquesta" data-screen-label="12" data-speaker-notes="Un SKILL.md que orquesta las tres. release-notes. El procedimiento llama a un script para reunir los commits, agrupa siguiendo references/categorias.md, y redacta con assets/plantilla. Fíjate en el reparto: el qué y el cómo en el SKILL.md (corto); el cómo se recogen los commits en un script (determinista); las categorías y la plantilla en ficheros que se cargan solo al usar la skill." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Las tres, juntas</div>
+    <h2 style="font-size:48px;font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 36px;">Un SKILL.md que reparte el trabajo</h2>
+    <div style="display:flex;gap:44px;align-items:stretch;">
+      <pre style="flex:1.4;margin:0;background:#111827;border-radius:20px;padding:32px 38px;font-family:var(--font-mono);font-size:22px;line-height:1.55;color:#E5E7EB;white-space:pre-wrap;box-shadow:0 14px 36px rgba(17,24,39,.22);"><span style="color:#9CA3AF;"># Notas de versión</span>
+
+<span style="color:#9CA3AF;">## Procedimiento</span>
+1. Ejecuta <span style="color:#86E1A9;">scripts/collect_commits.sh</span>
+   para reunir commits desde el último tag.
+2. Agrupa por tipo según
+   <span style="color:#86E1A9;">references/categorias.md</span>.
+3. Redacta con <span style="color:#86E1A9;">assets/plantilla-release.md</span>.
+4. Resalta los breaking changes al principio.</pre>
+      <ul style="flex:1;margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:20px;justify-content:center;">
+        <li style="display:flex;gap:18px;align-items:baseline;font-size:25px;line-height:1.4;"><span style="flex:none;width:12px;height:12px;border-radius:999px;background:var(--red);"></span>El <strong>qué</strong> y el <strong>cómo</strong>: en el SKILL.md, corto.</li>
+        <li style="display:flex;gap:18px;align-items:baseline;font-size:25px;line-height:1.4;"><span style="flex:none;width:12px;height:12px;border-radius:999px;background:var(--red);"></span>Recoger commits: en un <strong>script</strong>, determinista.</li>
+        <li style="display:flex;gap:18px;align-items:baseline;font-size:25px;line-height:1.4;"><span style="flex:none;width:12px;height:12px;border-radius:999px;background:var(--red);"></span>Categorías y plantilla: en <strong>ficheros</strong> que se cargan solo al usar la skill.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section data-label="Crear una skill" data-screen-label="13" data-speaker-notes="Dos caminos para crear una skill. A mano: creas la carpeta, escribes el SKILL.md con su frontmatter, añades los ficheros de apoyo. Empieza simple —instrucciones en markdown, sin scripts— y añade complejidad cuando ya funcione; prueba después de cada cambio. Con ayuda de Claude: le describes lo que quieres y te genera la estructura. Es el camino rápido para el primer borrador; luego lo afinas." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">En la práctica</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 48px;">Crear una skill: dos caminos</h2>
+    <div style="display:flex;gap:40px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:36px 40px;">
+        <div style="font-size:30px;font-weight:800;margin-bottom:16px;">A mano</div>
+        <p style="font-size:26px;line-height:1.45;margin:0;color:var(--ink);">Carpeta, SKILL.md con frontmatter, ficheros de apoyo. <strong>Empieza simple</strong> (markdown, sin scripts) y añade complejidad cuando ya funcione. Prueba tras cada cambio.</p>
+      </div>
+      <div style="flex:1;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:18px;padding:36px 40px;">
+        <div style="font-size:30px;font-weight:800;color:var(--red);margin-bottom:16px;">Con ayuda de Claude</div>
+        <p style="font-size:26px;line-height:1.45;margin:0;color:var(--ink);">Le describes lo que quieres y te genera la estructura: la carpeta, el SKILL.md formateado y los recursos. El camino rápido para el primer borrador; luego lo afinas.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Se escribe para otro Claude" data-screen-label="14" data-speaker-notes="Una idea que cambia cómo redactas. Una skill se escribe para que la use OTRA instancia de Claude, una que no tiene tu contexto. Incluye lo que le sería útil y no obvio: el conocimiento procedimental, los detalles del dominio, los recursos reutilizables. No incluyas lo que cualquier Claude ya sabría hacer sin que se lo digas." style="background:var(--red);display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="text-transform:uppercase;letter-spacing:0.14em;font-size:var(--type-over);font-weight:700;opacity:.85;margin-bottom:36px;">Cómo redactar el SKILL.md</div>
+    <h2 style="font-size:62px;font-weight:800;letter-spacing:-0.03em;line-height:1.06;margin:0;max-width:1500px;text-wrap:balance;">Una skill se escribe para que la use <em>otra</em> instancia de Claude</h2>
+    <p style="font-size:var(--type-lead);font-weight:500;line-height:1.45;margin:44px 0 0;max-width:1420px;opacity:.92;">Lo va a leer otro Claude que no tiene tu contexto. Incluye lo <strong>útil y no obvio</strong> —el conocimiento procedimental, los detalles del dominio, los recursos—. No incluyas lo que cualquier Claude ya sabría hacer.</p>
+  </section>
+
+  <section data-label="Precauciones" data-screen-label="15" data-speaker-notes="Las skills son potentes porque pueden traer y ejecutar código, y eso exige cuidado. El frontmatter de cada skill entra en tu prompt de sistema: una skill no confiable es vía de inyección. Cuidado con los scripts: se ejecutan, revísalos. Composición sin control: Claude puede combinar varias skills automáticamente; mantén el conjunto acotado. Y datos sensibles: no metas credenciales, sobre todo si la versionas." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Pueden traer y ejecutar código</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Precauciones</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:26px;">
+      <div style="background:var(--color-warning-subtle);border:1px solid #F7E4B5;border-radius:18px;padding:30px 36px;"><div style="font-size:27px;font-weight:800;color:var(--color-warning-text);margin-bottom:10px;">El frontmatter entra en tu system prompt</div><p style="font-size:24px;line-height:1.4;margin:0;color:var(--ink);">Una skill no confiable es vía de inyección. Trátalas como cualquier dependencia: con revisión.</p></div>
+      <div style="background:var(--color-warning-subtle);border:1px solid #F7E4B5;border-radius:18px;padding:30px 36px;"><div style="font-size:27px;font-weight:800;color:var(--color-warning-text);margin-bottom:10px;">Cuidado con los scripts</div><p style="font-size:24px;line-height:1.4;margin:0;color:var(--ink);">Un script se ejecuta. Revisa qué hace antes de confiar en una skill ajena que trae código.</p></div>
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 36px;"><div style="font-size:27px;font-weight:800;margin-bottom:10px;">Composición sin control explícito</div><p style="font-size:24px;line-height:1.4;margin:0;color:var(--muted);">Claude puede combinar varias skills en una tarea. Mantén tu conjunto acotado y entendible.</p></div>
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 36px;"><div style="font-size:27px;font-weight:800;margin-bottom:10px;">Datos sensibles</div><p style="font-size:24px;line-height:1.4;margin:0;color:var(--muted);">No metas credenciales ni datos personales, sobre todo si la versionas. Como en el CLAUDE.md.</p></div>
+    </div>
+  </section>
+
+  <section data-label="Ejercicio" data-screen-label="16" data-speaker-notes="El ejercicio: coge uno de los comandos de ayer (test o review) y conviértelo en skill. Crea la carpeta con su SKILL.md. Escribe una description con disparadores explícitos, en tercera persona e insistente. Mueve un trozo de detalle a references/ y, si encaja, un paso determinista a scripts/. Comprueba que Claude la invoca SIN que la teclees. El objetivo es sentir la diferencia entre disparar un prompt y que Claude reconozca la tarea y aplique tu procedimiento solo." style="background:#fff;display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Para practicar</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 40px;">Convierte un comando en skill</h2>
+    <div style="display:flex;flex-direction:column;gap:18px;max-width:1540px;">
+      <div style="display:flex;gap:24px;align-items:center;font-size:27px;"><span style="flex:none;width:46px;height:46px;border-radius:12px;background:var(--gray-100);color:var(--muted);font-weight:800;display:flex;align-items:center;justify-content:center;">1</span>Crea <code style="font-family:var(--font-mono);font-size:0.9em;">.claude/skills/&lt;nombre&gt;/</code> con su <code style="font-family:var(--font-mono);font-size:0.9em;">SKILL.md</code>.</div>
+      <div style="display:flex;gap:24px;align-items:center;font-size:27px;"><span style="flex:none;width:46px;height:46px;border-radius:12px;background:var(--gray-100);color:var(--muted);font-weight:800;display:flex;align-items:center;justify-content:center;">2</span>Escribe una <code style="font-family:var(--font-mono);font-size:0.9em;">description</code> con disparadores explícitos, en tercera persona e «insistente».</div>
+      <div style="display:flex;gap:24px;align-items:center;font-size:27px;"><span style="flex:none;width:46px;height:46px;border-radius:12px;background:var(--gray-100);color:var(--muted);font-weight:800;display:flex;align-items:center;justify-content:center;">3</span>Mueve un detalle a <code style="font-family:var(--font-mono);font-size:0.9em;">references/</code> y, si encaja, un paso determinista a <code style="font-family:var(--font-mono);font-size:0.9em;">scripts/</code>.</div>
+      <div style="display:flex;gap:24px;align-items:center;font-size:27px;font-weight:700;color:var(--red);"><span style="flex:none;width:46px;height:46px;border-radius:12px;background:var(--red);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;">4</span>Comprueba que Claude la invoca <strong>sin</strong> que la teclees, con una tarea que encaje.</div>
+    </div>
+  </section>
+
+  <section data-label="Resumen" data-screen-label="17" data-speaker-notes="Las ideas para llevarse a casa. Una skill es una carpeta con SKILL.md que Claude invoca solo. No es documentar lo ya documentado: encapsula tu conocimiento de proyecto. Progressive disclosure carga en tres niveles, así que mantén el SKILL.md corto. El description, en tercera persona e insistente, decide si funciona. scripts/references/assets reparten el trabajo. Y trátalas como dependencias: revísalas." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Para llevarse a casa</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Resumen de la lección</h2>
+    <div style="display:flex;flex-direction:column;gap:20px;max-width:1560px;">
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">Una skill es una <strong>carpeta con un SKILL.md</strong> que Claude <strong>invoca solo</strong> y que arrastra scripts, referencias y plantillas.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;"><strong>No es documentar lo ya documentado:</strong> encapsula <em>tu</em> conocimiento de proyecto, no la API de Anthropic.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;"><strong>Progressive disclosure</strong> carga en tres niveles → mantén el SKILL.md corto y mueve el detalle a <code style="font-family:var(--font-mono);font-size:0.9em;">references/</code>.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">El <code style="font-family:var(--font-mono);font-size:0.9em;">description</code> —tercera persona, «insistente», con disparadores— <strong>decide si funciona</strong>.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">Pueden ejecutar código: <strong>trátalas como dependencias</strong> y revísalas.</p></div>
+    </div>
+  </section>
+
+  <section data-label="Cierre" data-screen-label="18" data-speaker-notes="Cierre y puente. Las skills hacen que Claude aplique tu procedimiento, pero todo ocurre en tu conversación principal. Y si una tarea pesada —rastrear medio código, analizar logs— ensucia tu contexto con resultados que no vas a volver a mirar? Para eso están los subagentes: instancias aisladas que hacen el trabajo sucio en su propia ventana y te devuelven solo el resultado." style="background:var(--red);display:flex;flex-direction:column;justify-content:space-between;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="display:flex;align-items:center;gap:16px;"><span style="width:14px;height:14px;border-radius:999px;background:#fff;display:block;"></span><span style="text-transform:uppercase;letter-spacing:0.16em;font-size:var(--type-over);font-weight:700;opacity:.9;">Siguiente lección</span></div>
+    <div>
+      <h2 style="font-size:64px;font-weight:800;letter-spacing:-0.03em;line-height:1.06;margin:0;max-width:1480px;text-wrap:balance;">Saca el trabajo ruidoso fuera de tu conversación</h2>
+      <p style="font-size:var(--type-lead);font-weight:500;line-height:1.4;margin:36px 0 0;max-width:1360px;opacity:.92;">Los <strong>subagentes</strong>: instancias aisladas que hacen el trabajo sucio en su propia ventana y te devuelven solo el resultado. La otra cara de la moneda de las skills.</p>
+    </div>
+    <div style="font-size:var(--type-small);font-weight:600;opacity:.8;">Sesión 3 · Lección 2 — Agentes y subagentes</div>
+  </section>
+
+</x-import>
+</x-dc>
+</body>
+</html>

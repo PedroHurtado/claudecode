@@ -1,0 +1,90 @@
+/* ─────────────────────────────────────────
+   Fudie Design System · util.css
+   Clases utilitarias de uso global.
+───────────────────────────────────────── */
+
+/* ── Accesibilidad ── */
+
+.visually-hidden,
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.sr-only-focusable:not(:focus):not(:focus-within) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ── Layout ── */
+
+.block-scroll       { overflow: hidden; }
+.truncate           { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.full-width         { width: 100%; }
+
+/* ── Visibilidad responsive ── */
+
+@media (max-width: 768px) {
+  .hide-on-mobile { display: none !important; }
+}
+
+@media (min-width: 769px) {
+  .hide-on-desktop { display: none !important; }
+}
+
+@media (max-width: 1024px) {
+  .hide-on-tablet { display: none !important; }
+}
+
+/* ── Animaciones de entrada ── */
+
+.fade-in {
+  animation: fudie-fadeIn var(--duration-slow) var(--ease-out) both;
+}
+
+.slide-up {
+  animation: fudie-slideUp var(--duration-slow) var(--ease-out) both;
+}
+
+@keyframes fudie-fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fudie-slideUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Estado de carga ── */
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--gray-100) 25%,
+    var(--gray-200) 50%,
+    var(--gray-100) 75%
+  );
+  background-size: 200% 100%;
+  animation: fudie-skeleton 1.5s ease-in-out infinite;
+  border-radius: var(--radius-md);
+}
+
+@keyframes fudie-skeleton {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

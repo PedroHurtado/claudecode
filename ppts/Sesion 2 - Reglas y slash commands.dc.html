@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/styles.css">
+  <script src="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/_ds_bundle.js"></script>
+  <style>
+    :root {
+      --type-display: 90px;
+      --type-title: 60px;
+      --type-subtitle: 40px;
+      --type-lead: 36px;
+      --type-body: 30px;
+      --type-small: 24px;
+      --type-mono: 24px;
+      --type-over: 24px;
+      --pad-x: 120px;
+      --pad-y: 92px;
+      --ink: #111827;
+      --muted: #656C79;
+      --red: #DF2F3A;
+      --red-subtle: #FFF0F1;
+      --line: #E5E7EB;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+  </style>
+</helmet>
+<x-import component-from-global-scope="deck-stage" from="./deck-stage.js" width="1920" height="1080" hint-size="100%,100%">
+
+  <section data-label="Portada" data-screen-label="Portada" data-speaker-notes="Sesión 2, segunda lección. Ya le diste a Claude memoria con el CLAUDE.md. Hoy resolvemos sus dos límites: las reglas con ámbito para que el contexto no sea un único bloque gigante, y los slash commands para empaquetar los flujos que repites cada día." style="background:var(--red);display:flex;flex-direction:column;justify-content:space-between;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="display:flex;align-items:center;gap:16px;">
+      <span style="width:14px;height:14px;border-radius:999px;background:#fff;display:block;"></span>
+      <span style="text-transform:uppercase;letter-spacing:0.16em;font-size:var(--type-over);font-weight:700;opacity:.9;">Curso Claude Code · Sesión 2</span>
+    </div>
+    <div>
+      <div style="font-size:var(--type-subtitle);font-weight:600;opacity:.85;margin-bottom:18px;">Lección 2</div>
+      <h1 style="font-size:var(--type-display);font-weight:800;letter-spacing:-0.03em;line-height:1.0;margin:0;max-width:1380px;text-wrap:balance;">Reglas y slash commands</h1>
+      <p style="font-size:var(--type-lead);font-weight:500;line-height:1.4;margin:32px 0 0;max-width:1200px;opacity:.92;">Modulariza el contexto en reglas con ámbito y empaqueta en comandos los flujos que repites cada día.</p>
+    </div>
+    <div style="font-size:var(--type-small);font-weight:600;opacity:.8;">Sesión 2 · Contexto, reglas y comandos</div>
+  </section>
+
+  <section data-label="Dónde estamos" data-screen-label="01" data-speaker-notes="Recap rápido. El CLAUDE.md te dio memoria persistente del proyecto, pero tiene dos límites: se carga entero en cada sesión (no escala si lo metes todo) y describe lo que Claude debe saber, no lo que debe hacer paso a paso. Esas dos piezas son las de hoy." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Dónde estamos</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 16px;">Del CLAUDE.md a hacer que Claude actúe</h2>
+    <p style="font-size:var(--type-body);color:var(--muted);margin:0 0 48px;max-width:1320px;">Ya tienes memoria persistente del proyecto. Pero el CLAUDE.md tiene dos límites que hoy resolvemos.</p>
+    <div style="display:flex;gap:40px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:36px 40px;">
+        <div style="font-size:42px;font-weight:800;color:var(--red);margin-bottom:16px;">1</div>
+        <div style="font-size:30px;font-weight:800;margin-bottom:12px;">Se carga entero, siempre</div>
+        <p style="font-size:26px;color:var(--muted);line-height:1.4;margin:0;">No escala si lo metes todo: ocupa contexto incluso en sesiones donde no pinta nada.</p>
+        <p style="font-size:24px;color:var(--red);line-height:1.4;margin:18px 0 0;font-weight:700;">→ Reglas con ámbito</p>
+      </div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:36px 40px;">
+        <div style="font-size:42px;font-weight:800;color:var(--red);margin-bottom:16px;">2</div>
+        <div style="font-size:30px;font-weight:800;margin-bottom:12px;">Dice qué saber, no qué hacer</div>
+        <p style="font-size:26px;color:var(--muted);line-height:1.4;margin:0;">Describe contexto, no un procedimiento paso a paso para los flujos que repites.</p>
+        <p style="font-size:24px;color:var(--red);line-height:1.4;margin:18px 0 0;font-weight:700;">→ Slash commands</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="El problema de las reglas" data-screen-label="02" data-speaker-notes="Por qué el CLAUDE.md raíz no escala solo. Dos problemas: a partir de ~200 líneas se vuelve difícil de mantener y fácil de contradecir; y hay instrucciones que solo aplican a una parte del código. Cargar la regla de tests de React cuando tocas el backend solo gasta contexto." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">El problema que resuelven las reglas</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 52px;">Por qué el CLAUDE.md raíz no escala solo</h2>
+    <div style="display:flex;gap:40px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-100);border-radius:18px;padding:38px 42px;">
+        <div style="font-size:28px;font-weight:800;color:var(--gray-600);margin-bottom:16px;">Crece sin freno</div>
+        <p style="font-size:28px;line-height:1.4;margin:0;color:var(--ink);">A partir de <strong>~200 líneas</strong> se comporta como un documento largo: difícil de mantener y fácil de contradecir.</p>
+      </div>
+      <div style="flex:1.15;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:18px;padding:38px 42px;">
+        <div style="font-size:28px;font-weight:800;color:var(--red);margin-bottom:16px;">Carga lo que no toca</div>
+        <p style="font-size:28px;line-height:1.4;margin:0;color:var(--ink);">Hay instrucciones que <strong>solo aplican a una parte</strong> del código.</p>
+        <p style="font-size:24px;color:var(--color-error-text);line-height:1.4;margin:20px 0 0;">«Los componentes de React llevan tests con Testing Library» no pinta nada cuando tocas el backend, pero ocupa contexto igual.</p>
+      </div>
+    </div>
+    <p style="font-size:var(--type-small);color:var(--ink);margin:44px 0 0;font-weight:600;">La solución es la misma para los dos: modularizar.</p>
+  </section>
+
+  <section data-label="Modularizar" data-screen-label="03" data-speaker-notes="La idea central de la primera mitad. El CLAUDE.md raíz se queda pequeño y estable: es el índice. Todo lo profundo, específico de una zona o solo relevante a veces se mueve a ficheros de reglas bajo .claude/rules/." style="background:var(--red);display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="text-transform:uppercase;letter-spacing:0.14em;font-size:var(--type-over);font-weight:700;opacity:.85;margin-bottom:36px;">La solución</div>
+    <h2 style="font-size:72px;font-weight:800;letter-spacing:-0.03em;line-height:1.05;margin:0;max-width:1500px;text-wrap:balance;">El raíz se queda como índice; el detalle vive en reglas con ámbito</h2>
+    <p style="font-size:var(--type-lead);font-weight:500;line-height:1.4;margin:44px 0 0;max-width:1360px;opacity:.92;">El CLAUDE.md raíz, pequeño y estable. Todo lo profundo, específico de una zona o solo relevante a veces, se mueve a ficheros bajo <code style="font-family:var(--font-mono);font-size:0.92em;">.claude/rules/</code>.</p>
+  </section>
+
+  <section data-label="Cómo se crean las reglas" data-screen-label="04" data-speaker-notes="Dos formas de conectar el contenido de una regla al contexto. Por referencia desde el CLAUDE.md con @: el raíz actúa de índice y el detalle vive aparte. O con ámbito de ruta: las instrucciones de una carpeta entran en juego solo cuando trabajas en esa zona." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Dos vías para conectarlas</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 52px;">Cómo enchufas una regla al contexto</h2>
+    <div style="display:flex;gap:40px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:36px 40px;display:flex;flex-direction:column;">
+        <div style="font-size:30px;font-weight:800;margin-bottom:16px;">Por referencia <span style="font-family:var(--font-mono);color:var(--red);">@</span></div>
+        <p style="font-size:26px;color:var(--muted);line-height:1.4;margin:0 0 26px;">El CLAUDE.md actúa de índice y el detalle vive aparte, cargándose cuando hace falta.</p>
+        <div style="margin-top:auto;font-family:var(--font-mono);font-size:25px;font-weight:700;background:#111827;color:#fff;border-radius:12px;padding:18px 24px;">@docs/api-standards.md</div>
+      </div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:36px 40px;display:flex;flex-direction:column;">
+        <div style="font-size:30px;font-weight:800;margin-bottom:16px;">Con ámbito de ruta</div>
+        <p style="font-size:26px;color:var(--muted);line-height:1.4;margin:0 0 26px;">Las instrucciones de una carpeta entran en juego <strong>solo cuando trabajas ahí</strong>, no siempre.</p>
+        <div style="margin-top:auto;font-family:var(--font-mono);font-size:25px;font-weight:700;background:#111827;color:#fff;border-radius:12px;padding:18px 24px;">.claude/rules/ · CLAUDE.md por subdirectorio</div>
+      </div>
+    </div>
+    <p style="font-size:var(--type-small);color:var(--muted);margin:40px 0 0;">En un monorepo: lo común arriba, lo específico cerca del código al que aplica.</p>
+  </section>
+
+  <section data-label="Regla de oro" data-screen-label="05" data-speaker-notes="La regla de oro para decidir dónde va una instrucción. Si un revisor humano levantaría una ceja al ver que se incumple, va en el CLAUDE.md o en una regla. Si su incumplimiento bloquearía un merge en CI, va en CI o en un hook, no en un fichero que el modelo interpreta." style="background:var(--red);display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="text-transform:uppercase;letter-spacing:0.14em;font-size:var(--type-over);font-weight:700;opacity:.85;margin-bottom:40px;">Regla de oro para decidir dónde va una instrucción</div>
+    <div style="display:flex;gap:40px;">
+      <div style="flex:1;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:20px;padding:44px;">
+        <div style="font-size:30px;font-weight:800;line-height:1.2;margin-bottom:18px;">Un revisor levantaría una ceja</div>
+        <p style="font-size:26px;line-height:1.4;margin:0 0 24px;opacity:.92;">Es un criterio que se interpreta, no una garantía dura.</p>
+        <div style="font-size:34px;font-weight:800;">→ CLAUDE.md o regla</div>
+      </div>
+      <div style="flex:1;background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);border-radius:20px;padding:44px;">
+        <div style="font-size:30px;font-weight:800;line-height:1.2;margin-bottom:18px;">Bloquearía un merge en CI</div>
+        <p style="font-size:26px;line-height:1.4;margin:0 0 24px;opacity:.92;">Es una regla dura que no puede depender de interpretación.</p>
+        <div style="font-size:34px;font-weight:800;">→ CI o un hook</div>
+      </div>
+    </div>
+    <p style="font-size:var(--type-lead);font-weight:500;line-height:1.4;margin:48px 0 0;max-width:1400px;opacity:.92;">El CLAUDE.md y las reglas no sustituyen a la automatización; la complementan.</p>
+  </section>
+
+  <section data-label="Cómo escribir una regla" data-screen-label="06" data-speaker-notes="Aplican los mismos principios que el CLAUDE.md, porque una regla es contexto igual que él. Imperativo, no observación. Concreta y verificable: si no puedes comprobar si se cumple, está mal escrita. Y énfasis con moderación: IMPORTANTE o DEBES solo en lo crítico." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Para que se cumpla</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 52px;">Los mismos principios que el CLAUDE.md</h2>
+    <div style="display:flex;flex-direction:column;gap:22px;max-width:1560px;">
+      <div style="display:flex;gap:28px;align-items:flex-start;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 36px;">
+        <span style="flex:none;font-size:36px;font-weight:800;color:var(--red);">01</span>
+        <div><div style="font-size:30px;font-weight:800;margin-bottom:8px;">Imperativo, no observación</div><p style="font-size:26px;color:var(--muted);line-height:1.4;margin:0;">«Nunca uses <code style="font-family:var(--font-mono);">any</code> sin un comentario que lo justifique», no «intentamos evitar <code style="font-family:var(--font-mono);">any</code>».</p></div>
+      </div>
+      <div style="display:flex;gap:28px;align-items:flex-start;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 36px;">
+        <span style="flex:none;font-size:36px;font-weight:800;color:var(--red);">02</span>
+        <div><div style="font-size:30px;font-weight:800;margin-bottom:8px;">Concreta y verificable</div><p style="font-size:26px;color:var(--muted);line-height:1.4;margin:0;">Una regla que no puedes comprobar si se cumple está mal escrita.</p></div>
+      </div>
+      <div style="display:flex;gap:28px;align-items:flex-start;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 36px;">
+        <span style="flex:none;font-size:36px;font-weight:800;color:var(--red);">03</span>
+        <div><div style="font-size:30px;font-weight:800;margin-bottom:8px;">Énfasis con moderación</div><p style="font-size:26px;color:var(--muted);line-height:1.4;margin:0;"><code style="font-family:var(--font-mono);">IMPORTANTE</code> / <code style="font-family:var(--font-mono);">DEBES</code> solo en lo verdaderamente crítico. Si todo es importante, nada lo es.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Ejemplo de regla" data-screen-label="07" data-speaker-notes="Un ejemplo concreto: una regla con ámbito para los tests de frontend, que solo quieres activa cuando se tocan componentes. Fuera del CLAUDE.md raíz y con ámbito sobre src/components/, no gasta contexto cuando trabajas en el backend." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Un ejemplo real</div>
+    <h2 style="font-size:48px;font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Una regla con ámbito para los tests de frontend</h2>
+    <div style="display:flex;gap:44px;align-items:stretch;">
+      <pre style="flex:1.3;margin:0;background:#111827;border-radius:20px;padding:38px 42px;font-family:var(--font-mono);font-size:25px;line-height:1.65;color:#E5E7EB;white-space:pre-wrap;box-shadow:0 14px 36px rgba(17,24,39,.22);"><span style="color:#9CA3AF;"># Reglas de testing de componentes</span>
+
+- Usa React Testing Library, <span style="color:#FF9AA0;">nunca</span> Enzyme.
+- Testea comportamiento <span style="color:#fff;">visible para el usuario</span>,
+  no detalles de implementación.
+- Cada componente nuevo en <span style="color:#FF9AA0;">src/components/</span>
+  necesita su <span style="color:#FF9AA0;">*.test.tsx</span>.
+- Los datos de prueba salen de factorías,
+  <span style="color:#FF9AA0;">nunca</span> mocks en línea.</pre>
+      <div style="flex:none;width:540px;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:20px;padding:40px;display:flex;flex-direction:column;justify-content:center;">
+        <p style="font-size:30px;line-height:1.4;margin:0;color:var(--ink);">Con ámbito sobre <strong style="font-family:var(--font-mono);font-size:0.9em;">src/components/</strong>, esto <strong>no gasta contexto</strong> cuando trabajas en el backend.</p>
+        <p style="font-size:24px;color:var(--color-error-text);line-height:1.4;margin:22px 0 0;">Todo en imperativo y verificable: cada línea se puede comprobar.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Slash commands" data-screen-label="08" data-speaker-notes="Segunda pieza de la lección. En lugar de teclear el mismo prompt detallado cincuenta veces, lo escribes una vez en un fichero y lo invocas con barra y el nombre. Empaquetar los flujos que repites cada día." style="background:var(--red);display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="font-size:var(--type-over);font-weight:800;letter-spacing:0.14em;text-transform:uppercase;opacity:.8;margin-bottom:28px;">Segunda pieza</div>
+    <h2 style="font-size:84px;font-weight:800;letter-spacing:-0.03em;line-height:1.04;margin:0;max-width:1440px;text-wrap:balance;">Slash commands</h2>
+    <p style="font-size:var(--type-lead);font-weight:500;line-height:1.4;margin:40px 0 0;max-width:1360px;opacity:.92;">Empaqueta en un fichero el prompt que repites cada día y lánzalo tecleando <code style="font-family:var(--font-mono);">/</code> y su nombre. Lo escribes una vez; lo usas cincuenta.</p>
+  </section>
+
+  <section data-label="Qué es un comando" data-screen-label="09" data-speaker-notes="El mecanismo es deliberadamente simple: un fichero markdown es un comando. El nombre del fichero, sin extensión, se convierte en el nombre del comando. El contenido del fichero se convierte en el prompt que se le envía a Claude. review.md se convierte en /review." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">El mecanismo</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 16px;">Un fichero markdown = un comando</h2>
+    <p style="font-size:var(--type-body);color:var(--muted);margin:0 0 52px;max-width:1320px;">El nombre del fichero es el comando; su contenido, el prompt que recibe Claude al invocarlo.</p>
+    <div style="display:flex;gap:36px;align-items:center;justify-content:center;">
+      <div style="flex:none;width:520px;background:#111827;border-radius:20px;padding:40px 44px;box-shadow:0 14px 36px rgba(17,24,39,.22);">
+        <div style="font-size:22px;color:#9CA3AF;font-family:var(--font-mono);margin-bottom:14px;">.claude/commands/</div>
+        <div style="font-family:var(--font-mono);font-size:38px;font-weight:700;color:#fff;">review.md</div>
+        <div style="font-size:23px;color:#9CA3AF;line-height:1.5;margin-top:18px;font-family:var(--font-mono);">«Revisa este diff buscando bugs,<br>organiza en crítico/importante/menor…»</div>
+      </div>
+      <div style="flex:none;font-size:64px;color:var(--gray-300);font-weight:300;">→</div>
+      <div style="flex:none;width:420px;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:20px;padding:48px 44px;text-align:center;">
+        <div style="font-family:var(--font-mono);font-size:54px;font-weight:800;color:var(--red);">/review</div>
+        <p style="font-size:24px;color:var(--color-error-text);line-height:1.4;margin:18px 0 0;">Invocable en tu sesión, una y otra vez.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Dónde viven" data-screen-label="10" data-speaker-notes="Igual que el CLAUDE.md, dos ámbitos: proyecto (.claude/commands/, se versiona con git, lo hereda quien clona) y personal (~/.claude/commands/, tuyo en todos tus proyectos, no se versiona). Y la actualización de 2026: comandos y skills se fusionaron; los comandos siguen funcionando pero son formato legacy." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Dos ámbitos</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Proyecto vs. personal</h2>
+    <div style="display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;overflow:hidden;">
+      <div style="display:grid;grid-template-columns:1fr 1.2fr 1.6fr;background:var(--ink);color:#fff;font-size:24px;font-weight:700;"><div style="padding:22px 30px;">Ámbito</div><div style="padding:22px 30px;">Ubicación</div><div style="padding:22px 30px;">Para qué</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1.2fr 1.6fr;font-size:25px;border-bottom:1px solid var(--line);"><div style="padding:26px 30px;font-weight:700;">Proyecto</div><div style="padding:26px 30px;font-family:var(--font-mono);color:var(--red);font-weight:700;">.claude/commands/</div><div style="padding:26px 30px;">Comandos del equipo. Se versionan con git: quien clona los hereda.</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1.2fr 1.6fr;font-size:25px;background:var(--gray-50);"><div style="padding:26px 30px;font-weight:700;">Personal</div><div style="padding:26px 30px;font-family:var(--font-mono);color:var(--red);font-weight:700;">~/.claude/commands/</div><div style="padding:26px 30px;">Tus comandos, en todos tus proyectos, en tu máquina. No se versionan.</div></div>
+    </div>
+    <div style="display:flex;gap:24px;align-items:flex-start;background:var(--color-info-subtle);border:1px solid #BBD9F2;border-radius:16px;padding:28px 34px;margin-top:36px;">
+      <span style="flex:none;font-size:24px;font-weight:800;color:var(--color-info-text);text-transform:uppercase;letter-spacing:0.06em;">2026</span>
+      <p style="font-size:25px;line-height:1.45;margin:0;color:var(--ink);">Comandos y <strong>skills</strong> se fusionaron (v2.1.101). Los ficheros en <code style="font-family:var(--font-mono);font-size:0.92em;">.claude/commands/</code> siguen funcionando —es la vía más rápida para empezar—, pero la doc los marca como <em>legacy</em> y recomienda el formato de skill para lo nuevo. Las skills son el tema de la Sesión 3.</p>
+    </div>
+  </section>
+
+  <section data-label="Anatomía · frontmatter" data-screen-label="11" data-speaker-notes="Los comandos útiles llevan tres ingredientes: frontmatter, argumentos y salida de shell embebida. El frontmatter es YAML opcional entre tres guiones. description hace tu comando descubrible. allowed-tools restringe qué tools puede usar: un comando de revisión con solo Read, Grep, Glob puede leer pero no modificar nada. Es clave por seguridad." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Anatomía · ingrediente 1</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Frontmatter: metadatos y restricciones</h2>
+    <div style="display:flex;gap:44px;align-items:stretch;">
+      <pre style="flex:1.2;margin:0;background:#111827;border-radius:20px;padding:38px 42px;font-family:var(--font-mono);font-size:25px;line-height:1.7;color:#E5E7EB;white-space:pre-wrap;box-shadow:0 14px 36px rgba(17,24,39,.22);"><span style="color:#9CA3AF;">---</span>
+<span style="color:#FF9AA0;">description:</span> Revisión de seguridad
+<span style="color:#FF9AA0;">allowed-tools:</span> Read, Grep, Glob
+<span style="color:#9CA3AF;">---</span>
+Analiza el código en busca de
+vulnerabilidades: inyección SQL,
+XSS, credenciales expuestas…</pre>
+      <div style="flex:none;width:560px;display:flex;flex-direction:column;gap:24px;">
+        <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 34px;">
+          <div style="font-family:var(--font-mono);font-size:24px;font-weight:700;color:var(--red);margin-bottom:10px;">description</div>
+          <p style="font-size:25px;color:var(--muted);line-height:1.4;margin:0;">El texto que aparece al navegar los comandos con <code style="font-family:var(--font-mono);">/</code>. Hace tu comando descubrible.</p>
+        </div>
+        <div style="background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:18px;padding:30px 34px;">
+          <div style="font-family:var(--font-mono);font-size:24px;font-weight:700;color:var(--red);margin-bottom:10px;">allowed-tools</div>
+          <p style="font-size:25px;color:var(--ink);line-height:1.4;margin:0;"><strong>Restringe</strong> qué tools usa Claude. Solo <code style="font-family:var(--font-mono);font-size:0.92em;">Read, Grep, Glob</code> = puede leer pero no modificar nada. Clave por seguridad.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Argumentos" data-screen-label="12" data-speaker-notes="Para no quemar un fichero concreto dentro del comando, pasas el objetivo al invocarlo. $ARGUMENTS captura todo lo que escribes tras el nombre, como un único string. $0, $1... capturan posicionales por índice, base cero: $0 es el primero. El error típico es confundir los dos." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Anatomía · ingrediente 2</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 48px;">Argumentos: pasa el objetivo al invocar</h2>
+    <div style="display:flex;gap:40px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:20px;padding:38px 40px;">
+        <div style="font-family:var(--font-mono);font-size:34px;font-weight:800;color:var(--red);margin-bottom:18px;">$ARGUMENTS</div>
+        <p style="font-size:27px;line-height:1.4;margin:0 0 24px;">Captura <strong>todo</strong> lo que escribes tras el nombre, como un único string.</p>
+        <div style="font-family:var(--font-mono);font-size:22px;background:#111827;color:#E5E7EB;border-radius:12px;padding:20px 24px;line-height:1.6;"><span style="color:#9CA3AF;">/review-colors grafico.py</span><br>→ Revisa el fichero <span style="color:#FF9AA0;">grafico.py</span></div>
+      </div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:20px;padding:38px 40px;">
+        <div style="font-family:var(--font-mono);font-size:34px;font-weight:800;color:var(--red);margin-bottom:18px;">$0 · $1 · …</div>
+        <p style="font-size:27px;line-height:1.4;margin:0 0 24px;">Posicionales por índice, <strong>base cero</strong>: <code style="font-family:var(--font-mono);">$0</code> es el primero. Para cuando esperas varias piezas.</p>
+        <div style="font-family:var(--font-mono);font-size:22px;background:#111827;color:#E5E7EB;border-radius:12px;padding:20px 24px;line-height:1.6;">Arregla el issue <span style="color:#FF9AA0;">#$0</span><br>con prioridad <span style="color:#FF9AA0;">$1</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Shell embebido" data-screen-label="13" data-speaker-notes="El tercer ingrediente y lo que convierte un prompt fijo en algo dinámico. Una línea que empieza por exclamación con un comando entre comillas invertidas se ejecuta antes de que el prompt llegue a Claude, y su salida se inyecta. Para que no pida aprobación cada vez, esa tool va pre-aprobada en allowed-tools. Y para comandos con efectos secundarios, disable-model-invocation." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Anatomía · ingrediente 3</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 40px;">Salida de shell embebida con <code style="font-family:var(--font-mono);color:var(--red);">!</code></h2>
+    <div style="display:flex;gap:44px;align-items:stretch;">
+      <pre style="flex:1.2;margin:0;background:#111827;border-radius:20px;padding:36px 40px;font-family:var(--font-mono);font-size:24px;line-height:1.65;color:#E5E7EB;white-space:pre-wrap;box-shadow:0 14px 36px rgba(17,24,39,.22);"><span style="color:#9CA3AF;">---</span>
+<span style="color:#FF9AA0;">description:</span> Crea un commit convencional
+<span style="color:#FF9AA0;">allowed-tools:</span> Bash(git diff:*),
+  Bash(git commit:*)
+<span style="color:#FF9AA0;">disable-model-invocation:</span> true
+<span style="color:#9CA3AF;">---</span>
+<span style="color:#86E1A9;">!`git diff --cached`</span>
+
+Redacta el mensaje a partir del
+diff de arriba (Conventional Commits).</pre>
+      <div style="flex:none;width:560px;display:flex;flex-direction:column;gap:24px;">
+        <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 34px;">
+          <p style="font-size:26px;line-height:1.4;margin:0;color:var(--ink);">El <code style="font-family:var(--font-mono);color:var(--red);">!</code> ejecuta el comando <strong>antes</strong> y mete su salida en el prompt. Claude redacta con el diff real delante.</p>
+        </div>
+        <div style="background:var(--color-warning-subtle);border:1px solid #F7E4B5;border-radius:18px;padding:30px 34px;">
+          <div style="font-size:24px;font-weight:700;color:var(--color-warning-text);margin-bottom:10px;">Dos guardarraíles</div>
+          <p style="font-size:25px;line-height:1.4;margin:0;color:var(--ink);">Pre-aprueba el shell en <code style="font-family:var(--font-mono);font-size:0.9em;">allowed-tools</code> para que no pida permiso. Y <code style="font-family:var(--font-mono);font-size:0.9em;">disable-model-invocation: true</code> para que un comando con efectos solo se dispare cuando lo tecleas tú.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Los cuatro comandos" data-screen-label="14" data-speaker-notes="El temario pide cuatro flujos, construidos como comandos reales. Explicar (solo lectura), arreglar errores (lee antes de proponer), generar pruebas (detecta el framework existente) y crear comandos: el meta-paso, que es literalmente crear un .md en la carpeta. Fíjate cómo allowed-tools cambia según lo que cada comando necesita tocar." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">El temario, construido</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Cuatro comandos reales</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:26px;">
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 34px;">
+        <div style="font-family:var(--font-mono);font-size:30px;font-weight:800;color:var(--red);margin-bottom:8px;">/explain</div>
+        <p style="font-size:25px;line-height:1.4;margin:0 0 14px;color:var(--ink);">Explica un fichero o función a quien entra nuevo: qué hace, cómo encaja, las decisiones no obvias.</p>
+        <div style="font-family:var(--font-mono);font-size:21px;color:var(--muted);">allowed-tools: Read, Grep, Glob</div>
+      </div>
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 34px;">
+        <div style="font-family:var(--font-mono);font-size:30px;font-weight:800;color:var(--red);margin-bottom:8px;">/fix</div>
+        <p style="font-size:25px;line-height:1.4;margin:0 0 14px;color:var(--ink);">Localiza la causa raíz <strong>leyendo antes</strong> de proponer, aplica el arreglo mínimo y corre los tests.</p>
+        <div style="font-family:var(--font-mono);font-size:21px;color:var(--muted);">…Read, Grep, Glob, Edit, Bash(make test:*)</div>
+      </div>
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 34px;">
+        <div style="font-family:var(--font-mono);font-size:30px;font-weight:800;color:var(--red);margin-bottom:8px;">/test</div>
+        <p style="font-size:25px;line-height:1.4;margin:0 0 14px;color:var(--ink);">Detecta el framework ya en uso, cubre camino feliz, límites y errores, y verifica que pasan.</p>
+        <div style="font-family:var(--font-mono);font-size:21px;color:var(--muted);">…Read, Grep, Glob, Edit, Bash(make test:*)</div>
+      </div>
+      <div style="background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:18px;padding:30px 34px;">
+        <div style="font-size:30px;font-weight:800;color:var(--red);margin-bottom:8px;">Crear comandos</div>
+        <p style="font-size:25px;line-height:1.4;margin:0;color:var(--ink);">El meta-paso: crear un comando es <strong>crear un <code style="font-family:var(--font-mono);font-size:0.9em;">.md</code></strong> en la carpeta. Nada que instalar. El propio Claude puede escribírtelo.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Descubrir y probar" data-screen-label="15" data-speaker-notes="Cómo aparecen en tu terminal. Teclea barra y aparecen todos con su description. /help los lista. Y un detalle que confunde: el nombre del comando es el nombre del fichero, no el campo name del frontmatter. optimize.md siempre es /optimize." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Descubrir y probar</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 52px;">Cómo aparecen en tu terminal</h2>
+    <div style="display:flex;flex-direction:column;gap:24px;max-width:1520px;">
+      <div style="display:flex;gap:28px;align-items:center;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 36px;"><span style="flex:none;font-family:var(--font-mono);font-size:28px;font-weight:700;background:#111827;color:#fff;border-radius:10px;padding:12px 22px;">/</span><p style="font-size:28px;line-height:1.35;margin:0;">Teclea la barra y aparecen <strong>todos los comandos</strong>, los tuyos incluidos, con su <code style="font-family:var(--font-mono);font-size:0.92em;">description</code>. Autocompletado en cualquier punto.</p></div>
+      <div style="display:flex;gap:28px;align-items:center;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 36px;"><span style="flex:none;font-family:var(--font-mono);font-size:28px;font-weight:700;background:#111827;color:#fff;border-radius:10px;padding:12px 22px;">/help</span><p style="font-size:28px;line-height:1.35;margin:0;">Lista todos los comandos disponibles.</p></div>
+      <div style="display:flex;gap:28px;align-items:center;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:18px;padding:30px 36px;"><span style="flex:none;width:64px;height:64px;border-radius:14px;background:#fff;color:var(--red);font-weight:800;font-size:30px;display:flex;align-items:center;justify-content:center;">!</span><p style="font-size:28px;line-height:1.35;margin:0;">El nombre del comando es el <strong>nombre del fichero</strong>, no el campo <code style="font-family:var(--font-mono);font-size:0.92em;">name</code> del frontmatter. <code style="font-family:var(--font-mono);font-size:0.92em;">optimize.md</code> → <code style="font-family:var(--font-mono);font-size:0.92em;">/optimize</code>, siempre.</p></div>
+    </div>
+  </section>
+
+  <section data-label="Cuándo cada uno" data-screen-label="16" data-speaker-notes="La decisión de criterio de toda la sesión. Tres mecanismos, tres propósitos. CLAUDE.md: qué debe saber Claude siempre, carga automática. Reglas: qué debe saber en esta parte del código, cuando trabajas ahí. Comandos: qué procedimiento repetible disparo a demanda. Y la cuarta fila que abrimos mañana: las skills." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">La decisión de criterio</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">CLAUDE.md vs. reglas vs. comandos</h2>
+    <div style="display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;overflow:hidden;">
+      <div style="display:grid;grid-template-columns:1fr 1.5fr 1.3fr;background:var(--ink);color:#fff;font-size:24px;font-weight:700;"><div style="padding:22px 30px;">Mecanismo</div><div style="padding:22px 30px;">Responde a…</div><div style="padding:22px 30px;">Cuándo se aplica</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1.5fr 1.3fr;font-size:25px;border-bottom:1px solid var(--line);"><div style="padding:26px 30px;font-family:var(--font-mono);font-weight:700;color:var(--red);">CLAUDE.md</div><div style="padding:26px 30px;">¿Qué debe <strong>saber</strong> Claude siempre?</div><div style="padding:26px 30px;color:var(--muted);">Carga automática, cada sesión</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1.5fr 1.3fr;font-size:25px;border-bottom:1px solid var(--line);background:var(--gray-50);"><div style="padding:26px 30px;font-family:var(--font-mono);font-weight:700;color:var(--red);">Reglas</div><div style="padding:26px 30px;">¿Qué debe saber <strong>en esta parte</strong> del código?</div><div style="padding:26px 30px;color:var(--muted);">Cuando trabajas en esa zona</div></div>
+      <div style="display:grid;grid-template-columns:1fr 1.5fr 1.3fr;font-size:25px;border-bottom:1px solid var(--line);"><div style="padding:26px 30px;font-family:var(--font-mono);font-weight:700;color:var(--red);">Comandos</div><div style="padding:26px 30px;">¿Qué <strong>procedimiento repetible</strong> disparo a demanda?</div><div style="padding:26px 30px;color:var(--muted);">Cuando lo invocas con <code style="font-family:var(--font-mono);">/</code></div></div>
+      <div style="display:grid;grid-template-columns:1fr 1.5fr 1.3fr;font-size:25px;background:var(--red-subtle);"><div style="padding:26px 30px;font-weight:700;color:var(--red);">Skills</div><div style="padding:26px 30px;color:var(--ink);">Un comando que Claude además puede invocar <strong>solo</strong> y que arrastra ficheros de apoyo.</div><div style="padding:26px 30px;color:var(--color-error-text);">Sesión 3</div></div>
+    </div>
+  </section>
+
+  <section data-label="Errores frecuentes" data-screen-label="17" data-speaker-notes="Los errores típicos y su diagnóstico. El comando modifica lo que no debería: no le pusiste allowed-tools. $ARGUMENTS no recoge lo que pasas: confusión con los posicionales. Pide aprobación para el git diff: falta pre-aprobarlo. Claude lanza solo un comando con efectos: falta disable-model-invocation. Se contradice con el CLAUDE.md: duplicaste en vez de referenciar." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Errores comunes</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 40px;">Qué falla y cómo se diagnostica</h2>
+    <div style="display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;overflow:hidden;">
+      <div style="display:grid;grid-template-columns:1.3fr 1.5fr;background:var(--ink);color:#fff;font-size:24px;font-weight:700;"><div style="padding:20px 30px;">Síntoma</div><div style="padding:20px 30px;">Causa y arreglo</div></div>
+      <div style="display:grid;grid-template-columns:1.3fr 1.5fr;font-size:24px;border-bottom:1px solid var(--line);"><div style="padding:22px 30px;">«Modifica cosas que no debería»</div><div style="padding:22px 30px;color:var(--muted);">Falta <code style="font-family:var(--font-mono);font-size:0.92em;color:var(--ink);">allowed-tools</code>. Un comando de lectura lleva solo <code style="font-family:var(--font-mono);font-size:0.92em;color:var(--ink);">Read, Grep, Glob</code>.</div></div>
+      <div style="display:grid;grid-template-columns:1.3fr 1.5fr;font-size:24px;border-bottom:1px solid var(--line);background:var(--gray-50);"><div style="padding:22px 30px;">«<code style="font-family:var(--font-mono);font-size:0.92em;">$ARGUMENTS</code> no recoge lo que paso»</div><div style="padding:22px 30px;color:var(--muted);">Confusión con los posicionales. ¿Todo como string, o piezas separadas?</div></div>
+      <div style="display:grid;grid-template-columns:1.3fr 1.5fr;font-size:24px;border-bottom:1px solid var(--line);"><div style="padding:22px 30px;">«Me pide aprobación para el <code style="font-family:var(--font-mono);font-size:0.92em;">git diff</code> cada vez»</div><div style="padding:22px 30px;color:var(--muted);">El shell con <code style="font-family:var(--font-mono);font-size:0.92em;color:var(--ink);">!</code> necesita esa tool pre-aprobada en <code style="font-family:var(--font-mono);font-size:0.92em;color:var(--ink);">allowed-tools</code>.</div></div>
+      <div style="display:grid;grid-template-columns:1.3fr 1.5fr;font-size:24px;border-bottom:1px solid var(--line);background:var(--gray-50);"><div style="padding:22px 30px;">«Claude lanza solo un comando con efectos»</div><div style="padding:22px 30px;color:var(--muted);">Ponle <code style="font-family:var(--font-mono);font-size:0.92em;color:var(--ink);">disable-model-invocation: true</code>.</div></div>
+      <div style="display:grid;grid-template-columns:1.3fr 1.5fr;font-size:24px;"><div style="padding:22px 30px;">«Un comando y el CLAUDE.md se contradicen»</div><div style="padding:22px 30px;color:var(--muted);">Duplicaste. No repitas: el comando se <em>refiere</em> a las convenciones sin reenunciarlas.</div></div>
+    </div>
+  </section>
+
+  <section data-label="Ejercicios" data-screen-label="18" data-speaker-notes="Tres ejercicios. Un comando /review de solo lectura con hallazgos en crítico/importante/menor. Un /commit que embeba git diff --cached con disable-model-invocation. Y mover una instrucción que solo aplique a una parte del código del CLAUDE.md a una regla con ámbito, comprobando que el raíz encoge." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Para practicar</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 52px;">Tres ejercicios</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:26px;">
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:34px;"><div style="font-size:24px;font-weight:800;color:var(--red);margin-bottom:14px;">Ejercicio 1</div><div style="font-size:27px;font-weight:700;margin-bottom:10px;">Comando <code style="font-family:var(--font-mono);font-size:0.86em;">/review</code></div><p style="font-size:24px;color:var(--muted);line-height:1.45;margin:0;">Recibe una ruta por <code style="font-family:var(--font-mono);font-size:0.9em;">$ARGUMENTS</code>, solo lectura, hallazgos en crítico / importante / menor.</p></div>
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:34px;"><div style="font-size:24px;font-weight:800;color:var(--red);margin-bottom:14px;">Ejercicio 2</div><div style="font-size:27px;font-weight:700;margin-bottom:10px;">Comando <code style="font-family:var(--font-mono);font-size:0.86em;">/commit</code></div><p style="font-size:24px;color:var(--muted);line-height:1.45;margin:0;">Embebe <code style="font-family:var(--font-mono);font-size:0.9em;">git diff --cached</code> con <code style="font-family:var(--font-mono);font-size:0.9em;">!</code>, tools de git pre-aprobadas y <code style="font-family:var(--font-mono);font-size:0.9em;">disable-model-invocation</code>.</p></div>
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:34px;"><div style="font-size:24px;font-weight:800;color:var(--red);margin-bottom:14px;">Ejercicio 3</div><div style="font-size:27px;font-weight:700;margin-bottom:10px;">Mover a una regla</div><p style="font-size:24px;color:var(--muted);line-height:1.45;margin:0;">Coge una instrucción del CLAUDE.md que solo aplique a una parte y muévela a una regla con ámbito. El raíz encoge.</p></div>
+    </div>
+  </section>
+
+  <section data-label="Resumen" data-screen-label="19" data-speaker-notes="Las ideas para llevarse a casa. Modulariza: el raíz es el índice, el detalle va en reglas con ámbito. Las reglas se escriben como el CLAUDE.md: imperativo y verificable. Un comando es un fichero markdown; el nombre del fichero es el comando. allowed-tools y disable-model-invocation son los guardarraíles. Y la frontera: saber siempre, saber según dónde, hacer cuando lo pides." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Para llevarse a casa</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Resumen de la lección</h2>
+    <div style="display:flex;flex-direction:column;gap:20px;max-width:1560px;">
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;"><strong>Modulariza:</strong> el CLAUDE.md raíz es el índice; lo profundo o específico de una zona va en <strong>reglas con ámbito</strong> (<code style="font-family:var(--font-mono);font-size:0.9em;">@</code> o <code style="font-family:var(--font-mono);font-size:0.9em;">.claude/rules/</code>).</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">Una regla es contexto: se escribe como el CLAUDE.md —<strong>imperativo, concreto, énfasis con moderación</strong>.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">Un slash command es un <strong>fichero markdown = un comando</strong>. Frontmatter, argumentos (<code style="font-family:var(--font-mono);font-size:0.9em;">$ARGUMENTS</code>, <code style="font-family:var(--font-mono);font-size:0.9em;">$0</code>) y shell embebido con <code style="font-family:var(--font-mono);font-size:0.9em;">!</code>.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;"><code style="font-family:var(--font-mono);font-size:0.9em;">allowed-tools</code> restringe por seguridad; <code style="font-family:var(--font-mono);font-size:0.9em;">disable-model-invocation</code> reserva los comandos con efectos para cuando los tecleas tú.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">La frontera: <strong>saber siempre</strong> (CLAUDE.md), <strong>saber según dónde</strong> (reglas), <strong>hacer cuando lo pides</strong> (comandos).</p></div>
+    </div>
+  </section>
+
+  <section data-label="Cierre" data-screen-label="20" data-speaker-notes="Cierre. Tienes memoria, reglas con ámbito y comandos a demanda. La señal de que un comando se te queda corto —necesitas que se active solo o que arrastre material— es que toca convertirlo en skill. Ese es el primer tema de la Sesión 3: skills, agentes y subagentes, MCPs y hooks." style="background:var(--red);display:flex;flex-direction:column;justify-content:space-between;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="display:flex;align-items:center;gap:16px;"><span style="width:14px;height:14px;border-radius:999px;background:#fff;display:block;"></span><span style="text-transform:uppercase;letter-spacing:0.16em;font-size:var(--type-over);font-weight:700;opacity:.9;">Siguiente sesión · 1 de julio</span></div>
+    <div>
+      <h2 style="font-size:64px;font-weight:800;letter-spacing:-0.03em;line-height:1.06;margin:0;max-width:1480px;text-wrap:balance;">Cuando un comando se te queda corto, toca convertirlo en skill</h2>
+      <p style="font-size:var(--type-lead);font-weight:500;line-height:1.4;margin:36px 0 0;max-width:1360px;opacity:.92;">Skills, agentes y subagentes, MCPs y hooks. Empezamos justo donde lo dejamos: una skill que Claude invoca solo y que arrastra sus propias plantillas y scripts.</p>
+    </div>
+    <div style="font-size:var(--type-small);font-weight:600;opacity:.8;">Sesión 3 · Skills, agentes, MCPs y hooks</div>
+  </section>
+
+</x-import>
+</x-dc>
+</body>
+</html>

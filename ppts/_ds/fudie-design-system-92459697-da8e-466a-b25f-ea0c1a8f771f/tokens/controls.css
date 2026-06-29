@@ -1,0 +1,13 @@
+/* ─────────────────────────────────────────
+   Fudie Design System · controls.css
+   Alturas mínimas para elementos interactivos.
+───────────────────────────────────────── */
+
+:root {
+  --control-height-sm:  2rem;      /* @kind spacing */
+  --control-height-md:  2.5rem;    /* @kind spacing */
+  --control-height-lg:  2.75rem;   /* @kind spacing */
+
+  --field-message-min-height: 1rem;   /* @kind spacing */
+  --textarea-min-height:      5rem;   /* @kind spacing */
+}

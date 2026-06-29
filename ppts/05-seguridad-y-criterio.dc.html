@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/styles.css">
+  <script src="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/_ds_bundle.js"></script>
+  <style>
+    :root {
+      --type-display: 90px;
+      --type-title: 60px;
+      --type-subtitle: 40px;
+      --type-lead: 36px;
+      --type-body: 30px;
+      --type-small: 24px;
+      --type-mono: 24px;
+      --type-over: 24px;
+      --pad-x: 120px;
+      --pad-y: 92px;
+      --ink: #111827;
+      --muted: #656C79;
+      --red: #DF2F3A;
+      --red-subtle: #FFF0F1;
+      --line: #E5E7EB;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+  </style>
+</helmet>
+<x-import component-from-global-scope="deck-stage" from="./deck-stage.js" width="1920" height="1080" hint-size="100%,100%">
+
+  <section data-label="Portada" data-screen-label="Portada" data-speaker-notes="La última lección del curso. A lo largo de cuatro días hemos ido tocando permisos, aislamiento, datos sensibles y la decisión de qué mecanismo usar, siempre de pasada. Ahora los juntamos: primero el bloque de seguridad de frente, y luego el criterio que unifica todo el curso." style="background:var(--red);display:flex;flex-direction:column;justify-content:space-between;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="display:flex;align-items:center;gap:16px;">
+      <span style="width:14px;height:14px;border-radius:999px;background:#fff;display:block;"></span>
+      <span style="text-transform:uppercase;letter-spacing:0.16em;font-size:var(--type-over);font-weight:700;opacity:.9;">Curso Claude Code · Sesión 4 · Cierre</span>
+    </div>
+    <div>
+      <div style="font-size:var(--type-subtitle);font-weight:600;opacity:.85;margin-bottom:18px;">Lección 5</div>
+      <h1 style="font-size:78px;font-weight:800;letter-spacing:-0.03em;line-height:1.02;margin:0;max-width:1480px;text-wrap:balance;">Seguridad, buenas prácticas y criterio de elección</h1>
+      <p style="font-size:var(--type-lead);font-weight:500;line-height:1.4;margin:32px 0 0;max-width:1240px;opacity:.92;">El bloque de seguridad de frente, y el criterio que unifica todo el curso: qué mecanismo elegir para cada necesidad.</p>
+    </div>
+    <div style="font-size:var(--type-small);font-weight:600;opacity:.8;">Sesión 4 · Sesiones largas, flujo y seguridad</div>
+  </section>
+
+  <section data-label="Dónde estamos" data-screen-label="01" data-speaker-notes="El puente. A lo largo de cuatro días hemos tocado permisos, aislamiento, datos sensibles y la decisión de qué mecanismo usar, siempre de pasada. Ahora los juntamos: primero seguridad de frente, luego el criterio que unifica el curso." style="background:#fff;display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Dónde estamos · la última lección</div>
+    <h2 style="font-size:62px;font-weight:800;letter-spacing:-0.03em;line-height:1.06;margin:0;max-width:1500px;text-wrap:balance;">Lo que tocamos de pasada, ahora de frente</h2>
+    <p style="font-size:var(--type-lead);font-weight:500;line-height:1.45;margin:40px 0 0;max-width:1400px;color:var(--muted);">Cuatro días de permisos, aislamiento y datos sensibles sueltos. Ahora los juntamos: primero el <strong style="color:var(--ink);">bloque de seguridad</strong>, luego el <strong style="color:var(--ink);">criterio</strong> que unifica el curso.</p>
+  </section>
+
+  <section data-label="Parte A · Seguridad" data-screen-label="02" data-speaker-notes="Parte A: seguridad y buenas prácticas." style="background:var(--red);display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="font-size:var(--type-over);font-weight:800;letter-spacing:0.14em;text-transform:uppercase;opacity:.8;margin-bottom:28px;">Parte A</div>
+    <h2 style="font-size:80px;font-weight:800;letter-spacing:-0.03em;line-height:1.04;margin:0;max-width:1480px;text-wrap:balance;">Seguridad y buenas prácticas</h2>
+    <p style="font-size:var(--type-lead);font-weight:500;line-height:1.4;margin:40px 0 0;max-width:1360px;opacity:.92;">Acotar la libertad de un agente que actúa con tus permisos, en capas.</p>
+  </section>
+
+  <section data-label="Por qué es distinta" data-screen-label="03" data-speaker-notes="Hasta ahora pensábamos en Claude Code como asistente. Para la seguridad conviene pensar en él también como operador: cada vez que ejecuta un comando o lee un fichero, actúa con tus permisos. Eso abre vías de riesgo reales: inyección de comandos (una entrada maliciosa en un README o un comentario de dependencia podría convencerle de ejecutar algo destructivo), exfiltración de datos (sin restricciones puede leer un .env, credenciales de AWS, y filtrarlos sin querer), y persistencia (hooks o servidores MCP mal configurados que reintroducen problemas en cada arranque). La buena noticia: Claude no es malicioso por defecto. El riesgo viene de darle demasiada libertad por mala configuración." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Piénsalo como un operador, no solo un asistente</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 40px;">Cada acción ocurre <em>con tus permisos</em></h2>
+    <div style="display:flex;gap:26px;align-items:stretch;margin-bottom:36px;">
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 32px;"><div style="font-size:27px;font-weight:800;margin-bottom:8px;">Inyección de comandos</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">Una entrada maliciosa (un README, un comentario de dependencia) podría convencerle de ejecutar algo destructivo.</p></div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 32px;"><div style="font-size:27px;font-weight:800;margin-bottom:8px;">Exfiltración de datos</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">Sin restricciones puede leer un <code style="font-family:var(--font-mono);font-size:0.86em;color:var(--ink);">.env</code>, credenciales, y filtrarlos sin querer.</p></div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 32px;"><div style="font-size:27px;font-weight:800;margin-bottom:8px;">Persistencia</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">Hooks o servidores MCP mal configurados reintroducen problemas en cada arranque.</p></div>
+    </div>
+    <p style="font-size:var(--type-small);color:var(--ink);margin:0;font-weight:600;">Claude no es malicioso por defecto. El riesgo viene de <strong style="color:var(--red);">darle demasiada libertad por mala configuración</strong>. Seguridad = acotar esa libertad en capas.</p>
+  </section>
+
+  <section data-label="Gestión de permisos" data-screen-label="04" data-speaker-notes="El sistema de permisos es la primera capa de defensa. Las reglas viven en el objeto permissions de tu settings.json, en tres listas. allow: se ejecuta sin pedir aprobación; mete aquí solo lo inofensivo. ask: pide confirmación, para lo útil pero arriesgado (push, levantar contenedores): quieres pensarlo dos veces. deny: se bloquea siempre; tu escudo: lectura de secretos, comandos de red, despliegues." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">La primera capa de defensa</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 36px;">Permisos: <code style="font-family:var(--font-mono);color:var(--red);">allow</code> · <code style="font-family:var(--font-mono);color:var(--red);">ask</code> · <code style="font-family:var(--font-mono);color:var(--red);">deny</code></h2>
+    <div style="display:flex;gap:40px;align-items:stretch;">
+      <pre style="flex:1.15;margin:0;background:#111827;border-radius:20px;padding:32px 38px;font-family:var(--font-mono);font-size:22px;line-height:1.6;color:#E5E7EB;white-space:pre-wrap;box-shadow:0 14px 36px rgba(17,24,39,.22);">"permissions": {
+  "<span style="color:#86E1A9;">allow</span>": ["Bash(npm run test:*)"],
+  "<span style="color:#FFD479;">ask</span>":   ["Bash(git push:*)"],
+  "<span style="color:#FF9AA0;">deny</span>":  ["Read(./.env)",
+            "Bash(curl:*)", "WebFetch"]
+}</pre>
+      <div style="flex:1;display:flex;flex-direction:column;gap:14px;justify-content:center;">
+        <div style="background:var(--color-success-subtle);border:1px solid #BBE9D6;border-radius:14px;padding:20px 28px;"><span style="font-family:var(--font-mono);font-size:22px;font-weight:800;color:var(--color-success-text);">allow</span><span style="font-size:24px;color:var(--ink);"> — sin preguntar. Solo lo inofensivo.</span></div>
+        <div style="background:var(--color-warning-subtle);border:1px solid #F7E4B5;border-radius:14px;padding:20px 28px;"><span style="font-family:var(--font-mono);font-size:22px;font-weight:800;color:var(--color-warning-text);">ask</span><span style="font-size:24px;color:var(--ink);"> — confirma. Útil pero arriesgado.</span></div>
+        <div style="background:var(--color-error-subtle);border:1px solid #F6C9C9;border-radius:14px;padding:20px 28px;"><span style="font-family:var(--font-mono);font-size:22px;font-weight:800;color:var(--color-error-text);">deny</span><span style="font-size:24px;color:var(--ink);"> — bloquea siempre. Tu escudo.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="El orden de evaluación" data-screen-label="05" data-speaker-notes="La regla que hay que clavar: el orden de evaluación. Las reglas se evalúan deny, ask, allow. La primera coincidencia decide, y la especificidad NO cambia el orden. Consecuencia crítica: un deny amplio como Bash(aws *) bloquea toda llamada que coincida, incluida una que también encajaría en un allow más específico. Un deny no admite excepciones por allowlist. Dicho de otro modo: si algo está denegado en cualquier nivel, ningún otro nivel lo puede permitir. Un deny de la organización no lo sobrescribe tu --allowedTools, ni un allow de proyecto." style="background:var(--red);display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="text-transform:uppercase;letter-spacing:0.14em;font-size:var(--type-over);font-weight:700;opacity:.85;margin-bottom:36px;">La regla que hay que clavar</div>
+    <div style="display:flex;align-items:center;gap:24px;margin-bottom:36px;">
+      <span style="font-family:var(--font-mono);font-size:48px;font-weight:800;background:rgba(255,255,255,0.16);border-radius:14px;padding:14px 28px;">deny</span>
+      <span style="font-size:40px;opacity:.7;">→</span>
+      <span style="font-family:var(--font-mono);font-size:48px;font-weight:800;background:rgba(255,255,255,0.12);border-radius:14px;padding:14px 28px;">ask</span>
+      <span style="font-size:40px;opacity:.7;">→</span>
+      <span style="font-family:var(--font-mono);font-size:48px;font-weight:800;background:rgba(255,255,255,0.12);border-radius:14px;padding:14px 28px;">allow</span>
+    </div>
+    <h2 style="font-size:46px;font-weight:800;letter-spacing:-0.025em;line-height:1.15;margin:0;max-width:1500px;">Si algo está denegado en cualquier nivel, ningún otro lo puede permitir</h2>
+    <p style="font-size:var(--type-body);font-weight:500;line-height:1.45;margin:32px 0 0;max-width:1440px;opacity:.92;">La primera coincidencia decide; la especificidad no cambia el orden. Un <code style="font-family:var(--font-mono);font-size:0.9em;">deny</code> no admite excepciones por allowlist — ni tu <code style="font-family:var(--font-mono);font-size:0.9em;">--allowedTools</code> ni un <code style="font-family:var(--font-mono);font-size:0.9em;">allow</code> de proyecto lo sobrescriben.</p>
+  </section>
+
+  <section data-label="Los ámbitos" data-screen-label="06" data-speaker-notes="Igual que el CLAUDE.md y los MCP, los permisos tienen capas, de mayor a menor autoridad: managed policy (la impone la organización; el desarrollador no puede sobrescribirla, así un equipo de seguridad fija una base), user, project (se comparte por git), y local. Las reglas se combinan en vez de sustituirse, y un deny en cualquier capa permanece. Por eso un buen patrón corporativo es un deny de lectura de .env en managed policy: ningún proyecto ni usuario lo puede desactivar." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">De mayor a menor autoridad</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Los ámbitos de configuración</h2>
+    <div style="display:flex;gap:18px;align-items:stretch;margin-bottom:32px;">
+      <div style="flex:1.2;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:16px;padding:26px 28px;"><div style="font-size:25px;font-weight:800;color:var(--red);margin-bottom:8px;">managed policy</div><p style="font-size:22px;color:var(--ink);line-height:1.35;margin:0;">La impone la organización. El desarrollador <strong>no puede sobrescribirla</strong>.</p></div>
+      <div style="flex:none;width:36px;display:flex;align-items:center;justify-content:center;font-size:28px;color:var(--gray-300);">›</div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:16px;padding:26px 28px;"><div style="font-size:25px;font-weight:800;margin-bottom:8px;">user</div><p style="font-size:22px;color:var(--muted);line-height:1.35;margin:0;">Tu config global.</p></div>
+      <div style="flex:none;width:36px;display:flex;align-items:center;justify-content:center;font-size:28px;color:var(--gray-300);">›</div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:16px;padding:26px 28px;"><div style="font-size:25px;font-weight:800;margin-bottom:8px;">project</div><p style="font-size:22px;color:var(--muted);line-height:1.35;margin:0;">Se comparte por git.</p></div>
+      <div style="flex:none;width:36px;display:flex;align-items:center;justify-content:center;font-size:28px;color:var(--gray-300);">›</div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:16px;padding:26px 28px;"><div style="font-size:25px;font-weight:800;margin-bottom:8px;">local</div><p style="font-size:22px;color:var(--muted);line-height:1.35;margin:0;">Solo tú, este equipo.</p></div>
+    </div>
+    <p style="font-size:var(--type-small);color:var(--ink);margin:0;font-weight:600;">Se combinan, no se sustituyen, y un <code style="font-family:var(--font-mono);font-size:0.9em;color:var(--red);">deny</code> en cualquier capa permanece. Patrón corporativo: <strong>deny de <code style="font-family:var(--font-mono);font-size:0.9em;">.env</code> en managed policy</strong> — nadie lo desactiva.</p>
+  </section>
+
+  <section data-label="Defensa en profundidad" data-screen-label="07" data-speaker-notes="Tres capas complementarias. Permisos: controlan qué herramientas puede usar y a qué ficheros/dominios accede; aplican a todas las tools. Hooks PreToolUse (Sesión 3): se ejecutan ANTES del sistema de permisos y pueden aprobar, denegar o modificar con lógica dinámica que un patrón glob no puede expresar; la combinación robusta del .env es un hook más una regla deny. Ninguna de las dos sola lo cubre todo. Sandboxing: refuerzo a nivel de sistema operativo que restringe el acceso del Bash a filesystem y red; para máxima seguridad, un contenedor o VM. Y empieza denegando por defecto: corre en modo prompt un sprint, observa qué pide, y codifica solo esos patrones." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Defensa en profundidad</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 40px;">Permisos + hooks + sandbox</h2>
+    <div style="display:flex;gap:26px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 32px;"><div style="font-size:27px;font-weight:800;margin-bottom:10px;">Permisos</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">Qué tools usa y a qué ficheros/dominios accede. Aplican a todas las tools.</p></div>
+      <div style="flex:1.15;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:18px;padding:30px 32px;"><div style="font-size:27px;font-weight:800;color:var(--red);margin-bottom:10px;">Hooks <code style="font-family:var(--font-mono);font-size:0.78em;">PreToolUse</code></div><p style="font-size:24px;color:var(--ink);line-height:1.4;margin:0;">Se ejecutan <strong>antes</strong> de los permisos, con lógica dinámica. El <code style="font-family:var(--font-mono);font-size:0.86em;">.env</code> robusto: hook <strong>+</strong> regla <code style="font-family:var(--font-mono);font-size:0.86em;">deny</code>.</p></div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 32px;"><div style="font-size:27px;font-weight:800;margin-bottom:10px;">Sandboxing</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">Refuerzo a nivel de SO que restringe el Bash. Máxima seguridad: contenedor o VM.</p></div>
+    </div>
+    <p style="font-size:var(--type-small);color:var(--ink);margin:38px 0 0;font-weight:600;">Empieza <strong style="color:var(--red);">denegando por defecto</strong>: corre en modo prompt un sprint, observa qué pide, y codifica solo esos patrones.</p>
+  </section>
+
+  <section data-label="Riesgos de MCP de terceros" data-screen-label="08" data-speaker-notes="Los servidores MCP conectan Claude con el mundo exterior, y eso es justo lo que los hace un vector de riesgo. Un servidor MCP de terceros es código de terceros con acceso: trátalo como cualquier dependencia, revísalo antes de confiar; no conectes servidores que no entiendes. La aprobación de servidores de proyecto no es un trámite: los de scope project que vienen en un .mcp.json al clonar aparecen como Pending approval y requieren aprobación explícita; no apruebes a ciegas. Defaults inseguros: auto-aprobar servidores deja grietas; desactiva con /mcp los que no uses (también ahorra contexto)." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Código de terceros con acceso</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Riesgos de los MCP de terceros</h2>
+    <div style="display:flex;flex-direction:column;gap:18px;max-width:1580px;">
+      <div style="display:flex;gap:24px;align-items:center;background:var(--gray-50);border:1px solid var(--line);border-radius:16px;padding:26px 34px;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:27px;line-height:1.4;margin:0;"><strong>Es una dependencia más:</strong> revísalo antes de confiar. No conectes servidores que no entiendes.</p></div>
+      <div style="display:flex;gap:24px;align-items:center;background:var(--gray-50);border:1px solid var(--line);border-radius:16px;padding:26px 34px;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:27px;line-height:1.4;margin:0;"><strong>La aprobación no es un trámite:</strong> los de proyecto llegan como «⏸ Pending approval». No apruebes a ciegas.</p></div>
+      <div style="display:flex;gap:24px;align-items:center;background:var(--gray-50);border:1px solid var(--line);border-radius:16px;padding:26px 34px;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:27px;line-height:1.4;margin:0;"><strong>Defaults inseguros:</strong> desactiva con <code style="font-family:var(--font-mono);font-size:0.9em;">/mcp</code> los servidores que no uses (también ahorra contexto).</p></div>
+    </div>
+  </section>
+
+  <section data-label="Protección de datos" data-screen-label="09" data-speaker-notes="El caso concreto que más importa, que arrastramos desde la Sesión 2. Deniega la lectura de secretos: Read(.env), rutas de credenciales; mejor en managed policy si es un equipo. El hook como red de seguridad: una regla deny cubre las tools de fichero, pero un hook PreToolUse con exit 2 cubre también las lecturas indirectas, vía un cat o diff por Bash; la combinación de las dos es lo robusto. No metas secretos en sitios que se versionan: ni CLAUDE.md, ni una skill, ni un .mcp.json. Aislamiento para lo automático: contenedores o VMs efímeras. Y mantén Claude Code actualizado: muchos parches corregían bypasses de los diálogos de permisos." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">El caso que arrastramos desde la Sesión 2</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 40px;">Protección de datos sensibles</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px;">
+      <div style="background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:16px;padding:26px 32px;"><div style="font-size:25px;font-weight:800;color:var(--red);margin-bottom:8px;">Deny + hook</div><p style="font-size:24px;color:var(--ink);line-height:1.4;margin:0;">La regla <code style="font-family:var(--font-mono);font-size:0.86em;">deny</code> cubre las tools de fichero; el hook cubre las lecturas indirectas (un <code style="font-family:var(--font-mono);font-size:0.86em;">cat</code> por Bash). Las dos juntas.</p></div>
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:16px;padding:26px 32px;"><div style="font-size:25px;font-weight:800;margin-bottom:8px;">No versiones secretos</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">Ni en CLAUDE.md, ni en una skill, ni en un <code style="font-family:var(--font-mono);font-size:0.86em;color:var(--ink);">.mcp.json</code>. Usa gestores de secretos.</p></div>
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:16px;padding:26px 32px;"><div style="font-size:25px;font-weight:800;margin-bottom:8px;">Aislamiento para lo automático</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">El trabajo headless con permisos amplios vive en contenedores o VMs efímeras.</p></div>
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:16px;padding:26px 32px;"><div style="font-size:25px;font-weight:800;margin-bottom:8px;">Mantenlo actualizado</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">Muchos parches corregían <em>bypasses</em> de los diálogos de permisos. La versión al día es seguridad.</p></div>
+    </div>
+  </section>
+
+  <section data-label="Parte B · El criterio" data-screen-label="10" data-speaker-notes="Parte B: el criterio que unifica el curso. Hemos ido construyendo esta decisión a lo largo de tres sesiones, fila a fila. Ahora la tabla completa." style="background:var(--red);display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="font-size:var(--type-over);font-weight:800;letter-spacing:0.14em;text-transform:uppercase;opacity:.8;margin-bottom:28px;">Parte B</div>
+    <h2 style="font-size:72px;font-weight:800;letter-spacing:-0.03em;line-height:1.05;margin:0;max-width:1480px;text-wrap:balance;">El criterio que unifica el curso</h2>
+    <p style="font-size:var(--type-lead);font-weight:500;line-height:1.4;margin:40px 0 0;max-width:1380px;opacity:.92;">Una decisión construida fila a fila durante tres sesiones. Ahora, la tabla completa — el resumen ejecutivo de todo.</p>
+  </section>
+
+  <section data-label="Cuándo usar cada mecanismo" data-screen-label="11" data-speaker-notes="La tabla completa, el resumen ejecutivo de todo el curso. CLAUDE.md: qué debe saber Claude siempre y es corto; automático, cada sesión. Reglas: qué debe saber en esta parte del código; cuando trabajas en esa zona. Skills: qué procedimiento especializado, posiblemente extenso y con ficheros de apoyo; Claude la invoca cuando encaja. Subagentes: qué trabajo ruidoso o paralelo quiero fuera de mi contexto; ventana aislada que devuelve solo el resultado. MCP: cómo conecto con sistemas externos; cuando la petición mapea a una tool. Hooks: qué quiero garantizar sin depender del modelo; determinista, en un evento del ciclo de vida." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:18px;">El resumen ejecutivo del curso</div>
+    <h2 style="font-size:48px;font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 28px;">Cuándo usar cada mecanismo</h2>
+    <div style="display:flex;flex-direction:column;border:1px solid var(--line);border-radius:16px;overflow:hidden;">
+      <div style="display:grid;grid-template-columns:1fr 2fr 2.1fr;background:var(--ink);color:#fff;font-size:22px;font-weight:700;"><div style="padding:16px 26px;">Mecanismo</div><div style="padding:16px 26px;">Responde a…</div><div style="padding:16px 26px;">Se carga / actúa</div></div>
+      <div style="display:grid;grid-template-columns:1fr 2fr 2.1fr;font-size:22px;border-bottom:1px solid var(--line);"><div style="padding:18px 26px;font-family:var(--font-mono);font-weight:700;color:var(--red);">CLAUDE.md</div><div style="padding:18px 26px;">Qué debe <strong>saber siempre</strong>, y es corto</div><div style="padding:18px 26px;color:var(--muted);">Automático, cada sesión, todo el repo</div></div>
+      <div style="display:grid;grid-template-columns:1fr 2fr 2.1fr;font-size:22px;border-bottom:1px solid var(--line);background:var(--gray-50);"><div style="padding:18px 26px;font-family:var(--font-mono);font-weight:700;color:var(--red);">Reglas</div><div style="padding:18px 26px;">Qué saber <strong>en esta parte</strong> del código</div><div style="padding:18px 26px;color:var(--muted);">Cuando trabajas en esa zona</div></div>
+      <div style="display:grid;grid-template-columns:1fr 2fr 2.1fr;font-size:22px;border-bottom:1px solid var(--line);"><div style="padding:18px 26px;font-family:var(--font-mono);font-weight:700;color:var(--red);">Skills</div><div style="padding:18px 26px;"><strong>Procedimiento especializado</strong>, posiblemente extenso, con ficheros</div><div style="padding:18px 26px;color:var(--muted);">Claude la invoca cuando la tarea encaja</div></div>
+      <div style="display:grid;grid-template-columns:1fr 2fr 2.1fr;font-size:22px;border-bottom:1px solid var(--line);background:var(--gray-50);"><div style="padding:18px 26px;font-family:var(--font-mono);font-weight:700;color:var(--red);">Subagentes</div><div style="padding:18px 26px;">Trabajo <strong>ruidoso o paralelo</strong> fuera de tu contexto</div><div style="padding:18px 26px;color:var(--muted);">Ventana aislada que devuelve el resultado</div></div>
+      <div style="display:grid;grid-template-columns:1fr 2fr 2.1fr;font-size:22px;border-bottom:1px solid var(--line);"><div style="padding:18px 26px;font-family:var(--font-mono);font-weight:700;color:var(--red);">MCP</div><div style="padding:18px 26px;">Conectar con <strong>sistemas externos</strong></div><div style="padding:18px 26px;color:var(--muted);">Cuando la petición mapea a una tool</div></div>
+      <div style="display:grid;grid-template-columns:1fr 2fr 2.1fr;font-size:22px;background:var(--gray-50);"><div style="padding:18px 26px;font-family:var(--font-mono);font-weight:700;color:var(--red);">Hooks</div><div style="padding:18px 26px;">Qué <strong>garantizar</strong>, sin depender del modelo</div><div style="padding:18px 26px;color:var(--muted);">Determinista, en un evento del ciclo de vida</div></div>
+    </div>
+  </section>
+
+  <section data-label="Las preguntas-guía" data-screen-label="12" data-speaker-notes="Las preguntas-guía que separan los casos confusos. CLAUDE.md vs skill: ¿es corto y aplica siempre, o extenso y solo importa en esa tarea? Skill vs subagente: ¿quiero ver y dirigir el procedimiento paso a paso, o aislar trabajo cuyos intermedios no voy a reusar? Instrucción vs hook: ¿basta con pedírselo, o necesito garantizarlo pase lo que pase? Si su incumplimiento bloquearía un merge en CI, es un hook o CI, no una frase. Y el recordatorio transversal: nada de esto es para documentar lo que ya está en una referencia oficial. Cada mecanismo encapsula tu conocimiento, no el que el modelo ya tiene." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Para separar los casos confusos</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 40px;">Las preguntas-guía</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px;">
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:16px;padding:28px 32px;"><div style="font-size:25px;font-weight:800;margin-bottom:8px;">CLAUDE.md vs. skill</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">¿Corto y aplica <strong style="color:var(--ink);">siempre</strong>, o extenso y solo <strong style="color:var(--ink);">en esa tarea</strong>?</p></div>
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:16px;padding:28px 32px;"><div style="font-size:25px;font-weight:800;margin-bottom:8px;">Skill vs. subagente</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">¿<strong style="color:var(--ink);">Ver y dirigir</strong> paso a paso, o <strong style="color:var(--ink);">aislar</strong> lo que no vas a reusar?</p></div>
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:16px;padding:28px 32px;"><div style="font-size:25px;font-weight:800;margin-bottom:8px;">Instrucción vs. hook</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">¿Basta con <strong style="color:var(--ink);">pedírselo</strong>, o necesito <strong style="color:var(--ink);">garantizarlo</strong>? Si bloquearía CI → hook.</p></div>
+      <div style="background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:16px;padding:28px 32px;"><div style="font-size:25px;font-weight:800;color:var(--red);margin-bottom:8px;">¿Y la API que ya existe?</div><p style="font-size:24px;color:var(--ink);line-height:1.4;margin:0;">Nada de esto documenta lo ya documentado. Cada mecanismo encapsula <strong>tu</strong> conocimiento.</p></div>
+    </div>
+  </section>
+
+  <section data-label="Elección de modelo" data-screen-label="13" data-speaker-notes="La última decisión, que afecta a coste y calidad a la vez. Eliges modelo con /model, o fijas el de por defecto en /config. Usa el intermedio, Sonnet, como opción por defecto, y sube al grande, Opus, solo en los puntos clave: razonamiento complejo, decisiones de arquitectura, un bug que se resiste. Baja al rápido y barato, Haiku, para lo que no necesita potencia: un subagente Explore corre en Haiku por defecto; un slash command que solo arregla un punto y coma puede fijar model haiku. El modelo es otro recurso a acotar, como el contexto y los permisos. No corras en Opus lo que Haiku resuelve, ni esperes de Haiku lo que pide Opus." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">El modelo es otro recurso a acotar</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 40px;">Elección de modelo según la tarea</h2>
+    <div style="display:flex;gap:26px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:32px 34px;"><div style="font-size:30px;font-weight:800;margin-bottom:10px;">Haiku</div><div style="font-size:22px;color:var(--red);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px;">Rápido y barato</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">Lo que no necesita potencia: el subagente <strong style="color:var(--ink);">Explore</strong>, un comando que arregla un punto y coma.</p></div>
+      <div style="flex:1;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:18px;padding:32px 34px;"><div style="font-size:30px;font-weight:800;color:var(--red);margin-bottom:10px;">Sonnet</div><div style="font-size:22px;color:var(--red);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px;">Por defecto</div><p style="font-size:24px;color:var(--ink);line-height:1.4;margin:0;">El hábito estable. El trabajo cotidiano vive aquí.</p></div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:32px 34px;"><div style="font-size:30px;font-weight:800;margin-bottom:10px;">Opus</div><div style="font-size:22px;color:var(--red);font-weight:700;text-transform:uppercase;letter-spacing:0.06em;margin-bottom:12px;">En momentos puntuales</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">Razonamiento complejo, arquitectura, un bug que se resiste al normal.</p></div>
+    </div>
+    <p style="font-size:var(--type-small);color:var(--ink);margin:38px 0 0;font-weight:600;">Elige con <code style="font-family:var(--font-mono);font-size:0.9em;color:var(--red);">/model</code> o fija el de por defecto en <code style="font-family:var(--font-mono);font-size:0.9em;color:var(--red);">/config</code>. No corras en Opus lo que Haiku resuelve, ni esperes de Haiku lo que pide Opus.</p>
+  </section>
+
+  <section data-label="Ejercicio final" data-screen-label="14" data-speaker-notes="El ejercicio final, que es en realidad el examen del curso. Coge un proyecto tuyo real y diseña su setup completo de Claude Code: un CLAUDE.md de raíz corto en imperativo; al menos una regla con ámbito y una skill convertida de un comando; un subagente para tu trabajo ruidoso típico; un servidor MCP que conecte algo que uses; un hook de seguridad de bloqueo de .env y uno de calidad de formateo o tests; un settings.json con permisos allow/ask/deny pensados con deny-por-defecto; y una decisión de modelo por defecto y dónde subirías o bajarías. Para cada pieza, justifica por qué ese mecanismo y no otro, usando las preguntas-guía. No es saber qué hace cada herramienta, sino saber cuál elegir." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:18px;">El examen del curso</div>
+    <h2 style="font-size:52px;font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 32px;">Ejercicio final: diseña tu setup completo</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px 40px;max-width:1620px;">
+      <div style="display:flex;gap:18px;align-items:baseline;font-size:25px;line-height:1.35;"><span style="flex:none;color:var(--red);font-weight:800;">1</span><span><strong>CLAUDE.md</strong> de raíz, corto, en imperativo.</span></div>
+      <div style="display:flex;gap:18px;align-items:baseline;font-size:25px;line-height:1.35;"><span style="flex:none;color:var(--red);font-weight:800;">2</span><span>Una <strong>regla con ámbito</strong> y una <strong>skill</strong> (de un comando).</span></div>
+      <div style="display:flex;gap:18px;align-items:baseline;font-size:25px;line-height:1.35;"><span style="flex:none;color:var(--red);font-weight:800;">3</span><span>Un <strong>subagente</strong> para tu trabajo ruidoso típico.</span></div>
+      <div style="display:flex;gap:18px;align-items:baseline;font-size:25px;line-height:1.35;"><span style="flex:none;color:var(--red);font-weight:800;">4</span><span>Un <strong>servidor MCP</strong> que conecte algo que uses.</span></div>
+      <div style="display:flex;gap:18px;align-items:baseline;font-size:25px;line-height:1.35;"><span style="flex:none;color:var(--red);font-weight:800;">5</span><span>Un <strong>hook</strong> de seguridad (<code style="font-family:var(--font-mono);font-size:0.84em;">.env</code>) y uno de calidad.</span></div>
+      <div style="display:flex;gap:18px;align-items:baseline;font-size:25px;line-height:1.35;"><span style="flex:none;color:var(--red);font-weight:800;">6</span><span>Un <code style="font-family:var(--font-mono);font-size:0.84em;">settings.json</code> con <strong>permisos</strong> deny-por-defecto.</span></div>
+      <div style="display:flex;gap:18px;align-items:baseline;font-size:25px;line-height:1.35;"><span style="flex:none;color:var(--red);font-weight:800;">7</span><span>Una decisión de <strong>modelo</strong> y dónde subir o bajar.</span></div>
+      <div style="display:flex;gap:18px;align-items:baseline;font-size:25px;line-height:1.35;color:var(--red);font-weight:700;"><span style="flex:none;font-weight:800;">★</span><span>Justifica <em>por qué ese mecanismo y no otro</em>.</span></div>
+    </div>
+    <p style="font-size:var(--type-small);color:var(--muted);margin:32px 0 0;">El examen no es saber qué hace cada herramienta, sino <strong style="color:var(--ink);">saber cuál elegir</strong>.</p>
+  </section>
+
+  <section data-label="Cierre del curso" data-screen-label="15" data-speaker-notes="Cierre del curso. Has recorrido el arco completo: del prompting (Sesión 1) a dar memoria, procedimientos, manos aisladas y conexiones (Sesiones 2-3), hasta sostener todo eso en sesiones largas, en paralelo, verificado, automatizado y seguro (Sesión 4). El hilo que lo une no es ninguna herramienta concreta: es el criterio de elegir el mecanismo adecuado para cada necesidad, acotando los recursos —contexto, permisos, modelo— y manteniendo siempre un humano en el bucle donde el juicio importa. Gracias." style="background:var(--red);display:flex;flex-direction:column;justify-content:space-between;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="display:flex;align-items:center;gap:16px;"><span style="width:14px;height:14px;border-radius:999px;background:#fff;display:block;"></span><span style="text-transform:uppercase;letter-spacing:0.16em;font-size:var(--type-over);font-weight:700;opacity:.9;">Cierre del curso</span></div>
+    <div>
+      <h2 style="font-size:60px;font-weight:800;letter-spacing:-0.03em;line-height:1.06;margin:0;max-width:1520px;text-wrap:balance;">El hilo no es ninguna herramienta: es el criterio</h2>
+      <p style="font-size:var(--type-lead);font-weight:500;line-height:1.45;margin:36px 0 0;max-width:1440px;opacity:.92;">Del prompting a la memoria, los procedimientos, las manos aisladas y las conexiones — sostenido en sesiones largas, en paralelo, verificado, automatizado y seguro. Elegir el mecanismo adecuado, acotar los recursos —contexto, permisos, modelo— y mantener siempre <strong>un humano en el bucle</strong> donde el juicio importa.</p>
+    </div>
+    <div style="font-size:var(--type-small);font-weight:600;opacity:.8;">Curso Claude Code · Gracias</div>
+  </section>
+
+</x-import>
+</x-dc>
+</body>
+</html>

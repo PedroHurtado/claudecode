@@ -1,0 +1,63 @@
+:root {
+
+  /* ── Brand ── */
+  --color-primary:        #DF2F3A;
+  --color-primary-dark:   #C8323D;
+  --color-primary-light:  #FF7880;  /* decorativo, no usar texto encima */
+  --color-primary-subtle: #FFF0F1;
+
+  /* ── Semánticos ── */
+  --color-success:        #0C8F69;  /* 4.54:1 con white ✅ */
+  --color-success-dark:   #057A54;  /* 5.36:1 con white ✅ */
+  --color-success-subtle: #ECFDF5;
+  --color-success-text:   #065F46;  /* texto sobre success-subtle ✅ */
+
+  --color-warning:        #F59E0B;  /* usar SOLO con texto dark */
+  --color-warning-dark:   #A85A04;  /* 5.09:1 con white ✅ */
+  --color-warning-subtle: #FFFBEB;
+  --color-warning-text:   #92400E;  /* texto sobre warning-subtle ✅ */
+  --color-warning-on:     var(--gray-900); /* texto SOBRE fondo warning */
+
+  --color-error:          #D42020;  /* 5.21:1 con white ✅ */
+  --color-error-dark:     #B91C1C;  /* 6.26:1 con white ✅ */
+  --color-error-subtle:   #FEF2F2;
+  --color-error-text:     #991B1B;  /* texto sobre error-subtle ✅ */
+
+  --color-info:           #2563EB;  /* 5.17:1 con white ✅ */
+  --color-info-dark:      #1D4ED8;  /* 6.08:1 con white ✅ */
+  --color-info-subtle:    #EFF6FF;
+  --color-info-text:      #1E40AF;  /* texto sobre info-subtle ✅ */
+
+  --color-service:        #7C3AED;  /* 5.70:1 con white ✅ */
+  --color-service-dark:   #6D28D9;  /* 6.60:1 con white ✅ */
+  --color-service-subtle: #F5F3FF;
+  --color-service-text:   #5B21B6;  /* texto sobre service-subtle ✅ */
+
+  /* ── Neutrales ── */
+  --color-white:          #FFFFFF;
+  --color-black:          #000000;
+
+  --gray-50:              #F9FAFB;
+  --gray-100:             #F3F4F6;
+  --gray-200:             #E5E7EB;
+  --gray-300:             #D1D5DB;
+  --gray-400:             #9CA3AF;
+  --gray-500:             #6B7280;
+  --gray-600:             #4B5563;
+  --gray-700:             #374151;
+  --gray-800:             #1F2937;
+  --gray-900:             #111827;
+
+  /* ── Superficie ── */
+  --color-bg:             var(--gray-50);
+  --color-surface:        var(--color-white);
+  --color-backdrop:       rgb(0 0 0 / 0.4);
+  --color-border:         var(--gray-200);
+  --color-border-strong:  var(--gray-300);
+
+  /* ── Texto ── */
+  --color-text:           var(--gray-900);
+  --color-text-secondary: #656C79;  /* 4.80:1 sobre white ✅ */
+  --color-text-disabled:  var(--gray-400);
+  --color-text-on-primary: var(--color-white);
+}

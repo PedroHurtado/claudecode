@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/styles.css">
+  <script src="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/_ds_bundle.js"></script>
+  <style>
+    :root {
+      --type-display: 90px;
+      --type-title: 60px;
+      --type-subtitle: 40px;
+      --type-lead: 36px;
+      --type-body: 30px;
+      --type-small: 24px;
+      --type-mono: 24px;
+      --type-over: 24px;
+      --pad-x: 120px;
+      --pad-y: 92px;
+      --ink: #111827;
+      --muted: #656C79;
+      --red: #DF2F3A;
+      --red-subtle: #FFF0F1;
+      --line: #E5E7EB;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+  </style>
+</helmet>
+<x-import component-from-global-scope="deck-stage" from="./deck-stage.js" width="1920" height="1080" hint-size="100%,100%">
+
+  <section data-label="Portada" data-screen-label="Portada" data-speaker-notes="Sesión 4, primera lección. Llevamos tres sesiones cuidando la ventana de contexto: con CLAUDE.md, skills y subagentes. Esta lección cierra ese hilo de frente: qué haces cuando una sesión se alarga tanto que la ventana se llena igualmente. Es el problema que más moldea tus resultados en el día a día." style="background:var(--red);display:flex;flex-direction:column;justify-content:space-between;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="display:flex;align-items:center;gap:16px;">
+      <span style="width:14px;height:14px;border-radius:999px;background:#fff;display:block;"></span>
+      <span style="text-transform:uppercase;letter-spacing:0.16em;font-size:var(--type-over);font-weight:700;opacity:.9;">Curso Claude Code · Sesión 4</span>
+    </div>
+    <div>
+      <div style="font-size:var(--type-subtitle);font-weight:600;opacity:.85;margin-bottom:18px;">Lección 1</div>
+      <h1 style="font-size:var(--type-display);font-weight:800;letter-spacing:-0.03em;line-height:1.0;margin:0;max-width:1420px;text-wrap:balance;">Gestión de sesiones largas</h1>
+      <p style="font-size:var(--type-lead);font-weight:500;line-height:1.4;margin:32px 0 0;max-width:1200px;opacity:.92;">Qué hacer cuando la ventana se llena igualmente: mantener el contexto limpio en lugar de buscar más espacio.</p>
+    </div>
+    <div style="font-size:var(--type-small);font-weight:600;opacity:.8;">Sesión 4 · Sesiones largas, flujo y seguridad</div>
+  </section>
+
+  <section data-label="Dónde estamos" data-screen-label="01" data-speaker-notes="El puente. Llevamos tres sesiones tratando la ventana como el recurso crítico: la cuidamos con el CLAUDE.md, con skills y con subagentes. Esta lección cierra ese hilo de frente: qué pasa cuando la sesión se alarga tanto que la ventana se llena igualmente." style="background:#fff;display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Dónde estamos</div>
+    <h2 style="font-size:62px;font-weight:800;letter-spacing:-0.03em;line-height:1.06;margin:0;max-width:1500px;text-wrap:balance;">Cerramos el hilo del contexto de frente</h2>
+    <p style="font-size:var(--type-lead);font-weight:500;line-height:1.45;margin:40px 0 0;max-width:1400px;color:var(--muted);">CLAUDE.md, skills y subagentes cuidan la ventana. Pero ¿qué haces cuando la sesión se alarga tanto que <strong style="color:var(--ink);">se llena igualmente</strong>? Es lo que más moldea tu día a día.</p>
+  </section>
+
+  <section data-label="Context rot" data-screen-label="02" data-speaker-notes="El síntoma lo reconocerás: estás a fondo en una refactorización, avanzando bien, y de pronto Claude flojea. Respuestas genéricas, contradice decisiones de hace media hora, olvida un patrón que venía respetando, vuelve a pedirte algo que ya le diste. No es descuido: a medida que la ventana se llena, la atención del modelo se reparte más fina y la calidad cae. Eso es context rot." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">El problema · «context rot»</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">El síntoma que reconocerás</h2>
+    <div style="display:flex;gap:44px;align-items:center;">
+      <ul style="flex:1;margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:18px;">
+        <li style="display:flex;gap:18px;align-items:baseline;font-size:27px;line-height:1.4;"><span style="flex:none;width:12px;height:12px;border-radius:999px;background:var(--gray-400);"></span>Las respuestas se vuelven genéricas</li>
+        <li style="display:flex;gap:18px;align-items:baseline;font-size:27px;line-height:1.4;"><span style="flex:none;width:12px;height:12px;border-radius:999px;background:var(--gray-400);"></span>Contradice decisiones de hace media hora</li>
+        <li style="display:flex;gap:18px;align-items:baseline;font-size:27px;line-height:1.4;"><span style="flex:none;width:12px;height:12px;border-radius:999px;background:var(--gray-400);"></span>«Olvida» un patrón que venía respetando</li>
+        <li style="display:flex;gap:18px;align-items:baseline;font-size:27px;line-height:1.4;"><span style="flex:none;width:12px;height:12px;border-radius:999px;background:var(--gray-400);"></span>Te vuelve a pedir algo que ya le diste</li>
+      </ul>
+      <div style="flex:none;width:620px;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:20px;padding:44px;">
+        <p style="font-size:30px;line-height:1.35;margin:0;color:var(--ink);">No es descuido. A medida que la ventana se llena, <strong>la atención se reparte más fina</strong> y la calidad cae.</p>
+        <p style="font-size:24px;color:var(--color-error-text);line-height:1.4;margin:20px 0 0;font-weight:600;">Se llama context rot: degradación por contexto.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Más ventana no resuelve" data-screen-label="03" data-speaker-notes="El punto contraintuitivo, y que conviene clavar: una ventana más grande no resuelve el problema, solo lo retrasa. Incluso con un millón de tokens, los mecanismos de atención siguen pesando más lo reciente que lo antiguo. En algún punto de una sesión muy larga, las instrucciones del principio reciben atención menos fiable. La solución no es más espacio: es mantener el contexto limpio. Y no esperes a llenar la ventana: la calidad cae antes de tocar el límite." style="background:var(--red);display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="text-transform:uppercase;letter-spacing:0.14em;font-size:var(--type-over);font-weight:700;opacity:.85;margin-bottom:36px;">El punto contraintuitivo</div>
+    <h2 style="font-size:64px;font-weight:800;letter-spacing:-0.03em;line-height:1.06;margin:0;max-width:1500px;text-wrap:balance;">Una ventana más grande no resuelve el problema. Solo lo retrasa.</h2>
+    <p style="font-size:var(--type-lead);font-weight:500;line-height:1.45;margin:44px 0 0;max-width:1420px;opacity:.92;">Incluso con un millón de tokens, la atención pesa más lo reciente que lo antiguo. La solución no es más espacio: es mantener el contexto <strong>limpio</strong>. Y no esperes a llenar la ventana: <strong>la calidad cae antes de tocar el límite</strong>.</p>
+  </section>
+
+  <section data-label="/compact" data-screen-label="04" data-speaker-notes="Primera de las dos herramientas. /compact le pide a Claude que resuma la conversación y reemplaza el historial por ese resumen como nuevo punto de partida. Liberas tokens conservando el hilo esencial. Es con pérdida: guarda decisiones de alto nivel y cambios recientes, pero detalles finos pueden perderse. Puedes dirigirlo con instrucciones; sin pista, decide él qué importó, y a veces deja fuera algo que necesitabas." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Herramienta 1 · resumir y continuar</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0;"><code style="font-family:var(--font-mono);color:var(--red);">/compact</code></h2>
+    <div style="display:flex;gap:48px;margin-top:48px;align-items:center;">
+      <p style="flex:1;font-size:var(--type-body);line-height:1.5;margin:0;">Resume la conversación y la <strong>reemplaza por ese resumen</strong> como nuevo punto de partida. Liberas tokens conservando el hilo. Es <strong>con pérdida</strong>: detalles finos —una firma exacta, un error preciso— pueden condensarse.</p>
+      <div style="flex:none;width:640px;background:#111827;border-radius:20px;padding:38px 40px;box-shadow:0 14px 36px rgba(17,24,39,.22);">
+        <div style="font-size:23px;color:#9CA3AF;font-family:var(--font-mono);margin-bottom:14px;">dirígelo con instrucciones</div>
+        <div style="font-family:var(--font-mono);font-size:24px;color:#E5E7EB;line-height:1.6;"><span style="color:#86E1A9;">/compact</span> céntrate en el bug de auth,<br>descarta el debugging de tests</div>
+      </div>
+    </div>
+    <p style="font-size:var(--type-small);color:var(--muted);margin:44px 0 0;">Con una pista, prioriza eso y comprime el resto. Sin pista, decide él qué importó — y a veces deja fuera lo que necesitabas.</p>
+  </section>
+
+  <section data-label="/clear" data-screen-label="05" data-speaker-notes="/clear borra TODO el contexto de la conversación y arranca una sesión en blanco. Sin resumen, sin historial. Es un reset duro, aunque el CLAUDE.md se vuelve a cargar automáticamente porque vive en disco, no en la conversación. Cuidado: elimina el historial. Antes de usarlo, asegúrate de haber guardado en disco —en el CLAUDE.md o en un fichero de progreso— cualquier contexto que necesites conservar." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Herramienta 2 · reiniciar a cero</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0;"><code style="font-family:var(--font-mono);color:var(--red);">/clear</code></h2>
+    <div style="display:flex;gap:48px;margin-top:48px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:20px;padding:38px 40px;display:flex;flex-direction:column;justify-content:center;">
+        <p style="font-size:29px;line-height:1.45;margin:0;">Borra <strong>todo</strong> el contexto y arranca en blanco. Sin resumen, sin historial. Un reset duro — aunque el <strong>CLAUDE.md se recarga solo</strong>, porque vive en disco.</p>
+      </div>
+      <div style="flex:1;background:var(--color-warning-subtle);border:1px solid #F7E4B5;border-radius:20px;padding:38px 40px;display:flex;flex-direction:column;justify-content:center;">
+        <div style="font-size:26px;font-weight:800;color:var(--color-warning-text);margin-bottom:14px;">Cuidado</div>
+        <p style="font-size:28px;line-height:1.45;margin:0;color:var(--ink);">Elimina el historial. Antes de usarlo, <strong>guarda en disco</strong> (CLAUDE.md o un fichero de progreso) lo que necesites conservar.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Auto vs manual" data-screen-label="06" data-speaker-notes="Claude Code compacta solo cuando te acercas al límite. El problema es que en ese punto el modelo ya opera degradado: la compactación automática ocurre justo en el peor momento de inteligencia del modelo, y resume sin saber qué querías preservar. La compactación manual, proactiva, corre mientras todavía hay margen y el modelo recuerda toda la conversación, así que produce mejores resúmenes. No esperes al auto-compact: compacta tú en los límites naturales de tarea, como un checkpoint." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Automático vs. manual</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">No esperes al auto-compact</h2>
+    <div style="display:flex;gap:40px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-100);border-radius:18px;padding:36px 40px;">
+        <div style="font-size:27px;font-weight:800;color:var(--gray-600);margin-bottom:14px;">Automático</div>
+        <p style="font-size:26px;line-height:1.45;margin:0;color:var(--gray-600);">Salta al acercarte al límite — justo en el <strong>peor momento</strong> de inteligencia del modelo, y resume sin saber qué querías preservar.</p>
+      </div>
+      <div style="flex:1.15;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:18px;padding:36px 40px;">
+        <div style="font-size:27px;font-weight:800;color:var(--red);margin-bottom:14px;">Manual y proactivo</div>
+        <p style="font-size:26px;line-height:1.45;margin:0;color:var(--ink);">Corre mientras hay margen: el modelo aún recuerda todo y produce <strong>mejores resúmenes</strong>. Compacta en los límites de tarea —función cerrada, bug resuelto— como un <strong>checkpoint</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Cómo elegir" data-screen-label="07" data-speaker-notes="La decisión entre los dos no es cuán llena está la ventana, sino si el contexto previo tiene valor positivo o negativo para lo que viene. Misma tarea, vas justo de ventana: compact. Cambias a tarea no relacionada: clear. Contexto envenenado, el modelo insiste en una asunción incorrecta: clear. Parte vale y parte es ruido: compact con instrucciones dirigidas. La regla mnemotécnica: clear te da control, compact te automatiza la limpieza." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">¿El contexto previo suma o resta?</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 40px;">Cómo elegir entre los dos</h2>
+    <div style="display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;overflow:hidden;">
+      <div style="display:grid;grid-template-columns:2.2fr 1fr;background:var(--ink);color:#fff;font-size:24px;font-weight:700;"><div style="padding:20px 32px;">Situación</div><div style="padding:20px 32px;">Herramienta</div></div>
+      <div style="display:grid;grid-template-columns:2.2fr 1fr;font-size:25px;border-bottom:1px solid var(--line);"><div style="padding:24px 32px;">Misma tarea, pero vas justo de ventana</div><div style="padding:24px 32px;font-family:var(--font-mono);font-weight:700;color:var(--red);">/compact</div></div>
+      <div style="display:grid;grid-template-columns:2.2fr 1fr;font-size:25px;border-bottom:1px solid var(--line);background:var(--gray-50);"><div style="padding:24px 32px;">Cambias a una tarea no relacionada</div><div style="padding:24px 32px;font-family:var(--font-mono);font-weight:700;color:var(--red);">/clear</div></div>
+      <div style="display:grid;grid-template-columns:2.2fr 1fr;font-size:25px;border-bottom:1px solid var(--line);"><div style="padding:24px 32px;">Contexto «envenenado»: insiste en algo incorrecto</div><div style="padding:24px 32px;font-family:var(--font-mono);font-weight:700;color:var(--red);">/clear</div></div>
+      <div style="display:grid;grid-template-columns:2.2fr 1fr;font-size:25px;background:var(--gray-50);"><div style="padding:24px 32px;">Parte vale y parte es ruido</div><div style="padding:24px 32px;font-family:var(--font-mono);font-weight:700;color:var(--red);">/compact <span style="font-family:var(--font-sans);font-weight:400;color:var(--muted);">dirigido</span></div></div>
+    </div>
+    <p style="font-size:var(--type-small);color:var(--muted);margin:32px 0 0;"><code style="font-family:var(--font-mono);font-size:0.92em;color:var(--ink);">/clear</code> te da <strong style="color:var(--ink);">control</strong> (tú escribes el arranque); <code style="font-family:var(--font-mono);font-size:0.92em;color:var(--ink);">/compact</code> te <strong style="color:var(--ink);">automatiza</strong> la limpieza (Claude decide qué resumir).</p>
+  </section>
+
+  <section data-label="Ver el estado" data-screen-label="08" data-speaker-notes="Herramientas de apoyo para ver el estado. /context te da un desglose en vivo de qué ocupa tu ventana, por categorías, con sugerencias. Úsalo cuando la sesión empiece a sentirse larga y antes de lanzar una operación grande: ver 80% usado antes de empezar una operación de 30.000 tokens te dice que limpies primero. Y /memory te muestra qué ficheros CLAUDE.md y de memoria se cargaron al arrancar." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Ver el estado de la ventana</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 48px;">Dos comandos de apoyo</h2>
+    <div style="display:flex;gap:40px;align-items:stretch;">
+      <div style="flex:1.2;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:18px;padding:34px 38px;">
+        <div style="font-family:var(--font-mono);font-size:30px;font-weight:800;color:var(--red);margin-bottom:14px;">/context</div>
+        <p style="font-size:26px;line-height:1.45;margin:0;color:var(--ink);">Desglose <strong>en vivo</strong> de qué ocupa tu ventana, por categorías. Lánzalo antes de una operación grande: ver «80% usado» antes de leer 30.000 tokens te dice que limpies primero.</p>
+      </div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:34px 38px;">
+        <div style="font-family:var(--font-mono);font-size:30px;font-weight:800;color:var(--red);margin-bottom:14px;">/memory</div>
+        <p style="font-size:26px;line-height:1.45;margin:0;color:var(--muted);">Te muestra qué ficheros <strong style="color:var(--ink);">CLAUDE.md</strong> y de memoria se cargaron al arrancar.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Qué sobrevive" data-screen-label="09" data-speaker-notes="Cuando una sesión se compacta, qué pasa con tus instrucciones depende de cómo se cargaron. Las reglas con ámbito de ruta y los CLAUDE.md anidados se cargan en el historial cuando se lee su fichero disparador, así que la compactación los resume junto con todo lo demás; si una regla debe sobrevivir, quítale el ámbito o muévela al CLAUDE.md raíz. Los cuerpos de las skills se re-inyectan, pero las grandes se truncan conservando el principio: pon lo importante al principio. El CLAUDE.md de raíz se recarga siempre: vive en disco." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Qué sobrevive a la compactación</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Depende de cómo se cargó</h2>
+    <div style="display:flex;gap:26px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:32px 34px;"><div style="font-size:27px;font-weight:800;margin-bottom:12px;">Reglas con ámbito</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">Se cargan en el historial → se <strong style="color:var(--ink);">resumen con todo</strong>. ¿Debe sobrevivir? Quítale el ámbito o muévela al raíz.</p></div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:32px 34px;"><div style="font-size:27px;font-weight:800;margin-bottom:12px;">Cuerpos de skills</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">Se re-inyectan, pero las grandes se <strong style="color:var(--ink);">truncan conservando el principio</strong>. Pon lo importante arriba.</p></div>
+      <div style="flex:1;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:18px;padding:32px 34px;"><div style="font-size:27px;font-weight:800;color:var(--red);margin-bottom:12px;">CLAUDE.md de raíz</div><p style="font-size:24px;color:var(--ink);line-height:1.4;margin:0;">Se <strong>recarga siempre</strong>: vive en disco. Sobrevive a compact, clear, cierre y reinicio.</p></div>
+    </div>
+  </section>
+
+  <section data-label="Si te dolería perderlo" data-screen-label="10" data-speaker-notes="El diagnóstico limpio que anticipamos en la Sesión 2, ahora completo. Si tras compactar Claude olvidó algo, lo más probable es que esa información viviera solo en la transcripción: instrucciones del principio, una regla con ámbito, una skill invocada hace mucho. La transcripción es justo lo que se resume. La cura: si perder algo te dolería, que no viva solo en la conversación. Escríbelo en disco." style="background:var(--red);display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="text-transform:uppercase;letter-spacing:0.14em;font-size:var(--type-over);font-weight:700;opacity:.85;margin-bottom:36px;">El diagnóstico limpio</div>
+    <h2 style="font-size:64px;font-weight:800;letter-spacing:-0.03em;line-height:1.06;margin:0;max-width:1480px;text-wrap:balance;">Si perder algo te dolería, que no viva solo en la conversación</h2>
+    <p style="font-size:var(--type-lead);font-weight:500;line-height:1.45;margin:44px 0 0;max-width:1420px;opacity:.92;">¿Claude «olvidó» algo tras compactar? Vivía solo en la transcripción —y la transcripción es justo lo que se resume—. La cura es una sola: <strong>escríbelo en disco</strong>.</p>
+  </section>
+
+  <section data-label="Tareas acotadas" data-screen-label="11" data-speaker-notes="Todo lo anterior es reactivo. La estrategia proactiva, la que evita la mayoría de problemas, es estructurar el trabajo en tareas acotadas desde el principio. La regla de Anthropic: cuando empiezas una tarea nueva, empieza también una sesión nueva. En vez de una feature grande en una sesión, pártela en sesiones discretas: A implementa el modelo de datos y sus tests; B la capa de API usando el modelo de A; C conecta el frontend. La pieza clave: referencias los resultados anteriores a través de ficheros, no de un hilo que crece sin fin. Eso es estado determinista." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">La estrategia proactiva</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 16px;">Tarea nueva → sesión nueva</h2>
+    <p style="font-size:var(--type-body);color:var(--muted);margin:0 0 44px;max-width:1340px;">Parte una feature grande en sesiones discretas con principio y fin claros.</p>
+    <div style="display:flex;gap:22px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 32px;"><div style="font-size:24px;font-weight:800;color:var(--red);margin-bottom:10px;">Sesión A</div><p style="font-size:25px;line-height:1.4;margin:0;">Implementa el modelo de datos y sus tests.</p></div>
+      <div style="flex:none;width:50px;display:flex;align-items:center;justify-content:center;font-size:34px;color:var(--gray-300);">→</div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 32px;"><div style="font-size:24px;font-weight:800;color:var(--red);margin-bottom:10px;">Sesión B</div><p style="font-size:25px;line-height:1.4;margin:0;">Construye la API usando el modelo de A.</p></div>
+      <div style="flex:none;width:50px;display:flex;align-items:center;justify-content:center;font-size:34px;color:var(--gray-300);">→</div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 32px;"><div style="font-size:24px;font-weight:800;color:var(--red);margin-bottom:10px;">Sesión C</div><p style="font-size:25px;line-height:1.4;margin:0;">Conecta el frontend con la API.</p></div>
+    </div>
+    <p style="font-size:var(--type-small);color:var(--ink);margin:40px 0 0;font-weight:600;">Comunícalas por <strong>ficheros</strong>, no por un hilo que crece sin fin. Eso es estado determinista: no se degrada, no se resume, no se pierde.</p>
+  </section>
+
+  <section data-label="Retomar sobre roca" data-screen-label="12" data-speaker-notes="El patrón de retomar bien hecho. Cuando vuelvas a una sesión —claude --continue para la última, --resume para elegir— haz que tu primera instrucción sea lee el fichero de plan/progreso y dime dónde estamos. Así el arranque se ancla en estado determinista de disco, no en una transcripción que pudo compactarse. Es la diferencia entre retomar sobre roca y sobre arena. Y el otro lado: especifica tarea, intención y restricciones por adelantado en una instrucción bien formada; una negociación larga y ambigua es cara en contexto." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Retomar sobre roca, no sobre arena</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">El patrón de «retomar» bien hecho</h2>
+    <div style="display:flex;gap:40px;align-items:stretch;">
+      <div style="flex:1.2;background:#111827;border-radius:20px;padding:36px 40px;color:#fff;box-shadow:0 14px 36px rgba(17,24,39,.22);display:flex;flex-direction:column;justify-content:center;">
+        <div style="font-family:var(--font-mono);font-size:23px;color:#9CA3AF;margin-bottom:16px;">claude --continue · --resume</div>
+        <p style="font-size:28px;line-height:1.45;margin:0;">Tu <strong>primera instrucción</strong>: «lee el fichero de plan/progreso y dime dónde estamos». El arranque se ancla en disco, no en una transcripción que pudo compactarse.</p>
+      </div>
+      <div style="flex:1;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:20px;padding:36px 40px;display:flex;flex-direction:column;justify-content:center;">
+        <div style="font-size:26px;font-weight:800;color:var(--red);margin-bottom:14px;">Instrucciones bien formadas</div>
+        <p style="font-size:26px;line-height:1.45;margin:0;color:var(--ink);">Especifica tarea, intención y restricciones <strong>por adelantado</strong>. El contexto más barato es el que nunca necesitaste guardar.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Cuándo dejar de pelear" data-screen-label="13" data-speaker-notes="Una señal clara: si te pasas la sesión peleando continuamente con el contexto —compactando cada poco, viendo cómo se degrada pese a todo— la respuesta no es más disciplina de compactación. Es que la tarea es demasiado grande para una sola sesión, y toca orquestar: subagentes para el trabajo paralelo o ruidoso, o partir en sesiones discretas. Cuando la tarea quiere paralelismo o abarca mucho más de una ventana, la respuesta es dividir, no una sesión heroicamente larga." style="background:#fff;display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">La señal</div>
+    <h2 style="font-size:56px;font-weight:800;letter-spacing:-0.03em;line-height:1.06;margin:0 0 36px;max-width:1500px;">Si peleas <em>continuamente</em> con el contexto, la tarea es demasiado grande</h2>
+    <p style="font-size:var(--type-lead);font-weight:500;line-height:1.45;margin:0;max-width:1440px;color:var(--muted);">La respuesta no es más disciplina de compactación, es <strong style="color:var(--ink);">orquestar</strong>: subagentes para el trabajo paralelo o ruidoso, o partir en sesiones discretas. La respuesta es dividir, no una sesión heroicamente larga.</p>
+  </section>
+
+  <section data-label="Ejercicio" data-screen-label="14" data-speaker-notes="El ejercicio. Lanza /context en tres momentos —al empezar, a mitad, antes de una operación grande— y observa qué categorías crecen. Termina una subtarea y haz /compact con una instrucción dirigida; comprueba que la sesión sigue y conserva las decisiones clave. Y diseña una feature como tres sesiones acotadas que se comunican por un fichero de progreso que escribes tú al cerrar cada una." style="background:#fff;display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Para practicar</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 40px;">Tres tareas</h2>
+    <div style="display:flex;flex-direction:column;gap:18px;max-width:1560px;">
+      <div style="display:flex;gap:24px;align-items:center;font-size:27px;"><span style="flex:none;width:46px;height:46px;border-radius:12px;background:var(--gray-100);color:var(--muted);font-weight:800;display:flex;align-items:center;justify-content:center;">1</span>Lanza <code style="font-family:var(--font-mono);font-size:0.9em;">/context</code> en tres momentos y observa qué categorías crecen.</div>
+      <div style="display:flex;gap:24px;align-items:center;font-size:27px;"><span style="flex:none;width:46px;height:46px;border-radius:12px;background:var(--gray-100);color:var(--muted);font-weight:800;display:flex;align-items:center;justify-content:center;">2</span>Termina una subtarea y haz <code style="font-family:var(--font-mono);font-size:0.9em;">/compact</code> dirigido; comprueba que conserva lo clave.</div>
+      <div style="display:flex;gap:24px;align-items:center;font-size:27px;font-weight:700;color:var(--red);"><span style="flex:none;width:46px;height:46px;border-radius:12px;background:var(--red);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;">3</span>Diseña una feature como tres sesiones acotadas comunicadas por un fichero de progreso.</div>
+    </div>
+  </section>
+
+  <section data-label="Resumen" data-screen-label="15" data-speaker-notes="Las ideas para llevarse a casa. La calidad cae antes de llenar la ventana (context rot); más espacio solo lo retrasa. /compact resume y continúa; /clear reinicia a cero. Compacta tú, proactivo, en los límites de tarea. Lo que solo vive en la transcripción se resume: escríbelo en disco. Y la estrategia de fondo: tarea nueva, sesión nueva, comunicadas por ficheros." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Para llevarse a casa</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Resumen de la lección</h2>
+    <div style="display:flex;flex-direction:column;gap:20px;max-width:1560px;">
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">La calidad cae <strong>antes</strong> de llenar la ventana (<em>context rot</em>). Más espacio solo lo retrasa: mantén el contexto limpio.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;"><code style="font-family:var(--font-mono);font-size:0.9em;">/compact</code> resume y continúa (con pérdida, dirigible); <code style="font-family:var(--font-mono);font-size:0.9em;">/clear</code> reinicia a cero.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">Compacta tú, <strong>proactivo</strong>, en los límites de tarea. El auto-compact salta en el peor momento.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">Lo que solo vive en la transcripción se resume. Si te dolería perderlo, <strong>escríbelo en disco</strong>.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">Estrategia de fondo: <strong>tarea nueva, sesión nueva</strong>, comunicadas por ficheros.</p></div>
+    </div>
+  </section>
+
+  <section data-label="Cierre" data-screen-label="16" data-speaker-notes="Cierre y puente. La estrategia por tareas acotadas se apoya en algo que aún no hemos tratado a fondo: cómo Claude Code trabaja con Git. Commits, revisión, pull requests, conflictos, y los worktrees que te dejan correr varias sesiones en paralelo sin que se pisen. Es la infraestructura que hace viable el trabajo acotado y paralelo." style="background:var(--red);display:flex;flex-direction:column;justify-content:space-between;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="display:flex;align-items:center;gap:16px;"><span style="width:14px;height:14px;border-radius:999px;background:#fff;display:block;"></span><span style="text-transform:uppercase;letter-spacing:0.16em;font-size:var(--type-over);font-weight:700;opacity:.9;">Siguiente lección</span></div>
+    <div>
+      <h2 style="font-size:64px;font-weight:800;letter-spacing:-0.03em;line-height:1.06;margin:0;max-width:1480px;text-wrap:balance;">La infraestructura del trabajo acotado y paralelo</h2>
+      <p style="font-size:var(--type-lead);font-weight:500;line-height:1.4;margin:36px 0 0;max-width:1360px;opacity:.92;">Cómo Claude Code trabaja con Git —commits, revisión, PRs, conflictos— y los <strong>worktrees</strong> que dejan correr varias sesiones en paralelo sin que se pisen.</p>
+    </div>
+    <div style="font-size:var(--type-small);font-weight:600;opacity:.8;">Sesión 4 · Lección 2 — Flujo de trabajo con Git</div>
+  </section>
+
+</x-import>
+</x-dc>
+</body>
+</html>

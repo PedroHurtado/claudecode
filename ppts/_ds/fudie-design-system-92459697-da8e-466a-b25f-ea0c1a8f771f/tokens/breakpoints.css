@@ -1,0 +1,21 @@
+/* ─────────────────────────────────────────
+   Fudie Design System · breakpoints.css
+   Las custom properties NO funcionan en @media queries.
+   Estos son los valores canónicos (fuente de verdad):
+
+     --bp-sm:  480px   → mobile pequeño
+     --bp-md:  768px   → tablet / mobile grande
+     --bp-lg:  1024px  → tablet landscape
+     --bp-xl:  1280px  → desktop
+     --bp-2xl: 1536px  → desktop grande
+
+   Usar directamente: @media (max-width: 768px) { ... }
+───────────────────────────────────────── */
+
+:root {
+  --bp-sm:  480px;  /* @kind other */
+  --bp-md:  768px;  /* @kind other */
+  --bp-lg:  1024px; /* @kind other */
+  --bp-xl:  1280px; /* @kind other */
+  --bp-2xl: 1536px; /* @kind other */
+}

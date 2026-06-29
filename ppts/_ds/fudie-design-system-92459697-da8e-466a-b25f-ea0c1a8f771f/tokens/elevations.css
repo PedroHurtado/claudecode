@@ -1,0 +1,17 @@
+/* ─────────────────────────────────────────
+   Fudie Design System · elevations.css
+   Z-index semánticos para capas de UI.
+───────────────────────────────────────── */
+
+:root {
+
+  /* ── Escala de z-index ── */
+  --z-base:     0;   /* @kind other */
+  --z-raised:   10;  /* @kind other */
+  --z-dropdown: 100; /* @kind other */
+  --z-sticky:   200; /* @kind other */
+  --z-overlay:  300; /* @kind other */
+  --z-modal:    400; /* @kind other */
+  --z-toast:    500; /* @kind other */
+  --z-tooltip:  600; /* @kind other */
+}

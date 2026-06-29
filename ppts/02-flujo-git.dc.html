@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/styles.css">
+  <script src="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/_ds_bundle.js"></script>
+  <style>
+    :root {
+      --type-display: 90px;
+      --type-title: 60px;
+      --type-subtitle: 40px;
+      --type-lead: 36px;
+      --type-body: 30px;
+      --type-small: 24px;
+      --type-mono: 24px;
+      --type-over: 24px;
+      --pad-x: 120px;
+      --pad-y: 92px;
+      --ink: #111827;
+      --muted: #656C79;
+      --red: #DF2F3A;
+      --red-subtle: #FFF0F1;
+      --line: #E5E7EB;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+  </style>
+</helmet>
+<x-import component-from-global-scope="deck-stage" from="./deck-stage.js" width="1920" height="1080" hint-size="100%,100%">
+
+  <section data-label="Portada" data-screen-label="Portada" data-speaker-notes="Sesión 4, segunda lección. La anterior cerró con una idea: trabajar por tareas acotadas y, cuando hace falta, en paralelo. Eso solo es viable si Git no se convierte en un cuello de botella. Hoy cubrimos cómo Claude Code trabaja con Git y la pieza que hace posible el paralelismo real: los worktrees." style="background:var(--red);display:flex;flex-direction:column;justify-content:space-between;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="display:flex;align-items:center;gap:16px;">
+      <span style="width:14px;height:14px;border-radius:999px;background:#fff;display:block;"></span>
+      <span style="text-transform:uppercase;letter-spacing:0.16em;font-size:var(--type-over);font-weight:700;opacity:.9;">Curso Claude Code · Sesión 4</span>
+    </div>
+    <div>
+      <div style="font-size:var(--type-subtitle);font-weight:600;opacity:.85;margin-bottom:18px;">Lección 2</div>
+      <h1 style="font-size:var(--type-display);font-weight:800;letter-spacing:-0.03em;line-height:1.0;margin:0;max-width:1380px;text-wrap:balance;">Flujo de trabajo con Git</h1>
+      <p style="font-size:var(--type-lead);font-weight:500;line-height:1.4;margin:32px 0 0;max-width:1220px;opacity:.92;">Commits, revisión, PRs y conflictos — y los worktrees que hacen posible el paralelismo real sin que las sesiones se pisen.</p>
+    </div>
+    <div style="font-size:var(--type-small);font-weight:600;opacity:.8;">Sesión 4 · Sesiones largas, flujo y seguridad</div>
+  </section>
+
+  <section data-label="Dónde estamos" data-screen-label="01" data-speaker-notes="El puente. La lección anterior cerró con trabajar por tareas acotadas y en paralelo. Eso solo es viable si Git no se convierte en un cuello de botella. Hoy: cómo Claude Code trabaja con Git, y los worktrees que hacen posible el paralelismo real." style="background:#fff;display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Dónde estamos</div>
+    <h2 style="font-size:62px;font-weight:800;letter-spacing:-0.03em;line-height:1.06;margin:0;max-width:1500px;text-wrap:balance;">El trabajo acotado y paralelo solo es viable si Git no estorba</h2>
+    <p style="font-size:var(--type-lead);font-weight:500;line-height:1.45;margin:40px 0 0;max-width:1400px;color:var(--muted);">Cubrimos cómo Claude Code trabaja con Git —commits, revisión, PRs, conflictos— y la pieza que hace posible el paralelismo real: los <strong style="color:var(--ink);">worktrees</strong>.</p>
+  </section>
+
+  <section data-label="Explore, Plan, Code, Commit" data-screen-label="02" data-speaker-notes="Claude Code entiende Git de forma nativa: le pides el flujo completo en lenguaje natural. Pero el valor no está en que sepa ejecutar git, sino en el criterio de cómo lo encajas. El flujo fundacional, Explore, Plan, Code, Commit, conecta con todo lo visto: Explore usa el subagente Explore de la Sesión 3; Plan es el modo Plan de la Sesión 1; Code implementa; Commit revisa y comitea." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">El esqueleto mental</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 48px;">Explore · Plan · Code · Commit</h2>
+    <div style="display:flex;gap:22px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 30px;"><div style="font-size:28px;font-weight:800;color:var(--red);margin-bottom:10px;">Explore</div><p style="font-size:23px;color:var(--muted);line-height:1.4;margin:0;">Explora el código relevante. El subagente <strong style="color:var(--ink);">Explore</strong> (S3) mantiene la lectura fuera de tu contexto.</p></div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 30px;"><div style="font-size:28px;font-weight:800;color:var(--red);margin-bottom:10px;">Plan</div><p style="font-size:23px;color:var(--muted);line-height:1.4;margin:0;">Un plan paso a paso antes de tocar nada. El <strong style="color:var(--ink);">modo Plan</strong> (S1).</p></div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 30px;"><div style="font-size:28px;font-weight:800;color:var(--red);margin-bottom:10px;">Code</div><p style="font-size:23px;color:var(--muted);line-height:1.4;margin:0;">Implementa.</p></div>
+      <div style="flex:1;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:18px;padding:30px 30px;"><div style="font-size:28px;font-weight:800;color:var(--red);margin-bottom:10px;">Commit</div><p style="font-size:23px;color:var(--ink);line-height:1.4;margin:0;">Revisa los cambios y comitea.</p></div>
+    </div>
+    <p style="font-size:var(--type-small);color:var(--muted);margin:44px 0 0;">El valor no está en que sepa ejecutar <code style="font-family:var(--font-mono);font-size:0.92em;color:var(--ink);">git</code>, sino en el <strong style="color:var(--ink);">criterio de cómo lo encajas</strong> en tu trabajo.</p>
+  </section>
+
+  <section data-label="Revisar antes de comitear" data-screen-label="03" data-speaker-notes="La regla de oro del trabajo con IA y Git: revisa el diff antes de comitear. Claude escribe código correcto la mayoría de las veces, pero la mayoría no es siempre, y un commit es justo el punto donde quieres cazar el error antes de que se propague. Usa el commit como checkpoint: tras una serie de ediciones, revisa con git diff o /diff —que abre un visor interactivo de todos los cambios— y solo entonces comitea." style="background:var(--red);display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="text-transform:uppercase;letter-spacing:0.14em;font-size:var(--type-over);font-weight:700;opacity:.85;margin-bottom:36px;">La regla de oro</div>
+    <h2 style="font-size:68px;font-weight:800;letter-spacing:-0.03em;line-height:1.05;margin:0;max-width:1460px;text-wrap:balance;">Revisa el diff antes de comitear</h2>
+    <p style="font-size:var(--type-lead);font-weight:500;line-height:1.45;margin:44px 0 0;max-width:1440px;opacity:.92;">Claude acierta <em>la mayoría</em> de las veces, y «la mayoría» no es «siempre». Usa el commit como <strong>checkpoint</strong>: revisa con <code style="font-family:var(--font-mono);font-size:0.9em;">git diff</code> o <code style="font-family:var(--font-mono);font-size:0.9em;">/diff</code> (un visor interactivo de todos los cambios) y solo entonces comitea.</p>
+  </section>
+
+  <section data-label="/commit" data-screen-label="04" data-speaker-notes="Aquí se cierra un círculo de la Sesión 2: el comando /commit que construiste —el que embebía git diff --cached con exclamación y redactaba el mensaje a partir del diff real— es exactamente la herramienta para esto. Un commit bien hecho parte del diff real, no de lo que el modelo cree que cambió." style="background:#fff;display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Se cierra un círculo de la Sesión 2</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">El comando <code style="font-family:var(--font-mono);color:var(--red);">/commit</code>, con su contexto completo</h2>
+    <div style="display:flex;gap:44px;align-items:center;">
+      <pre style="flex:1.1;margin:0;background:#111827;border-radius:20px;padding:34px 40px;font-family:var(--font-mono);font-size:24px;line-height:1.65;color:#E5E7EB;white-space:pre-wrap;box-shadow:0 14px 36px rgba(17,24,39,.22);"><span style="color:#86E1A9;">!`git diff --cached`</span>
+
+Redacta el mensaje (Conventional
+Commits) a partir del diff de arriba.</pre>
+      <div style="flex:1;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:20px;padding:40px 44px;">
+        <p style="font-size:30px;line-height:1.4;margin:0;color:var(--ink);">Un commit bien hecho parte del <strong>diff real</strong>, no de lo que el modelo <em>cree</em> que cambió.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Pull requests" data-screen-label="05" data-speaker-notes="Claude Code puede generar el PR completo: analiza todos los commits de la rama, redacta título y descripción, y lo abre. Con un servidor MCP de GitHub conectado (Sesión 3) puedes ir más allá: revisa el PR #456, abre una issue, sin salir del terminal. Pero criterio, no automatismo: el PR es el artefacto que otra persona va a revisar; su descripción tiene que reflejar de verdad qué cambia y por qué. Trata la redacción de Claude como un borrador muy bueno que tú validas." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Pull requests</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 40px;">Genera el PR completo — pero lo validas tú</h2>
+    <div style="display:flex;gap:44px;align-items:stretch;">
+      <pre style="flex:1.15;margin:0;background:#111827;border-radius:20px;padding:32px 38px;font-family:var(--font-mono);font-size:22px;line-height:1.6;color:#E5E7EB;white-space:pre-wrap;box-shadow:0 14px 36px rgba(17,24,39,.22);">git push -u origin feature/pagos
+
+gh pr create \
+  --title "<span style="color:#86E1A9;">Integración de pagos</span>" \
+  --base main</pre>
+      <div style="flex:1;background:var(--color-warning-subtle);border:1px solid #F7E4B5;border-radius:20px;padding:36px 40px;display:flex;flex-direction:column;justify-content:center;">
+        <div style="font-size:26px;font-weight:800;color:var(--color-warning-text);margin-bottom:14px;">Criterio, no automatismo</div>
+        <p style="font-size:27px;line-height:1.45;margin:0;color:var(--ink);">Otra persona va a revisar ese PR. La descripción tiene que reflejar de verdad qué cambia y por qué. Es un <strong>borrador muy bueno que tú validas</strong>.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Conflictos" data-screen-label="06" data-speaker-notes="Cuando dos ramas tocan lo mismo, hay conflicto de merge. Claude puede ayudarte: entiende el contexto de ambos lados y propone la fusión. Pero la cautela es mayor que en un commit normal, porque un conflicto mal resuelto puede mezclar de forma sutil dos intenciones distintas. La práctica sana: que Claude proponga, pero que tú revises el resultado leyendo qué se quedó de cada lado. La mejor resolución de conflictos es prevenirlos, y eso lleva directos a los worktrees." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Resolución de conflictos</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Claude propone, tú revisas qué se quedó de cada lado</h2>
+    <div style="display:flex;gap:40px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:34px 38px;">
+        <p style="font-size:27px;line-height:1.45;margin:0;">Entiende el contexto de ambos lados y propone la fusión. Pero un conflicto mal resuelto <strong>mezcla de forma sutil dos intenciones</strong>: la cautela es mayor que en un commit normal.</p>
+      </div>
+      <div style="flex:1;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:18px;padding:34px 38px;display:flex;flex-direction:column;justify-content:center;">
+        <p style="font-size:30px;line-height:1.4;margin:0;color:var(--ink);">La mejor resolución de conflictos es <strong>prevenirlos</strong>.</p>
+        <p style="font-size:24px;color:var(--color-error-text);line-height:1.4;margin:18px 0 0;font-weight:600;">→ Y eso nos lleva directos a los worktrees.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="El problema de los worktrees" data-screen-label="07" data-speaker-notes="El problema que resuelven. Imagina: Claude refactorizando el middleware de auth y entra un bug crítico ya. Sin worktrees, las opciones son malas: git stash de trabajo a medias y pierdes contexto, o abres otro terminal, clonas el repo otra vez, reinstalas dependencias. En ambos casos pierdes diez minutos y el hilo. Y peor: varias sesiones apuntando al mismo directorio se pisan los cambios y producen salida corrupta. Clonar el repo entero por cada tarea no escala: varios gigas cada vez." style="background:var(--red);display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="text-transform:uppercase;letter-spacing:0.14em;font-size:var(--type-over);font-weight:700;opacity:.85;margin-bottom:36px;">El problema que resuelven los worktrees</div>
+    <h2 style="font-size:60px;font-weight:800;letter-spacing:-0.03em;line-height:1.06;margin:0;max-width:1500px;text-wrap:balance;">Entra un bug urgente y tus opciones son todas malas</h2>
+    <p style="font-size:var(--type-lead);font-weight:500;line-height:1.45;margin:44px 0 0;max-width:1440px;opacity:.92;">Un <code style="font-family:var(--font-mono);font-size:0.9em;">git stash</code> pierde contexto; clonar de nuevo cuesta diez minutos. Y dos sesiones en el <strong>mismo directorio</strong> se pisan los cambios y producen salida corrupta. Clonar el repo por cada tarea (varios gigas) no escala.</p>
+  </section>
+
+  <section data-label="Qué es un worktree" data-screen-label="08" data-speaker-notes="Un git worktree es un directorio de trabajo separado, con sus propios ficheros y su propia rama, que comparte la misma historia y el mismo remoto que tu checkout principal. En vez de una carpeta con tu repo, tienes varias, cada una en su rama, todas apuntando a la misma base de datos de Git. Cada directorio es independiente en disco, pero no duplican la historia. Correr cada sesión en su propio worktree significa que las ediciones de una nunca tocan los ficheros de otra." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">El concepto</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 40px;">Qué es un git worktree</h2>
+    <div style="display:flex;gap:44px;align-items:center;">
+      <pre style="flex:1.2;margin:0;background:#111827;border-radius:20px;padding:34px 38px;font-family:var(--font-mono);font-size:22px;line-height:1.7;color:#E5E7EB;white-space:pre-wrap;box-shadow:0 14px 36px rgba(17,24,39,.22);">mi-proyecto/          <span style="color:#9CA3AF;">← principal (main)</span>
+mi-proyecto-pagos/    <span style="color:#86E1A9;">← feature/pagos</span>
+mi-proyecto-refactor/ <span style="color:#86E1A9;">← feature/refactor</span></pre>
+      <div style="flex:1;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:20px;padding:38px 42px;">
+        <p style="font-size:28px;line-height:1.45;margin:0;color:var(--ink);">Directorio separado, su propia rama, <strong>comparte historia y remoto</strong>. Independiente en disco, sin duplicar la historia.</p>
+        <p style="font-size:24px;color:var(--color-error-text);line-height:1.4;margin:18px 0 0;font-weight:600;">Las ediciones de una sesión nunca tocan los ficheros de otra.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Cómo se usan" data-screen-label="09" data-speaker-notes="Claude Code tiene soporte nativo. La forma rápida: claude --worktree feature-pagos, o la forma corta claude -w. Claude crea un worktree aislado bajo .claude/worktrees/, hace checkout de una rama nueva ahí, y arranca una sesión acotada a ese directorio. Tu working tree principal queda intacto. Mientras Claude trabaja en un worktree, tú puedes estar revisando lo que terminó en otro: no esperas, diriges. También puedes pedírselo en lenguaje natural durante una sesión." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Soporte nativo</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 40px;">Cómo se usan en Claude Code</h2>
+    <div style="display:flex;gap:44px;align-items:center;">
+      <pre style="flex:1.2;margin:0;background:#111827;border-radius:20px;padding:34px 38px;font-family:var(--font-mono);font-size:22px;line-height:1.7;color:#E5E7EB;white-space:pre-wrap;box-shadow:0 14px 36px rgba(17,24,39,.22);"><span style="color:#9CA3AF;"># Terminal 1</span>
+claude <span style="color:#FF9AA0;">-w</span> feature-pagos
+
+<span style="color:#9CA3AF;"># Terminal 2 · en paralelo</span>
+claude <span style="color:#FF9AA0;">-w</span> bugfix-auth</pre>
+      <div style="flex:1;background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:20px;padding:38px 42px;">
+        <p style="font-size:27px;line-height:1.45;margin:0;color:var(--ink);">Crea un worktree aislado bajo <code style="font-family:var(--font-mono);font-size:0.84em;">.claude/worktrees/</code>, una rama nueva, y una sesión acotada a ese directorio. Tu árbol principal queda intacto.</p>
+        <p style="font-size:24px;color:var(--color-error-text);line-height:1.4;margin:18px 0 0;font-weight:600;">Mientras Claude trabaja en uno, tú revisas otro: no esperas, diriges.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Detalles que ahorran disgustos" data-screen-label="10" data-speaker-notes="Detalles que ahorran disgustos. Añade .claude/worktrees/ a tu .gitignore para que su contenido no aparezca como ficheros sin seguir. Los worktrees parten de la rama por defecto del repo, así que arrancan de un árbol limpio que coincide con el remoto: si la feature A necesita las migraciones de la B, no las corras en paralelo; construye B, mergéala, y entonces empieza A. Limpieza: los interactivos te preguntan al salir; los de modo no interactivo con -p no se limpian solos, los quitas con git worktree remove. Y .worktreeinclude copia ficheros de entorno al crear el worktree." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Detalles que ahorran disgustos</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Cuatro cosas que conviene saber</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:28px 34px;"><div style="font-size:26px;font-weight:800;margin-bottom:8px;">Ignóralos en git</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">Añade <code style="font-family:var(--font-mono);font-size:0.86em;color:var(--ink);">.claude/worktrees/</code> al <code style="font-family:var(--font-mono);font-size:0.86em;color:var(--ink);">.gitignore</code>.</p></div>
+      <div style="background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:18px;padding:28px 34px;"><div style="font-size:26px;font-weight:800;color:var(--red);margin-bottom:8px;">Parten de la rama base limpia</div><p style="font-size:24px;color:var(--ink);line-height:1.4;margin:0;">Si A depende de B, <strong>no las corras en paralelo</strong>: construye B, mergéala, empieza A.</p></div>
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:28px 34px;"><div style="font-size:26px;font-weight:800;margin-bottom:8px;">Limpieza</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">Los <code style="font-family:var(--font-mono);font-size:0.86em;color:var(--ink);">-p</code> no se limpian solos: <code style="font-family:var(--font-mono);font-size:0.86em;color:var(--ink);">git worktree remove</code>.</p></div>
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:28px 34px;"><div style="font-size:26px;font-weight:800;margin-bottom:8px;">Config de entorno</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">Copia <code style="font-family:var(--font-mono);font-size:0.86em;color:var(--ink);">.env</code> y puertos con un <code style="font-family:var(--font-mono);font-size:0.86em;color:var(--ink);">.worktreeinclude</code>.</p></div>
+    </div>
+  </section>
+
+  <section data-label="Conexión con subagentes" data-screen-label="11" data-speaker-notes="Un puente con la Sesión 3: los subagentes también pueden correr en su propio worktree para que sus ediciones en paralelo no choquen. Le pides a Claude que use worktrees para sus agentes, o lo fijas en un subagente personalizado añadiendo isolation: worktree a su frontmatter. Cada subagente recibe un worktree temporal que se elimina solo cuando termina sin cambios. Es la combinación que permite paralelismo real sin colisiones." style="background:#fff;display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Un puente con la Sesión 3</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Los subagentes también pueden aislarse en worktrees</h2>
+    <div style="display:flex;gap:44px;align-items:center;">
+      <div style="flex:none;background:#111827;border-radius:18px;padding:30px 38px;font-family:var(--font-mono);font-size:26px;color:#E5E7EB;box-shadow:0 14px 36px rgba(17,24,39,.22);"><span style="color:#FF9AA0;">isolation:</span> worktree</div>
+      <p style="flex:1;font-size:var(--type-body);line-height:1.5;margin:0;">Añádelo al frontmatter de un subagente y cada uno recibe un <strong>worktree temporal</strong> que se elimina solo al terminar sin cambios. Es la combinación que permite <strong>paralelismo real sin colisiones</strong>.</p>
+    </div>
+  </section>
+
+  <section data-label="Cuándo ayuda y cuándo estorba" data-screen-label="12" data-speaker-notes="Como con los subagentes, paralelizar a lo loco es un antipatrón. Los worktrees brillan cuando: tienes features independientes que se desarrollan a la vez, quieres seguir tu trabajo mientras Claude corre una tarea larga, o necesitas atender un bug urgente sin destruir tu contexto. Estorban cuando las tareas dependen entre sí (por la rama base limpia), o son tan pequeñas que el overhead de montar y limpiar no compensa frente a hacerlas en secuencia." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Paralelizar a lo loco es un antipatrón</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Cuándo ayuda y cuándo estorba</h2>
+    <div style="display:flex;gap:40px;align-items:stretch;">
+      <div style="flex:1;background:var(--color-success-subtle);border:1px solid #BBE9D6;border-radius:18px;padding:34px 38px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;"><span style="font-size:26px;color:var(--color-success);">✓</span><span style="font-size:28px;font-weight:800;color:var(--color-success-text);">Brillan cuando</span></div>
+        <ul style="margin:0;padding-left:24px;font-size:25px;line-height:1.55;color:var(--ink);"><li>Hay <strong>features independientes</strong> a la vez</li><li>Sigues tu trabajo mientras Claude corre una tarea larga</li><li>Atiendes un bug urgente sin destruir tu contexto</li></ul>
+      </div>
+      <div style="flex:1;background:var(--gray-100);border-radius:18px;padding:34px 38px;">
+        <div style="display:flex;align-items:center;gap:12px;margin-bottom:18px;"><span style="font-size:26px;color:var(--gray-500);">✕</span><span style="font-size:28px;font-weight:800;color:var(--gray-600);">Estorban cuando</span></div>
+        <ul style="margin:0;padding-left:24px;font-size:25px;line-height:1.55;color:var(--gray-600);"><li>Las tareas <strong>dependen entre sí</strong> (rama base limpia)</li><li>Son tan pequeñas que el overhead de montar y limpiar no compensa</li></ul>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Ejercicio" data-screen-label="13" data-speaker-notes="El ejercicio. Crea dos worktrees con claude -w en dos terminales y asígnales tareas independientes; comprueba que cada sesión solo ve sus ficheros y no se pisan. En uno, lleva la feature hasta el PR: git push y gh pr create, revisando el diff con /diff antes de comitear y validando la descripción. Y provoca a propósito una dependencia entre dos worktrees y observa que, al partir de la rama base limpia, A no ve los cambios de B; resuélvelo con el orden correcto." style="background:#fff;display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Para practicar</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 40px;">Tres tareas</h2>
+    <div style="display:flex;flex-direction:column;gap:18px;max-width:1580px;">
+      <div style="display:flex;gap:24px;align-items:center;font-size:27px;"><span style="flex:none;width:46px;height:46px;border-radius:12px;background:var(--gray-100);color:var(--muted);font-weight:800;display:flex;align-items:center;justify-content:center;">1</span>Dos worktrees con <code style="font-family:var(--font-mono);font-size:0.9em;">claude -w</code>, tareas <strong>independientes</strong>; comprueba que no se pisan.</div>
+      <div style="display:flex;gap:24px;align-items:center;font-size:27px;"><span style="flex:none;width:46px;height:46px;border-radius:12px;background:var(--gray-100);color:var(--muted);font-weight:800;display:flex;align-items:center;justify-content:center;">2</span>Lleva una feature al PR (<code style="font-family:var(--font-mono);font-size:0.9em;">git push</code>, <code style="font-family:var(--font-mono);font-size:0.9em;">gh pr create</code>); revisa con <code style="font-family:var(--font-mono);font-size:0.9em;">/diff</code> y valida la descripción.</div>
+      <div style="display:flex;gap:24px;align-items:center;font-size:27px;font-weight:700;color:var(--red);"><span style="flex:none;width:46px;height:46px;border-radius:12px;background:var(--red);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;">3</span>Provoca una dependencia entre worktrees; observa el aislamiento y resuélvelo con el orden correcto.</div>
+    </div>
+  </section>
+
+  <section data-label="Resumen" data-screen-label="14" data-speaker-notes="Las ideas para llevarse a casa. Claude entiende Git nativo; el flujo es Explore, Plan, Code, Commit. La regla de oro: revisa el diff antes de comitear (/diff), y /commit parte del diff real. Genera PRs y resuelve conflictos, pero tú validas. Los worktrees son directorios separados con su rama que comparten historia: paralelismo aislado sin pisarse. Y no paralelices a lo loco: solo para tareas independientes." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Para llevarse a casa</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Resumen de la lección</h2>
+    <div style="display:flex;flex-direction:column;gap:20px;max-width:1560px;">
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">Claude entiende Git nativo. El esqueleto: <strong>Explore · Plan · Code · Commit</strong>.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">La regla de oro: <strong>revisa el diff antes de comitear</strong> (<code style="font-family:var(--font-mono);font-size:0.9em;">/diff</code>). <code style="font-family:var(--font-mono);font-size:0.9em;">/commit</code> parte del diff real.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">Genera PRs y resuelve conflictos, pero <strong>tú validas</strong>: son borradores muy buenos.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">Los <strong>worktrees</strong> son directorios separados con su rama que comparten historia: paralelismo aislado sin pisarse.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">No paralelices a lo loco: solo para tareas <strong>independientes</strong>.</p></div>
+    </div>
+  </section>
+
+  <section data-label="Cierre" data-screen-label="15" data-speaker-notes="Cierre y puente. Ya sabes versionar y paralelizar. Falta asegurar que lo que se produce funciona: testing y TDD asistido por IA, el ciclo test-implementación-refactor, y cómo verificar cobertura y resultados sin fiarte solo de que parece que va." style="background:var(--red);display:flex;flex-direction:column;justify-content:space-between;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="display:flex;align-items:center;gap:16px;"><span style="width:14px;height:14px;border-radius:999px;background:#fff;display:block;"></span><span style="text-transform:uppercase;letter-spacing:0.16em;font-size:var(--type-over);font-weight:700;opacity:.9;">Siguiente lección</span></div>
+    <div>
+      <h2 style="font-size:64px;font-weight:800;letter-spacing:-0.03em;line-height:1.06;margin:0;max-width:1480px;text-wrap:balance;">Asegurar que lo que se produce de verdad funciona</h2>
+      <p style="font-size:var(--type-lead);font-weight:500;line-height:1.4;margin:36px 0 0;max-width:1360px;opacity:.92;">Testing y TDD asistido por IA: el ciclo test-implementación-refactor, y verificar cobertura y resultados sin fiarte solo de que «parece que va».</p>
+    </div>
+    <div style="font-size:var(--type-small);font-weight:600;opacity:.8;">Sesión 4 · Lección 3 — Testing y TDD asistido</div>
+  </section>
+
+</x-import>
+</x-dc>
+</body>
+</html>

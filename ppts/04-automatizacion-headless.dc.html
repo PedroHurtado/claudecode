@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/tokens/colors.css">
+  <link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/tokens/typography.css">
+  <link rel="stylesheet" href="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/styles.css">
+  <script src="_ds/fudie-design-system-92459697-da8e-466a-b25f-ea0c1a8f771f/_ds_bundle.js"></script>
+  <style>
+    :root {
+      --type-display: 90px;
+      --type-title: 60px;
+      --type-subtitle: 40px;
+      --type-lead: 36px;
+      --type-body: 30px;
+      --type-small: 24px;
+      --type-mono: 24px;
+      --type-over: 24px;
+      --pad-x: 120px;
+      --pad-y: 92px;
+      --ink: #111827;
+      --muted: #656C79;
+      --red: #DF2F3A;
+      --red-subtle: #FFF0F1;
+      --line: #E5E7EB;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+  </style>
+</helmet>
+<x-import component-from-global-scope="deck-stage" from="./deck-stage.js" width="1920" height="1080" hint-size="100%,100%">
+
+  <section data-label="Portada" data-screen-label="Portada" data-speaker-notes="Sesión 4, cuarta lección. Todo lo que has hecho ha sido interactivo: tú delante del terminal, aprobando, dirigiendo. Pero el ciclo de testing de la lección anterior, los commits, las revisiones, son justo el tipo de trabajo que una máquina puede ejecutar sin nadie delante. Esta lección abre esa puerta: el modo headless y su integración en CI." style="background:var(--red);display:flex;flex-direction:column;justify-content:space-between;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="display:flex;align-items:center;gap:16px;">
+      <span style="width:14px;height:14px;border-radius:999px;background:#fff;display:block;"></span>
+      <span style="text-transform:uppercase;letter-spacing:0.16em;font-size:var(--type-over);font-weight:700;opacity:.9;">Curso Claude Code · Sesión 4</span>
+    </div>
+    <div>
+      <div style="font-size:var(--type-subtitle);font-weight:600;opacity:.85;margin-bottom:18px;">Lección 4</div>
+      <h1 style="font-size:var(--type-display);font-weight:800;letter-spacing:-0.03em;line-height:1.0;margin:0;max-width:1400px;text-wrap:balance;">Automatización y modo headless</h1>
+      <p style="font-size:var(--type-lead);font-weight:500;line-height:1.4;margin:32px 0 0;max-width:1220px;opacity:.92;">Correr Claude Code de forma no interactiva e integrarlo en CI, moviendo el límite de seguridad del humano al entorno.</p>
+    </div>
+    <div style="font-size:var(--type-small);font-weight:600;opacity:.8;">Sesión 4 · Sesiones largas, flujo y seguridad</div>
+  </section>
+
+  <section data-label="Dónde estamos" data-screen-label="01" data-speaker-notes="El puente. Todo ha sido interactivo: tú delante, aprobando, dirigiendo. Pero el ciclo de testing, los commits, las revisiones, son trabajo que una máquina puede ejecutar sin nadie delante. Esta lección abre esa puerta." style="background:#fff;display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Dónde estamos</div>
+    <h2 style="font-size:62px;font-weight:800;letter-spacing:-0.03em;line-height:1.06;margin:0;max-width:1500px;text-wrap:balance;">Hay trabajo que una máquina puede ejecutar sin nadie delante</h2>
+    <p style="font-size:var(--type-lead);font-weight:500;line-height:1.45;margin:40px 0 0;max-width:1400px;color:var(--muted);">El ciclo de testing, los commits, las revisiones. Hasta ahora todo era interactivo —tú aprobando—. El <strong style="color:var(--ink);">modo headless</strong> abre la puerta a automatizarlo.</p>
+  </section>
+
+  <section data-label="El modo headless" data-screen-label="02" data-speaker-notes="Claude Code, por defecto, es una interfaz de terminal: tú escribes, responde, apruebas, ejecuta. Ese bucle es ideal para sesiones interactivas y terrible para todo lo demás. En cuanto quieres que algo lo dispare un script, o que corra en CI, o de noche sin ti, necesitas el modo headless. La forma de entrar es el flag -p, o --print. claude -p ejecuta la petición, imprime el resultado y termina. Sin sesión interactiva, sin prompts. Eso te permite invocarlo desde un script, usarlo en CI/CD, y correr varios agentes en paralelo." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Ejecución no interactiva</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 40px;">El flag <code style="font-family:var(--font-mono);color:var(--red);">-p</code> (o <code style="font-family:var(--font-mono);color:var(--red);">--print</code>)</h2>
+    <div style="display:flex;gap:44px;align-items:center;">
+      <div style="flex:none;width:680px;background:#111827;border-radius:20px;padding:36px 40px;box-shadow:0 14px 36px rgba(17,24,39,.22);">
+        <div style="font-family:var(--font-mono);font-size:23px;color:#E5E7EB;line-height:1.6;"><span style="color:#FF9AA0;">claude -p</span> "revisa el código en src/<br>y reporta problemas de seguridad"</div>
+        <div style="font-size:22px;color:#9CA3AF;font-family:var(--font-mono);margin-top:18px;">→ ejecuta, imprime, termina. Sin prompts.</div>
+      </div>
+      <ul style="flex:1;margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:18px;">
+        <li style="display:flex;gap:16px;align-items:baseline;font-size:26px;line-height:1.4;"><span style="flex:none;width:12px;height:12px;border-radius:999px;background:var(--red);"></span>Invocarlo <strong>desde un script</strong></li>
+        <li style="display:flex;gap:16px;align-items:baseline;font-size:26px;line-height:1.4;"><span style="flex:none;width:12px;height:12px;border-radius:999px;background:var(--red);"></span>Usarlo en <strong>CI/CD</strong></li>
+        <li style="display:flex;gap:16px;align-items:baseline;font-size:26px;line-height:1.4;"><span style="flex:none;width:12px;height:12px;border-radius:999px;background:var(--red);"></span>Correr <strong>varios agentes en paralelo</strong></li>
+      </ul>
+    </div>
+  </section>
+
+  <section data-label="Salida estructurada" data-screen-label="03" data-speaker-notes="Para que la salida sea procesable por una máquina, pide formato estructurado: --output-format json. Con eso obtienes, entre otras cosas, el coste —total_cost_usd— y los tokens por invocación, que necesitas para monitorizar gasto en una flota de agentes." style="background:#fff;display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Salida procesable por máquina</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Pide formato estructurado</h2>
+    <div style="display:flex;gap:44px;align-items:center;">
+      <div style="flex:none;width:720px;background:#111827;border-radius:20px;padding:36px 40px;box-shadow:0 14px 36px rgba(17,24,39,.22);">
+        <div style="font-family:var(--font-mono);font-size:24px;color:#E5E7EB;line-height:1.6;">claude -p "..." <span style="color:#FF9AA0;">--output-format json</span></div>
+        <div style="font-family:var(--font-mono);font-size:22px;color:#9CA3AF;line-height:1.7;margin-top:18px;">{ "<span style="color:#86E1A9;">total_cost_usd</span>": 0.04,<br>&nbsp;&nbsp;"<span style="color:#86E1A9;">tokens</span>": { … } }</div>
+      </div>
+      <p style="flex:1;font-size:var(--type-body);line-height:1.5;margin:0;">Obtienes el <strong>coste</strong> y los <strong>tokens por invocación</strong>, justo lo que necesitas para monitorizar gasto en una flota de agentes.</p>
+    </div>
+  </section>
+
+  <section data-label="El problema de los permisos" data-screen-label="04" data-speaker-notes="Aquí aparece la tensión central del modo headless. Por defecto, Claude Code pide aprobación humana antes de ejecutar cualquier herramienta que modifique estado: escribir un fichero, correr un comando, una petición de red. Eso es esencial en una sesión interactiva y un bloqueo total en una automática: no hay nadie para aprobar. Hay varias formas de resolverlo, y el criterio para elegir es cuánto confías en el entorno." style="background:var(--red);display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="text-transform:uppercase;letter-spacing:0.14em;font-size:var(--type-over);font-weight:700;opacity:.85;margin-bottom:36px;">La tensión central del modo headless</div>
+    <h2 style="font-size:62px;font-weight:800;letter-spacing:-0.03em;line-height:1.06;margin:0;max-width:1500px;text-wrap:balance;">Lo que protege en interactivo, bloquea en automático</h2>
+    <p style="font-size:var(--type-lead);font-weight:500;line-height:1.45;margin:44px 0 0;max-width:1440px;opacity:.92;">Por defecto Claude pide aprobación humana antes de modificar estado —escribir, ejecutar, red—. Esencial con un humano delante; <strong>un bloqueo total</strong> sin nadie para aprobar. El criterio para resolverlo: cuánto confías en el entorno.</p>
+  </section>
+
+  <section data-label="Dos formas de resolverlo" data-screen-label="05" data-speaker-notes="Dos formas. La correcta para la mayoría de casos: una allowlist de permisos. Defines de antemano qué herramientas se aprueban automáticamente y dejas que todo lo demás se deniegue. En vez de abrir todo, abres solo lo que esa automatización concreta necesita. La opción nuclear: --dangerously-skip-permissions. Auto-aprueba todas las llamadas; el nombre no es una broma. Solo es aceptable cuando el radio de daño está contenido por el propio entorno: un contenedor Docker sin montajes del host, un worktree en una rama dedicada, una VM efímera que se destruye tras la ejecución." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Dos formas de resolverlo</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Allowlist vs. la opción nuclear</h2>
+    <div style="display:flex;gap:40px;align-items:stretch;">
+      <div style="flex:1;background:var(--color-success-subtle);border:1px solid #BBE9D6;border-radius:18px;padding:34px 38px;">
+        <div style="font-size:26px;font-weight:800;color:var(--color-success-text);margin-bottom:14px;">La correcta · una allowlist</div>
+        <p style="font-size:26px;line-height:1.45;margin:0;color:var(--ink);">Defines qué tools se aprueban; todo lo demás se deniega. En vez de abrir todo, abres <strong>solo lo que esa automatización necesita</strong> (<code style="font-family:var(--font-mono);font-size:0.84em;">Read</code>, <code style="font-family:var(--font-mono);font-size:0.84em;">Grep</code>, los tests…).</p>
+      </div>
+      <div style="flex:1;background:var(--color-error-subtle);border:1px solid #F6C9C9;border-radius:18px;padding:34px 38px;">
+        <div style="font-family:var(--font-mono);font-size:23px;font-weight:800;color:var(--color-error-text);margin-bottom:14px;">--dangerously-skip-permissions</div>
+        <p style="font-size:26px;line-height:1.45;margin:0;color:var(--ink);">Auto-aprueba <strong>todo</strong>. El nombre no es broma. Solo si el <strong>radio de daño lo contiene el entorno</strong>: Docker sin montajes, worktree dedicado, VM efímera.</p>
+      </div>
+    </div>
+  </section>
+
+  <section data-label="Regla de oro headless" data-screen-label="06" data-speaker-notes="Regla de oro de seguridad para headless: nunca corras Claude Code en modo sin permisos sobre tu máquina principal, con tus credenciales reales o acceso a producción. La automatización segura vive en entornos aislados: contenedores, worktrees dedicados, VMs efímeras. Si te ves alcanzando --dangerously-skip-permissions para escapar de la fatiga de aprobar cosas, esa es la señal de que necesitas escribir una buena allowlist, no de saltarte los permisos." style="background:var(--red);display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="text-transform:uppercase;letter-spacing:0.14em;font-size:var(--type-over);font-weight:700;opacity:.85;margin-bottom:36px;">Regla de oro de seguridad para headless</div>
+    <h2 style="font-size:60px;font-weight:800;letter-spacing:-0.03em;line-height:1.06;margin:0;max-width:1500px;text-wrap:balance;">Nunca sin permisos sobre tu máquina principal</h2>
+    <p style="font-size:var(--type-lead);font-weight:500;line-height:1.45;margin:44px 0 0;max-width:1440px;opacity:.92;">La automatización segura vive en <strong>entornos aislados</strong>: contenedores, worktrees dedicados, VMs efímeras. Si alcanzas <code style="font-family:var(--font-mono);font-size:0.86em;">--dangerously-skip-permissions</code> para escapar de la fatiga de aprobar, esa es la señal de que necesitas una <strong>buena allowlist</strong>, no de saltarte los permisos.</p>
+  </section>
+
+  <section data-label="Integración en CI" data-screen-label="07" data-speaker-notes="Aquí es donde el modo headless cobra todo su sentido. Casos típicos. Revisión automática de PRs: una GitHub Action que en cada PR lanza claude -p para revisar el diff y comentar problemas; encaja con el subagente revisor y el comando /review, ahora ejecutados por la máquina. Arreglo de pipelines rotos: un job que cuando CI falla recoge los logs, los analiza y propone el arreglo. Migraciones o refactors mecánicos a gran escala. Y trabajo nocturno, combinado con worktrees: lanzas una tanda en paralelo antes de irte y revisas por la mañana." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Donde cobra todo su sentido</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Casos de uso en CI</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 36px;"><div style="font-size:27px;font-weight:800;margin-bottom:8px;">Revisión automática de PRs</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">Una GitHub Action que revisa el diff y comenta. Tu <code style="font-family:var(--font-mono);font-size:0.86em;color:var(--ink);">/review</code> y subagente revisor, ya en la máquina.</p></div>
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 36px;"><div style="font-size:27px;font-weight:800;margin-bottom:8px;">Arreglo de pipelines rotos</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">Cuando CI falla, recoge los logs, los analiza y propone el arreglo.</p></div>
+      <div style="background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:30px 36px;"><div style="font-size:27px;font-weight:800;margin-bottom:8px;">Refactors mecánicos a escala</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">Cambios repetitivos y bien definidos, descritos en una instrucción.</p></div>
+      <div style="background:var(--red-subtle);border:1px solid #FAD2D5;border-radius:18px;padding:30px 36px;"><div style="font-size:27px;font-weight:800;color:var(--red);margin-bottom:8px;">Trabajo nocturno</div><p style="font-size:24px;color:var(--ink);line-height:1.4;margin:0;">Con worktrees: lanzas una tanda en paralelo antes de irte; cada uno produce su PR. Revisas por la mañana.</p></div>
+    </div>
+  </section>
+
+  <section data-label="El patrón seguro para CI" data-screen-label="08" data-speaker-notes="La práctica recomendada combina tres capas que ya conoces. Aislamiento: corre el agente en un contenedor Docker o un worktree dedicado, nunca sobre el checkout principal ni con credenciales de producción. Permisos acotados: una allowlist con solo las herramientas que ese job necesita, en vez de saltarte los permisos. Límites de seguridad: topes como un número máximo de turnos y un timeout, para que un agente descontrolado no dispare costes ni se quede colgado. Y recuerda: los worktrees creados con -p no se limpian solos; encárgate tú con git worktree remove, o confía en el barrido automático por cleanupPeriodDays." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">La práctica recomendada</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">El patrón seguro: tres capas</h2>
+    <div style="display:flex;gap:26px;align-items:stretch;">
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:32px 32px;"><div style="font-size:42px;font-weight:800;color:var(--red);margin-bottom:12px;">01</div><div style="font-size:27px;font-weight:800;margin-bottom:8px;">Aislamiento</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">Docker o worktree dedicado, nunca el checkout principal ni credenciales de producción.</p></div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:32px 32px;"><div style="font-size:42px;font-weight:800;color:var(--red);margin-bottom:12px;">02</div><div style="font-size:27px;font-weight:800;margin-bottom:8px;">Permisos acotados</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">Una allowlist con solo las tools que ese job necesita.</p></div>
+      <div style="flex:1;background:var(--gray-50);border:1px solid var(--line);border-radius:18px;padding:32px 32px;"><div style="font-size:42px;font-weight:800;color:var(--red);margin-bottom:12px;">03</div><div style="font-size:27px;font-weight:800;margin-bottom:8px;">Límites de seguridad</div><p style="font-size:24px;color:var(--muted);line-height:1.4;margin:0;">Tope de turnos y timeout: que un agente descontrolado no dispare costes ni se cuelgue.</p></div>
+    </div>
+    <div style="display:flex;gap:24px;align-items:center;background:var(--color-warning-subtle);border:1px solid #F7E4B5;border-radius:16px;padding:24px 32px;margin-top:32px;">
+      <span style="flex:none;font-size:22px;font-weight:800;color:var(--color-warning-text);text-transform:uppercase;letter-spacing:0.06em;">Limpieza</span>
+      <p style="font-size:24px;line-height:1.4;margin:0;color:var(--ink);">Los worktrees con <code style="font-family:var(--font-mono);font-size:0.88em;">-p</code> no se limpian solos: <code style="font-family:var(--font-mono);font-size:0.88em;">git worktree remove</code>, o el barrido por <code style="font-family:var(--font-mono);font-size:0.88em;">cleanupPeriodDays</code>.</p>
+    </div>
+  </section>
+
+  <section data-label="Cuándo NO automatizar" data-screen-label="09" data-speaker-notes="El modo headless es potente, pero no todo merece quitar al humano del bucle. Tareas con criterio ambiguo: si requiere decisiones de diseño o juicio sobre trade-offs, un agente sin supervisión puede tomar un camino plausible pero equivocado, y lo descubres tarde. Cambios de alto riesgo o irreversibles: migraciones de datos en producción, despliegues; ahí quieres un humano que apruebe. Y cuando aún no tienes una allowlist validada: automatizar antes de saber qué tools pide de verdad la tarea es abrir la puerta a sorpresas. Corre primero en interactivo, observa qué pide, y codifica solo esos patrones." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">No todo merece quitar al humano</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Cuándo <em>no</em> automatizar</h2>
+    <div style="display:flex;flex-direction:column;gap:20px;max-width:1560px;">
+      <div style="display:flex;gap:24px;align-items:center;background:var(--gray-50);border:1px solid var(--line);border-radius:16px;padding:26px 34px;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:27px;line-height:1.4;margin:0;"><strong>Criterio ambiguo:</strong> decisiones de diseño o trade-offs → un camino plausible pero equivocado que descubres tarde.</p></div>
+      <div style="display:flex;gap:24px;align-items:center;background:var(--gray-50);border:1px solid var(--line);border-radius:16px;padding:26px 34px;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:27px;line-height:1.4;margin:0;"><strong>Alto riesgo o irreversible:</strong> migraciones en producción, despliegues → un humano aprueba.</p></div>
+      <div style="display:flex;gap:24px;align-items:center;background:var(--gray-50);border:1px solid var(--line);border-radius:16px;padding:26px 34px;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:27px;line-height:1.4;margin:0;"><strong>Sin allowlist validada:</strong> corre primero en interactivo, observa qué pide, y codifica solo esos patrones.</p></div>
+    </div>
+  </section>
+
+  <section data-label="Ejercicio" data-screen-label="10" data-speaker-notes="El ejercicio. Lanza una tarea de solo lectura en headless: claude -p resume qué hace el módulo src/auth --output-format json, y observa la salida estructurada y los campos de coste y tokens. Diseña en papel, sin ejecutar sobre tu máquina, cómo correrías una revisión de PR en CI: qué entorno de aislamiento, qué tools en la allowlist, qué límites de turnos y timeout, justificando cada decisión por el radio de daño contenido. Y reflexiona sobre una tarea repetitiva tuya: ¿buena candidata a headless, o tiene criterio ambiguo que pide un humano?" style="background:#fff;display:flex;flex-direction:column;justify-content:center;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Para practicar</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 40px;">Tres tareas</h2>
+    <div style="display:flex;flex-direction:column;gap:18px;max-width:1580px;">
+      <div style="display:flex;gap:24px;align-items:center;font-size:27px;"><span style="flex:none;width:46px;height:46px;border-radius:12px;background:var(--gray-100);color:var(--muted);font-weight:800;display:flex;align-items:center;justify-content:center;">1</span>Una tarea de solo lectura en headless con <code style="font-family:var(--font-mono);font-size:0.9em;">--output-format json</code>; mira coste y tokens.</div>
+      <div style="display:flex;gap:24px;align-items:center;font-size:27px;"><span style="flex:none;width:46px;height:46px;border-radius:12px;background:var(--gray-100);color:var(--muted);font-weight:800;display:flex;align-items:center;justify-content:center;">2</span>Diseña en papel una revisión de PR en CI: aislamiento, allowlist y límites, justificados por el radio de daño.</div>
+      <div style="display:flex;gap:24px;align-items:center;font-size:27px;font-weight:700;color:var(--red);"><span style="flex:none;width:46px;height:46px;border-radius:12px;background:var(--red);color:#fff;font-weight:800;display:flex;align-items:center;justify-content:center;">3</span>Una tarea repetitiva tuya: ¿headless, o criterio ambiguo que pide un humano?</div>
+    </div>
+  </section>
+
+  <section data-label="Resumen" data-screen-label="11" data-speaker-notes="Las ideas para llevarse a casa. claude -p ejecuta sin sesión interactiva; --output-format json da salida procesable con coste y tokens. La tensión: por defecto pide aprobación, lo que bloquea en automático. La forma correcta es una allowlist acotada, no --dangerously-skip-permissions. La automatización segura vive en entornos aislados. El patrón de CI combina aislamiento, permisos acotados y límites. Y no automatices criterio ambiguo, alto riesgo, ni sin allowlist validada." style="background:#fff;display:flex;flex-direction:column;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:var(--ink);">
+    <div style="text-transform:uppercase;letter-spacing:0.12em;font-size:var(--type-over);font-weight:700;color:var(--red);margin-bottom:22px;">Para llevarse a casa</div>
+    <h2 style="font-size:var(--type-title);font-weight:800;letter-spacing:-0.025em;line-height:1.05;margin:0 0 44px;">Resumen de la lección</h2>
+    <div style="display:flex;flex-direction:column;gap:20px;max-width:1560px;">
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;"><code style="font-family:var(--font-mono);font-size:0.9em;">claude -p</code> ejecuta sin sesión interactiva; <code style="font-family:var(--font-mono);font-size:0.9em;">--output-format json</code> da salida procesable con coste y tokens.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">La aprobación por defecto <strong>bloquea en automático</strong>. La forma correcta es una <strong>allowlist acotada</strong>, no saltarse los permisos.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">La automatización segura vive en <strong>entornos aislados</strong>: contenedores, worktrees dedicados, VMs efímeras.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">El patrón de CI: <strong>aislamiento + permisos acotados + límites</strong> de turnos/timeout.</p></div>
+      <div style="display:flex;gap:24px;align-items:baseline;"><span style="flex:none;width:14px;height:14px;border-radius:999px;background:var(--red);"></span><p style="font-size:28px;line-height:1.4;margin:0;">No automatices criterio ambiguo, alto riesgo, ni sin <strong>allowlist validada</strong>.</p></div>
+    </div>
+  </section>
+
+  <section data-label="Cierre" data-screen-label="12" data-speaker-notes="Cierre y puente a la última lección. Hemos tocado permisos y aislamiento de pasada varias veces; ahora los tratamos de frente en el bloque de seguridad —gestión de permisos, riesgos de los MCP de terceros, protección de datos sensibles— y cerramos el curso con el criterio que lo unifica todo: cuándo usar CLAUDE.md, skills, subagentes o MCP, y cómo elegir el modelo según la tarea." style="background:var(--red);display:flex;flex-direction:column;justify-content:space-between;padding:var(--pad-y) var(--pad-x);font-family:var(--font-sans);color:#fff;">
+    <div style="display:flex;align-items:center;gap:16px;"><span style="width:14px;height:14px;border-radius:999px;background:#fff;display:block;"></span><span style="text-transform:uppercase;letter-spacing:0.16em;font-size:var(--type-over);font-weight:700;opacity:.9;">Siguiente lección · la última</span></div>
+    <div>
+      <h2 style="font-size:60px;font-weight:800;letter-spacing:-0.03em;line-height:1.06;margin:0;max-width:1500px;text-wrap:balance;">Seguridad de frente, y el criterio que unifica el curso</h2>
+      <p style="font-size:var(--type-lead);font-weight:500;line-height:1.4;margin:36px 0 0;max-width:1380px;opacity:.92;">Gestión de permisos, riesgos de los MCP de terceros, protección de datos — y cuándo usar CLAUDE.md, skills, subagentes o MCP, y cómo elegir el modelo.</p>
+    </div>
+    <div style="font-size:var(--type-small);font-weight:600;opacity:.8;">Sesión 4 · Lección 5 — Seguridad, buenas prácticas y criterio</div>
+  </section>
+
+</x-import>
+</x-dc>
+</body>
+</html>
