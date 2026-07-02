@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "mcp-didactico": {
+      "command": "node",
+      "args": ["mcp-didactico/build/server.js"]
+    }
+  }
+}
